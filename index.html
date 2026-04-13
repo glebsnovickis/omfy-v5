@@ -1,0 +1,2498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMFY Distribution — B2B Scooter & Parts Distributor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Saira and IBM Plex Mono removed per brand audit — Geist + Eurostile only -->
+    <link href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Eurostile';
+            src: url('eurostile-2/eurostile.TTF') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Eurostile';
+            src: url('eurostile-2/EuroStyle Normal.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===== VARIABLES ===== */
+        :root {
+            --primary: #FF4E00;
+            --primary-hover: #d94400;
+            --dark-bg: #141414;
+            --dark-card: #1a1a1a;
+            --dark-border: rgba(255,255,255,.08);
+            --dark-text: #ffffff;
+            --dark-text-secondary: rgba(255,255,255,.6);
+            --light-bg: #ffffff;
+            --light-card: #ffffff;
+            --light-border: #e0e0e0;
+            --light-text: #1a1a1a;
+            --light-text-secondary: #555;
+        }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        body {
+            font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 300;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== GLOBAL STYLES ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Eurostile', 'Geist', sans-serif;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        button, input[type="submit"] {
+            font-family: 'Geist', sans-serif;
+        }
+
+        /* ===== SECTION THEMES ===== */
+        .section-dark {
+            background: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        .section-dark h2, .section-dark h3 { color: var(--dark-text); }
+        .section-dark p { color: var(--dark-text-secondary); }
+        .section-dark .card {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+        .section-dark .card h3, .section-dark .card h4 { color: var(--dark-text); }
+        .section-dark .card p { color: var(--dark-text-secondary); }
+
+        .section-light {
+            background: var(--light-bg);
+            color: var(--light-text);
+        }
+        .section-light h2, .section-light h3 { color: var(--light-text); }
+        .section-light p { color: var(--light-text-secondary); }
+        .section-light .card {
+            background: var(--light-card);
+            border-color: var(--light-border);
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-family: 'Geist', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+        .section-dark .section-subtitle { color: var(--dark-text-secondary); }
+        .section-light .section-subtitle { color: var(--light-text-secondary); }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* ===== NAVIGATION — shared ===== */
+        .nav-bar {
+            left: 0;
+            right: 0;
+            padding: 1rem 0;
+            z-index: 1000;
+        }
+        .nav-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+        .nav-logo svg {
+            height: 32px;
+            width: auto;
+        }
+        .nav-cta {
+            background: var(--primary);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 0.95rem;
+        }
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 78, 0, 0.3);
+        }
+        @media (max-width: 768px) {
+            .nav-cta { padding: 0.6rem 1.2rem; font-size: 0.85rem; }
+        }
+
+        /* --- Hero nav: transparent, sits on top of hero --- */
+        .nav-hero {
+            position: absolute;
+            top: 0;
+            background: transparent;
+            z-index: 10;
+            transition: opacity 0.3s ease;
+        }
+        .nav-hero .hamburger span {
+            background: #fff;
+        }
+        .nav-hero .nav-cta {
+            background: rgba(255,255,255,.15);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,.3);
+            backdrop-filter: blur(6px);
+        }
+        .nav-hero .nav-cta:hover {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+        }
+
+        /* --- Sticky nav: appears on scroll --- */
+        .nav-scrolled {
+            position: fixed;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--light-border);
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.35s ease;
+            pointer-events: none;
+        }
+        .nav-scrolled.visible {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+        .nav-scrolled .nav-logo svg path { fill: var(--primary); }
+        .nav-scrolled .hamburger span {
+            background: var(--light-text);
+        }
+
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            z-index: 1002;
+        }
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--light-text);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .nav-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,.5);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .nav-menu-overlay.active { opacity: 1; pointer-events: all; }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            max-width: 85vw;
+            height: 100vh;
+            background: #fff;
+            z-index: 1001;
+            transition: right 0.35s cubic-bezier(.4,0,.2,1);
+            padding: 80px 30px 40px;
+            box-shadow: -4px 0 30px rgba(0,0,0,.15);
+            overflow-y: auto;
+        }
+        .nav-menu.active { right: 0; }
+        .nav-menu a {
+            display: block;
+            font-family: 'Geist', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--light-text);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(0,0,0,.06);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-menu a:hover { color: var(--primary); }
+        .nav-menu a:last-of-type { border-bottom: none; }
+        .nav-menu .nav-menu-cta {
+            display: block;
+            text-align: center;
+            margin-top: 24px;
+            background: var(--primary);
+            color: #000;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-family: 'Geist', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+        }
+
+        /* ===== HERO SECTION (Video) ===== */
+        .hero-video {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+        .hero-video video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            object-fit: cover;
+        }
+        .hero-video::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.6) 50%, rgba(0,0,0,.85) 100%);
+            z-index: 1;
+        }
+        .hero-video .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+        }
+        .hero-video h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,.7);
+        }
+        .hero-video p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: rgba(255,255,255,.85);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            text-shadow: 0 2px 8px rgba(0,0,0,.5);
+        }
+        .hero-cta {
+            display: inline-block;
+            font-family: 'Geist', sans-serif;
+            background: var(--primary);
+            color: #000;
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 78, 0, 0.3);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .hero-cta:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(255, 78, 0, 0.4);
+        }
+        .social-proof-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            background: rgba(255, 78, 0, 0.12);
+            border: 1px solid rgba(255, 78, 0, 0.25);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .proof-item { text-align: center; }
+        .proof-item strong {
+            font-family: 'Geist', sans-serif;
+            font-size: 1.3rem;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        .proof-item span { font-size: 0.9rem; color: rgba(255,255,255,.7); }
+        @media (max-width: 768px) {
+            .hero-video h1 { font-size: 2rem; }
+            .social-proof-bar { gap: 1.5rem; flex-direction: column; align-items: center; }
+        }
+
+        /* ===== BRANDS MARQUEE ===== */
+        .brands-section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .brands-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('Gemini_Generated_Image_innemeinnemeinne.png') center/cover no-repeat;
+            opacity: 0.25;
+            z-index: 0;
+        }
+        .brands-section > .container { position: relative; z-index: 1; }
+        .marquee-wrapper {
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 4rem;
+        }
+        .marquee-wrapper::before,
+        .marquee-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            z-index: 2;
+        }
+        .section-light .marquee-wrapper::before { left: 0; background: linear-gradient(to right, #fff, transparent); }
+        .section-light .marquee-wrapper::after { right: 0; background: linear-gradient(to left, #fff, transparent); }
+        .section-dark .marquee-wrapper::before { left: 0; background: linear-gradient(to right, #141414, transparent); }
+        .section-dark .marquee-wrapper::after { right: 0; background: linear-gradient(to left, #141414, transparent); }
+        /* Remove gradient fades on marquee edges when background photo is present */
+        .marquee-no-fade::before,
+        .marquee-no-fade::after { display: none !important; }
+        .marquee-track {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+        .marquee-track:hover { animation-play-state: paused; }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            min-width: 150px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+            flex-shrink: 0;
+        }
+        @media (max-width: 768px) {
+            .marquee-track { gap: 1.5rem; }
+            .brand-logo { height: 70px; min-width: 90px; }
+        }
+        .brand-logo:hover { opacity: 1; }
+        .brand-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        /* Light section: make logos black */
+        .section-light .brand-logo img { filter: brightness(0); }
+        /* Dark section: make logos white */
+        .section-dark .brand-logo img { filter: brightness(0) invert(1); }
+        /* For logos on black backgrounds — invert them */
+        .brand-logo img.logo-on-black { filter: brightness(0) invert(1); }
+        .section-dark .brand-logo img.logo-on-black { filter: brightness(0) invert(1); }
+        .section-light .brand-logo img.logo-on-black { filter: brightness(0); }
+
+        /* ===== PRODUCT CAROUSEL ===== */
+        .products-carousel-wrap {
+            position: relative;
+            margin-top: 3rem;
+            overflow: hidden;
+        }
+        .products-carousel-track {
+            display: flex;
+            transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+            gap: 1.5rem;
+        }
+        .product-card {
+            flex: 0 0 calc(33.333% - 1rem);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+            border: 1px solid;
+        }
+        @media (max-width: 992px) {
+            .product-card { flex: 0 0 calc(50% - 0.75rem); }
+        }
+        @media (max-width: 600px) {
+            .product-card { flex: 0 0 100%; }
+        }
+        .section-light .product-card {
+            background: #fff;
+            border-color: var(--light-border);
+            box-shadow: 0 2px 12px rgba(0,0,0,.06);
+        }
+        .section-light .product-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 12px 40px rgba(255,78,0,.15);
+        }
+        .product-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-image img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-family: 'Geist', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .product-info { padding: 1.5rem 2rem; }
+        .product-info h3 { margin-bottom: 0.5rem; }
+        .product-info p { margin-bottom: 0; font-size: 0.95rem; }
+
+        .products-carousel-arrows {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 2rem;
+        }
+        .products-carousel-arrow {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--light-border);
+            background: #fff;
+            color: var(--light-text);
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .products-carousel-arrow:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .products-carousel-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .products-carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--light-border);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0;
+        }
+        .products-carousel-dot.active {
+            background: var(--primary);
+            width: 28px;
+            border-radius: 5px;
+        }
+
+        /* ===== WHY OMFY (Accordion Style) ===== */
+        .why-section { padding: 80px 0; }
+        .why-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-top: 2.5rem;
+        }
+        .why-accordion { display: flex; flex-direction: column; gap: 12px; }
+        .why-accordion-item {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid;
+        }
+        .section-dark .why-accordion-item {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+        .section-dark .why-accordion-item:hover,
+        .section-dark .why-accordion-item.active { border-color: var(--primary); }
+        .why-accordion-header {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+        .why-accordion-header i {
+            font-size: 24px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        .why-accordion-header h4 {
+            font-family: 'Geist', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+            flex: 1;
+        }
+        .section-dark .why-accordion-header h4 { color: #fff; }
+        .why-accordion-header .toggle-icon {
+            font-size: 18px;
+            color: var(--primary);
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+        .why-accordion-item.active .toggle-icon { transform: rotate(180deg); }
+        .why-accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .why-accordion-item.active .why-accordion-body { max-height: 200px; }
+        .why-accordion-body-inner {
+            padding: 0 1.5rem 1.25rem 3.5rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .section-dark .why-accordion-body-inner { color: var(--dark-text-secondary); }
+        .why-image {
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+        .why-image img { width: 100%; height: 100%; object-fit: cover; }
+        .why-highlight {
+            margin-top: 2rem;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        .section-dark .why-highlight {
+            background: linear-gradient(90deg, rgba(255,78,0,.15) 0%, transparent 100%);
+            border-left: 3px solid var(--primary);
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            .why-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .how-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('Gemini_Generated_Image_zghxwozghxwozghx.png') center/cover no-repeat;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        .how-section > .container { position: relative; z-index: 1; }
+        .how-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: stretch;
+            margin-top: 2.5rem;
+        }
+        .steps-grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .step-card {
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            transition: border-color .2s;
+            border: 1px solid;
+        }
+        .section-light .step-card {
+            background: rgba(255,255,255,0.70);
+            border-color: var(--light-border);
+            box-shadow: 0 2px 8px rgba(0,0,0,.04);
+            backdrop-filter: blur(6px);
+        }
+        .section-light .step-card:hover { border-color: var(--primary); }
+        .step-card .step-icon { font-size: 28px; color: var(--primary); margin-bottom: 10px; }
+        .step-card h4 {
+            font-family: 'Geist', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        .section-light .step-card h4 { color: var(--light-text); }
+        .step-card p { font-size: 12px; margin: 0; }
+        .section-light .step-card p { color: var(--light-text-secondary); }
+        .how-image {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--light-border);
+        }
+        .how-image img { width: 100%; height: 100%; object-fit: cover; }
+        /* How It Works Variant B — image as background, no side image */
+        .how-section-b {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .how-section-b::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('Gemini_Generated_Image_innemeinnemeinne-3.png') center/cover no-repeat;
+            opacity: 1;
+            z-index: 0;
+        }
+        .how-section-b > .container { position: relative; z-index: 1; }
+        .how-section-b .section-tag { color: #fff; }
+        .how-section-b h2 { color: #fff; }
+        .how-section-b .section-subtitle { color: rgba(255,255,255,0.8); }
+        .how-section-b .steps-grid-full {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 2.5rem;
+        }
+        .how-section-b .step-card {
+            background: rgba(255,255,255,0.80);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,.15);
+            backdrop-filter: blur(8px);
+        }
+        .how-section-b .step-card:hover { border-color: var(--primary); }
+        .how-section-b .step-card h4 { color: var(--light-text); }
+        .how-section-b .step-card p { color: var(--light-text-secondary); }
+        .flow-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 24px 32px;
+            border-radius: 12px;
+            margin-top: 32px;
+            border: 1px solid;
+        }
+        .section-light .flow-bar {
+            background: #fff;
+            border-color: var(--light-border);
+        }
+        .flow-bar .flow-step {
+            font-family: 'Geist', sans-serif;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            border: 1px solid rgba(255,78,0,.2);
+        }
+        .section-light .flow-bar .flow-step { background: #f5f5f5; }
+        .flow-bar .flow-step.highlight { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .flow-bar .flow-arrow { font-size: 22px; color: var(--primary); }
+        @media (max-width: 768px) {
+            .how-layout { grid-template-columns: 1fr; }
+        }
+
+        /* ===== BENEFITS (What You Get) ===== */
+        .benefits-section { padding: 80px 0; }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .benefit-item {
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid;
+        }
+        .section-dark .benefit-item {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+        .section-dark .benefit-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+        .benefit-stat {
+            font-family: 'Geist', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .benefit-item p { margin-bottom: 0; font-size: 0.95rem; }
+        @media (max-width: 768px) {
+            .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* Highlighted benefit card (first delivery free) */
+        .benefit-item.benefit-highlight {
+            border-color: var(--primary) !important;
+            background: linear-gradient(135deg, rgba(255,78,0,.12) 0%, rgba(255,78,0,.04) 100%) !important;
+            position: relative;
+        }
+        .benefit-item.benefit-highlight .benefit-stat {
+            font-size: 2.6rem;
+        }
+        .benefit-item.benefit-highlight::before {
+            content: '★';
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            font-size: 16px;
+            color: var(--primary);
+        }
+
+        /* Shipping promo banner (Variant B — full-width below grid) */
+        .shipping-promo {
+            margin-top: 2.5rem;
+            padding: 28px 36px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            border: 2px solid var(--primary);
+            background: linear-gradient(135deg, rgba(255,78,0,.14) 0%, rgba(255,78,0,.03) 100%);
+        }
+        .shipping-promo-main {
+            text-align: center;
+        }
+        .shipping-promo-main .promo-stat {
+            font-family: 'Geist', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        .shipping-promo-main .promo-detail {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,.7);
+            margin-top: 4px;
+        }
+        .shipping-promo-divider {
+            width: 1px;
+            height: 50px;
+            background: rgba(255,255,255,.12);
+        }
+        .shipping-promo-secondary {
+            text-align: center;
+        }
+        .shipping-promo-secondary .promo-stat {
+            font-family: 'Geist', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .shipping-promo-secondary .promo-detail {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,.55);
+            margin-top: 2px;
+        }
+        @media (max-width: 600px) {
+            .shipping-promo { gap: 1.5rem; padding: 24px 20px; }
+            .shipping-promo-divider { width: 60px; height: 1px; }
+        }
+
+        /* ===== MID-PAGE CTA ===== */
+        .mid-cta {
+            padding: 60px 0;
+            text-align: center;
+        }
+        .mid-cta h2 { text-align: center; margin-bottom: 1rem; }
+        .mid-cta p { text-align: center; margin-bottom: 2rem; }
+        .mid-cta-btn {
+            display: inline-block;
+            font-family: 'Geist', sans-serif;
+            background: var(--primary);
+            color: #000;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 78, 0, 0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .mid-cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 78, 0, 0.35);
+        }
+
+        /* ===== EUROPE MAP (gradient section) ===== */
+        .map-gradient-section {
+            background: linear-gradient(135deg, #5F1105 0%, #FF4E00 50%, #FBB808 100%);
+            padding: 0;
+            overflow: hidden;
+        }
+        /* Map header + full-width img (used in mobile vertical layout) */
+        .map-gradient-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .map-gradient-header .section-tag { color: rgba(255,255,255,.7); }
+        .map-gradient-header h2 {
+            color: #fff;
+            font-size: 2.4rem;
+            text-transform: uppercase;
+        }
+        .map-gradient-header p {
+            color: rgba(255,255,255,.8);
+            max-width: 600px;
+            margin: 0.5rem auto 0;
+        }
+        .map-gradient-img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .map-gradient-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 50px;
+        }
+        .map-gradient-stat-card {
+            background: rgba(255,255,255,.12);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 12px;
+            padding: 24px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 110px;
+            transition: background 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            cursor: default;
+        }
+        .map-gradient-stat-card:hover {
+            background: rgba(255,255,255,.25);
+            border-color: rgba(255,255,255,.4);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,.2);
+        }
+        .map-gradient-stat-card .stat-num {
+            font-family: 'Eurostile', 'Geist', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+        }
+        .map-gradient-stat-card p {
+            margin: 6px 0 0 0;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,.75);
+        }
+        /* ===== Partner logos inside gradient ===== */
+        .map-partners-top {
+            padding: 30px 0;
+        }
+        .map-partners-top .brand-logo {
+            height: 90px;
+            min-width: 150px;
+            opacity: 1;
+        }
+        .map-partners-top .brand-logo img {
+            filter: brightness(0) invert(1) !important;
+        }
+        /* Samokat logo — constrain width to match other logos */
+        .brand-logo img[alt="Samokat"] { max-width: 140px; max-height: 50px; }
+        .map-partners-top .marquee-wrapper::before,
+        .map-partners-top .marquee-wrapper::after { display: none !important; }
+
+        /* (stat card flex centering merged into main rule above) */
+
+        /* ===== DESKTOP: side-by-side layout (hidden on mobile) ===== */
+        .map-desktop {
+            display: block;
+        }
+        .map-gradient-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 2rem;
+        }
+        .map-gradient-left {
+            text-align: left;
+            padding: 50px 0;
+        }
+        .map-gradient-left .section-tag { color: rgba(255,255,255,.7); }
+        .map-gradient-left h2 {
+            color: #fff;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .map-gradient-left p {
+            color: rgba(255,255,255,.8);
+            max-width: 400px;
+            margin-bottom: 2rem;
+        }
+        .map-gradient-left .map-gradient-stats {
+            grid-template-columns: repeat(2, 1fr);
+            padding: 0;
+            margin: 0;
+            gap: 1rem;
+        }
+        .map-gradient-right {
+            padding-bottom: 40px;
+        }
+        .map-gradient-right img {
+            display: block;
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            height: auto;
+        }
+
+        /* ===== MOBILE: vertical layout (hidden on desktop) ===== */
+        .map-mobile {
+            display: none;
+        }
+        .map-mobile .map-gradient-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+        .map-mobile .map-gradient-header .section-tag { color: rgba(255,255,255,.7); }
+        .map-mobile .map-gradient-header h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .map-mobile .map-gradient-header p {
+            color: rgba(255,255,255,.8);
+            max-width: 600px;
+            margin: 0.5rem auto 0;
+        }
+        .map-mobile .map-gradient-img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .map-mobile .map-gradient-stats {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 30px 20px 40px;
+        }
+        .map-mobile .map-partners-top .brand-logo {
+            height: 110px;
+            min-width: 160px;
+        }
+        .map-mobile .map-partners-top .marquee-track {
+            gap: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .map-desktop { display: none; }
+            .map-mobile { display: block; }
+            .map-gradient-stats { grid-template-columns: repeat(2, 1fr); }
+        }
+        /* legacy placeholder to keep line refs stable */
+        .map-static-dot {
+            fill: var(--primary);
+            opacity: 0.9;
+        }
+        .map-static-dot-pulse {
+            fill: var(--primary);
+            opacity: 0.3;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 0.3; r: 8; }
+            50% { opacity: 0.1; r: 14; }
+        }
+        .map-static-label {
+            font-family: 'Geist', sans-serif;
+            font-size: 10px;
+            fill: rgba(255,255,255,.7);
+            font-weight: 500;
+        }
+
+        /* (Brandbook map CSS removed — using .map-gradient-section above) */
+
+        /* ===== TRUST / TESTIMONIALS ===== */
+        .trust-section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .trust-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('Gemini_Generated_Image_zghxwozghxwozghx-2.png') center/cover no-repeat;
+            opacity: 0.5;
+            z-index: 0;
+        }
+        .trust-section > .container { position: relative; z-index: 1; }
+        .trust-stat {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .trust-stat .large {
+            font-family: 'Geist', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .testimonial-carousel {
+            position: relative;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid;
+        }
+        .section-light .testimonial-carousel {
+            border-color: var(--light-border);
+            background: #fff;
+            box-shadow: 0 4px 16px rgba(0,0,0,.06);
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: stretch;
+            background: rgba(255,255,255,0.70);
+            backdrop-filter: blur(6px);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .carousel-slide-img { overflow: hidden; min-height: 300px; }
+        .carousel-slide-img img { width: 100%; height: 100%; object-fit: cover; }
+        .carousel-slide-text {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .carousel-slide-text .quote {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: rgba(0,0,0,.75);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        .carousel-slide-text .quote::before {
+            content: '\201C';
+            font-size: 2rem;
+            color: var(--primary);
+            line-height: 0;
+            margin-right: 4px;
+            vertical-align: -8px;
+        }
+        .carousel-slide-text .author {
+            font-family: 'Geist', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 2px;
+            color: var(--light-text);
+        }
+        .carousel-slide-text .role { font-size: 13px; color: rgba(0,0,0,.5); }
+        .carousel-arrows {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 12px;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .carousel-arrow {
+            pointer-events: auto;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.85);
+            border: 1px solid var(--light-border);
+            color: #1a1a1a;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
+        }
+        .carousel-arrow:hover { background: var(--primary); }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 0;
+        }
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background .2s;
+            border: none;
+        }
+        .section-light .carousel-dot { background: rgba(0,0,0,.15); }
+        .carousel-dot.active { background: var(--primary); }
+        @media (max-width: 768px) {
+            .carousel-slide { grid-template-columns: 1fr; }
+            .carousel-slide-img { max-height: 220px; }
+        }
+
+        /* Supply Chain */
+        .supply-chain {
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid;
+        }
+        .section-light .supply-chain {
+            background: #fff;
+            border-color: var(--light-border);
+            box-shadow: 0 2px 12px rgba(0,0,0,.04);
+        }
+        .supply-chain h3 { text-align: center; margin-bottom: 2rem; }
+        .chain-flow {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .chain-item {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            border-radius: 12px;
+            padding: 20px 16px;
+            transition: border-color .2s;
+            border: 1px solid;
+        }
+        .section-light .chain-item {
+            background: #f5f5f5;
+            border-color: var(--light-border);
+        }
+        .section-light .chain-item:hover { border-color: rgba(255,78,0,.3); }
+        .chain-item.chain-highlight {
+            background: linear-gradient(135deg, rgba(255,78,0,.15) 0%, rgba(255,78,0,.05) 100%);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(255,78,0,.1);
+        }
+        .chain-item-label {
+            font-family: 'Geist', sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        .chain-item.chain-highlight .chain-item-label { font-size: 1.2rem; font-weight: 800; }
+        .chain-item-detail { font-size: 0.85rem; }
+        .section-light .chain-item-detail { color: var(--light-text-secondary); }
+        .chain-arrow { font-size: 1.5rem; color: var(--primary); flex-shrink: 0; }
+        @media (max-width: 768px) {
+            .chain-flow { flex-direction: column; gap: 1.5rem; }
+            .chain-arrow { transform: rotate(90deg); }
+        }
+
+        /* ===== FORM SECTION ===== */
+        .form-section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        /* form-section: no background image, dark bg from section-dark */
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .form-header { text-align: center; margin-bottom: 3rem; }
+        .form-header h2 { text-align: center; color: #fff; }
+        .form-header p { font-size: 1.05rem; color: var(--dark-text-secondary); }
+        .form-box {
+            background: #fff;
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 3rem;
+            background-image:
+                linear-gradient(#fff, #fff),
+                linear-gradient(135deg, var(--primary), rgba(255, 78, 0, 0.2));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--light-text);
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem;
+            background: #f8f8f8;
+            border: 1px solid var(--light-border);
+            border-radius: 8px;
+            color: var(--light-text);
+            font-family: 'Geist', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #fff;
+            box-shadow: 0 0 15px rgba(255, 78, 0, 0.15);
+        }
+        .form-group input::placeholder { color: rgba(0, 0, 0, 0.35); }
+        .form-submit {
+            width: 100%;
+            padding: 1.1rem;
+            background: var(--primary);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 78, 0, 0.3);
+        }
+        .form-disclaimer {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--light-text-secondary);
+            padding: 1.5rem;
+            background: rgba(255, 78, 0, 0.04);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 78, 0, 0.12);
+        }
+        .form-disclaimer p { margin-bottom: 0.5rem; color: var(--light-text-secondary); }
+        .form-disclaimer p:last-child { margin-bottom: 0; font-style: italic; color: var(--primary); }
+        @media (max-width: 768px) {
+            .form-box { padding: 2rem; }
+        }
+
+        /* ===== FAQ SECTION ===== */
+        .faq-section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .faq-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('brandbook-photos/page23_img38_2731x4096.jpeg') center/cover no-repeat;
+            opacity: 0.5;
+            z-index: 0;
+        }
+        .faq-section > .container { position: relative; z-index: 1; }
+        .faq-container { max-width: 800px; margin: 3rem auto 0; }
+        .faq-item {
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid;
+        }
+        .section-light .faq-item {
+            background: rgba(255,255,255,0.70);
+            border-color: var(--light-border);
+            box-shadow: 0 2px 8px rgba(0,0,0,.04);
+            backdrop-filter: blur(6px);
+        }
+        .section-light .faq-item:hover { border-color: var(--primary); }
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            transition: background 0.3s;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+        .section-light .faq-question:hover { background: #f8f8f8; }
+        .faq-question h4 {
+            font-family: 'Geist', sans-serif;
+            margin: 0;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+        .section-light .faq-question h4 { color: var(--light-text); }
+        .faq-toggle {
+            color: var(--primary);
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+            margin-left: 1rem;
+            flex-shrink: 0;
+        }
+        .faq-item.active .faq-toggle { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-item.active .faq-answer { max-height: 500px; }
+        .faq-content {
+            padding: 0 2rem 2rem;
+            line-height: 1.8;
+        }
+        .section-light .faq-content { color: var(--light-text-secondary); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0a0a0a;
+            padding: 3rem 0;
+            color: #fff;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+        .footer-brand h3 { color: var(--primary); margin-bottom: 0.5rem; font-family: 'Geist', sans-serif; display: none; }
+        .footer-brand .footer-logo-svg { height: 30px; width: auto; margin-bottom: 0.75rem; }
+        .footer-brand p { font-size: 0.9rem; color: rgba(255,255,255,.6); margin-bottom: 1.5rem; }
+        .footer-contact { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .contact-item { font-size: 0.9rem; color: rgba(255,255,255,.6); }
+        .contact-item a { color: rgba(255,255,255,.6); }
+        .contact-item a:hover { color: var(--primary); }
+        .footer-links h4 {
+            font-family: 'Geist', sans-serif;
+            color: #fff;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links a { color: rgba(255,255,255,.6); font-size: 0.9rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--primary); }
+        .social-links { display: flex; gap: 1rem; margin-bottom: 1rem; }
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #222;
+            border-radius: 50%;
+            color: #fff;
+            transition: all 0.3s;
+        }
+        .social-links a:hover { background: var(--primary); color: #000; }
+        .footer-bottom {
+            border-top: 1px solid #222;
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,.4);
+            font-size: 0.85rem;
+        }
+        .partner-register-btn {
+            display: inline-block;
+            font-family: 'Geist', sans-serif;
+            background: transparent;
+            color: var(--primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .partner-register-btn:hover {
+            background: var(--primary);
+            color: #000;
+        }
+        @media (max-width: 768px) {
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+        }
+
+        /* ===== COMPARISON SEPARATOR ===== */
+        .comparison-separator {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,78,0,.08) 50%, transparent 100%);
+            border-top: 2px dashed var(--primary);
+            border-bottom: 2px dashed var(--primary);
+            margin: 0;
+        }
+        .comparison-separator span {
+            display: inline-block;
+            background: var(--primary);
+            color: #000;
+            font-family: 'Geist', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 8px 24px;
+            border-radius: 6px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.6rem; }
+            .container { padding: 0 15px; }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- STICKY NAVIGATION (appears on scroll > 500px) -->
+    <!-- ============================================ -->
+    <nav class="nav-bar nav-scrolled" id="navScrolled">
+        <div class="container">
+            <div class="nav-logo"><svg viewBox="0 0 308 89" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#nav-clip2)"><path d="M78.1332 87.9249H72.5876L75.3928 70.8414H80.9707C82.6322 70.8414 84.0024 71.1902 85.092 71.888C86.1817 72.5857 86.9369 73.5778 87.3793 74.8751C87.8108 76.1725 87.8864 77.7096 87.5843 79.5085C87.293 81.2637 86.7427 82.7682 85.9012 84.0219C85.0705 85.2757 83.9916 86.235 82.6861 86.911C81.3806 87.5869 79.8594 87.9249 78.144 87.9249H78.1332ZM75.5114 85.6681H78.2411C79.5249 85.6681 80.647 85.4174 81.5856 84.905C82.5351 84.4035 83.3011 83.6622 83.8837 82.7028C84.4771 81.7434 84.8763 80.5769 85.1028 79.2032C85.3186 77.8841 85.3078 76.7721 85.0489 75.8563C84.7899 74.9514 84.2937 74.2537 83.5492 73.7849C82.8048 73.3161 81.823 73.0763 80.5823 73.0763H77.5721L75.5114 85.6572V85.6681Z" fill="white"/><path d="M94.7267 70.8305L91.9216 87.914H89.3646L92.1697 70.8305H94.7267Z" fill="white"/><path d="M106.907 75.4312C106.918 74.5808 106.648 73.9376 106.109 73.4906C105.569 73.0436 104.803 72.8256 103.843 72.8256C103.153 72.8256 102.527 72.9346 101.987 73.1526C101.448 73.3707 101.006 73.6759 100.66 74.0575C100.326 74.4391 100.11 74.8752 100.024 75.3548C99.959 75.7582 100.002 76.1071 100.142 76.4014C100.283 76.6958 100.498 76.9465 100.779 77.1428C101.06 77.339 101.372 77.5025 101.707 77.6334C102.041 77.7642 102.365 77.8732 102.678 77.9495L104.264 78.3856C104.771 78.5164 105.3 78.7018 105.828 78.9307C106.357 79.1597 106.832 79.454 107.252 79.8356C107.673 80.2062 107.997 80.675 108.202 81.2201C108.407 81.7652 108.45 82.4303 108.331 83.1934C108.169 84.1637 107.781 85.0249 107.166 85.7663C106.551 86.5185 105.742 87.1072 104.739 87.5433C103.735 87.9794 102.581 88.1974 101.254 88.1974C99.9267 88.1974 98.9233 87.9903 98.0602 87.5869C97.1971 87.1835 96.5713 86.6057 96.1613 85.8535C95.7621 85.1013 95.6219 84.2182 95.7298 83.1825H98.2867C98.2328 83.8039 98.3407 84.3163 98.632 84.7197C98.9125 85.134 99.3117 85.4283 99.8296 85.6246C100.347 85.8208 100.93 85.9189 101.588 85.9189C102.311 85.9189 102.969 85.799 103.573 85.57C104.178 85.3411 104.674 85.014 105.062 84.5998C105.451 84.1855 105.688 83.6949 105.785 83.1389C105.871 82.6374 105.807 82.2231 105.58 81.8961C105.354 81.569 105.008 81.3073 104.555 81.1002C104.102 80.8931 103.584 80.6968 103.002 80.5442L101.092 79.9991C99.808 79.6284 98.8262 79.0833 98.1573 78.3529C97.4884 77.6334 97.251 76.674 97.4344 75.4857C97.5963 74.5045 98.0062 73.6432 98.6536 72.9128C99.3009 72.1823 100.11 71.6045 101.081 71.2012C102.052 70.7978 103.099 70.5907 104.231 70.5907C105.364 70.5907 106.357 70.7978 107.155 71.2121C107.964 71.6263 108.558 72.1932 108.935 72.9128C109.324 73.6323 109.453 74.4718 109.335 75.4203H106.875L106.907 75.4312Z" fill="white"/><path d="M112.204 73.0545L112.571 70.8305H125.658L125.291 73.0545H120.015L117.566 87.9249H115.02L117.469 73.0545H112.204Z" fill="white"/><path d="M125.734 87.9249L128.539 70.8414H134.57C135.876 70.8414 136.933 71.0703 137.721 71.5173C138.508 71.9752 139.058 72.5966 139.361 73.4033C139.663 74.2101 139.717 75.1368 139.555 76.1943C139.382 77.23 139.015 78.1457 138.444 78.9416C137.882 79.7374 137.127 80.3479 136.189 80.7949C135.25 81.2419 134.117 81.4599 132.812 81.4599H128.248L128.626 79.2359H132.963C133.793 79.2359 134.484 79.116 135.034 78.8762C135.584 78.6363 136.027 78.2875 136.35 77.8296C136.663 77.3717 136.879 76.8266 136.987 76.1943C137.084 75.5401 137.052 74.9841 136.89 74.5153C136.728 74.0466 136.404 73.6868 135.919 73.4251C135.444 73.1744 134.786 73.0436 133.945 73.0436H130.74L128.291 87.9249H125.734ZM135.336 80.2171L138.249 87.9249H135.347L132.51 80.2171H135.336Z" fill="white"/><path d="M146.136 70.8305L143.33 87.914H140.773L143.579 70.8305H146.136Z" fill="white"/><path d="M147.042 87.9248L149.847 70.8414H156.04C157.238 70.8414 158.198 71.0376 158.921 71.441C159.644 71.8444 160.151 72.3786 160.42 73.0545C160.69 73.7304 160.766 74.4935 160.625 75.333C160.507 76.0416 160.269 76.6412 159.935 77.1318C159.6 77.6224 159.191 78.004 158.705 78.2984C158.23 78.5927 157.723 78.7999 157.195 78.9416L157.162 79.1051C157.712 79.1378 158.23 79.3122 158.716 79.6502C159.201 79.9882 159.568 80.4679 159.816 81.0784C160.064 81.6998 160.129 82.452 159.989 83.3351C159.838 84.2073 159.503 84.9922 158.986 85.679C158.468 86.3768 157.756 86.9219 156.839 87.3252C155.932 87.7286 154.821 87.9358 153.516 87.9358H147.031L147.042 87.9248ZM149.955 85.7117H153.634C154.853 85.7117 155.77 85.4719 156.375 84.9922C156.979 84.5125 157.346 83.9129 157.464 83.1934C157.551 82.6592 157.486 82.1577 157.292 81.7107C157.097 81.2637 156.774 80.9039 156.321 80.6314C155.868 80.3588 155.306 80.228 154.616 80.228H150.84L149.934 85.7008L149.955 85.7117ZM151.196 78.2329H154.616C155.188 78.2329 155.727 78.1239 156.224 77.895C156.72 77.6769 157.141 77.3608 157.475 76.9574C157.81 76.554 158.025 76.0743 158.101 75.5292C158.219 74.8206 158.079 74.2319 157.658 73.7522C157.249 73.2725 156.536 73.0327 155.533 73.0327H152.048L151.196 78.2329Z" fill="white"/><path d="M175.934 70.8305H178.491L176.646 82.0705C176.452 83.2697 175.999 84.3272 175.287 85.243C174.575 86.1587 173.679 86.8892 172.579 87.4125C171.478 87.9358 170.259 88.1974 168.9 88.1974C167.541 88.1974 166.418 87.9358 165.501 87.4125C164.584 86.8892 163.926 86.1587 163.516 85.243C163.117 84.3272 163.009 83.2588 163.203 82.0705L165.048 70.8305H167.605L165.793 81.8633C165.674 82.6374 165.728 83.3242 165.976 83.9238C166.213 84.5234 166.623 84.9922 167.184 85.3411C167.746 85.679 168.458 85.8535 169.31 85.8535C170.162 85.8535 170.939 85.679 171.619 85.3411C172.298 85.0031 172.859 84.5234 173.291 83.9238C173.723 83.3242 173.992 82.6374 174.122 81.8633L175.934 70.8305Z" fill="white"/><path d="M181.017 73.0545L181.384 70.8305H194.471L194.104 73.0545H188.828L186.379 87.9249H183.833L186.282 73.0545H181.017Z" fill="white"/><path d="M199.897 70.8305L197.092 87.914H194.535L197.34 70.8305H199.897Z" fill="white"/><path d="M216.88 79.5412C216.578 81.3401 216.006 82.8772 215.153 84.1637C214.301 85.4501 213.255 86.4313 212.014 87.1181C210.773 87.805 209.446 88.1538 208.011 88.1538C206.576 88.1538 205.249 87.7941 204.192 87.0745C203.135 86.355 202.379 85.3302 201.926 83.9892C201.473 82.6483 201.398 81.0675 201.7 79.2251C202.002 77.4262 202.574 75.8781 203.426 74.5917C204.278 73.3053 205.336 72.3241 206.576 71.6263C207.817 70.9395 209.166 70.5907 210.611 70.5907C212.057 70.5907 213.352 70.9504 214.398 71.67C215.445 72.3895 216.2 73.4143 216.653 74.7552C217.106 76.0853 217.182 77.6879 216.88 79.5412ZM214.398 79.2251C214.625 77.8514 214.592 76.7067 214.323 75.78C214.042 74.8533 213.568 74.1447 212.899 73.665C212.23 73.1853 211.421 72.9455 210.482 72.9455C209.479 72.9455 208.54 73.2071 207.666 73.7086C206.792 74.2101 206.048 74.9624 205.433 75.9436C204.818 76.9247 204.397 78.124 204.17 79.5303C203.944 80.904 203.976 82.0487 204.246 82.9754C204.526 83.902 205.001 84.5998 205.67 85.0795C206.339 85.5591 207.148 85.7881 208.098 85.7881C209.047 85.7881 210.018 85.5373 210.903 85.0249C211.777 84.5125 212.521 83.7712 213.136 82.8009C213.751 81.8197 214.172 80.6314 214.398 79.2142V79.2251Z" fill="white"/><path d="M235.123 70.8305L232.318 87.914H229.976L223.449 75.3766H223.287L221.227 87.914H218.67L221.475 70.8305H223.837L230.376 83.3787H230.537L232.598 70.8305H235.123Z" fill="white"/><path d="M1.04665 28.9013C5.32986 7.20622 19.8194 0.752218 41.0736 0.108998C56.2968 -0.545123 81.6401 1.13379 82.0285 20.6702C82.4276 28.3562 80.3885 36.6526 76.8929 43.3792C72.135 53.3872 60.7742 58.4785 48.108 59.5796C25.4081 61.3893 -5.94458 60.7352 0.98192 29.2174L1.04665 28.9013ZM56.4155 41.1878C59.9543 38.8657 61.0332 33.4692 62.1013 29.261C62.7163 26.3829 63.5794 23.5157 62.8134 20.7465C61.5942 16.6801 55.3258 16.8763 48.2591 16.8654C36.2726 17.4977 24.3616 13.2132 20.7365 28.5851C15.8599 43.9897 22.0204 43.4228 36.3697 43.3137C42.7028 43.063 51.3986 44.2513 56.2105 41.3078L56.4263 41.166L56.4155 41.1878Z" fill="white"/><path d="M77.0989 57.2138C74.3477 55.2515 75.0167 52.2643 76.1171 46.9877C78.3612 37.3503 82.0618 21.4552 84.2628 12.2539C85.2554 7.22804 87.4563 2.23491 93.1205 1.83153C99.1623 1.112 107.632 0.806742 112.465 2.99805C119.316 6.59572 118.852 16.2876 120.999 22.7634C122.812 29.7189 125.218 28.269 128.821 23.4066C135.316 15.3282 140.441 1.76612 152.557 1.59169C158.577 1.46086 170.423 0.0654036 173.239 4.02284C174.89 8.6235 172.376 13.3223 171.524 18.5552C169.593 26.7972 167.025 37.7755 165.18 45.6577C163.669 51.97 162.666 55.5458 158.534 57.3992C154.186 59.2089 145.986 59.7104 144.562 53.9105C144.098 51.4685 144.735 48.6776 145.242 46.1374C147.087 37.7864 150.216 25.6634 150.841 21.0627C150.938 20.2233 151.111 19.2748 150.712 18.7733C150.28 18.4244 149.158 19.5909 147.454 21.8586C142.825 27.8111 138.218 36.1511 132.889 41.7657C127.559 47.3039 117.525 49.3208 112.066 43.6626C108.948 40.392 108.117 35.3662 107.178 30.9945C106.531 28.8577 104.837 15.4373 102.68 20.5176C101.083 24.2788 98.3424 37.6883 96.0983 46.4753C95.1596 50.0185 94.0591 53.9214 91.103 56.1673C87.37 58.9364 81.1771 59.4706 77.25 57.312L77.0989 57.2138Z" fill="white"/><path d="M307.453 2.8345C304.152 0.316131 290.374 0.970253 285.142 4.05553C278.172 7.18441 273.684 16.462 266.509 18.4571C263.682 18.7079 261.837 15.906 260.37 13.5512C258.439 10.3242 256.465 6.75923 253.303 4.54612C249.527 1.7661 237.638 1.35182 236.343 1.35182C232.643 1.30822 227.766 1.34092 222.447 1.33002C210.212 1.39543 197.395 1.1992 185.247 1.41724C177.457 1.06837 177.338 7.31523 175.72 13.3986C174.08 20.3323 172.322 27.7892 170.649 34.8429C169.646 39.0838 168.686 43.1393 167.887 46.5189C166.668 52.2098 165.6 55.4041 168.513 57.3883L168.664 57.4755C173.411 59.8957 180.1 58.3912 183.801 54.4774C187.404 50.847 187.955 45.4505 191.85 42.5833C197.708 38.5168 206.005 40.4356 212.845 39.6725C221.692 39.607 229.589 31.714 220.688 27.8983C215.359 25.1619 195.744 29.3373 195.41 21.7168C199.035 14.4452 222.166 18.6533 234.304 17.1489C236.98 16.8218 239.591 18.1519 240.864 20.5503C242.504 23.6465 244.165 26.7645 245.535 29.4355C248.276 34.4286 250.185 39.9341 249.365 45.6468C249.053 49.179 248.103 53.1583 250.412 55.9928L250.552 56.1563C254.479 60.2991 261.988 58.7837 265.872 55.0661C271.105 49.8986 270.954 41.7329 276.133 36.4673C282.736 29.2283 290.73 21.9567 297.754 14.8703C300.57 12.0903 303.148 9.60466 305.004 7.6423C307.205 5.32016 308.23 3.73937 307.442 2.80179L307.453 2.8345Z" fill="white"/></g><defs><clipPath id="nav-clip2"><rect width="307.711" height="88.2083" fill="white"/></clipPath></defs></svg></div>
+            <div style="display:flex;align-items:center;gap:16px;">
+                <button class="nav-cta" onclick="scrollToForm()">Request Catalog</button>
+                <button class="hamburger" id="hamburgerBtnScrolled" onclick="toggleMenu()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="nav-menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="nav-menu" id="navMenu">
+        <a href="#section-bestsellers" onclick="toggleMenu()">Bestsellers</a>
+        <a href="#section-brands" onclick="toggleMenu()">Our Brands</a>
+        <a href="#section-why" onclick="toggleMenu()">Why OMFY</a>
+        <a href="#section-how" onclick="toggleMenu()">How It Works</a>
+        <a href="#section-benefits" onclick="toggleMenu()">Benefits</a>
+        <a href="#map-brandbook" onclick="toggleMenu()">Our Network</a>
+        <a href="#section-testimonials" onclick="toggleMenu()">Testimonials</a>
+        <a href="#section-faq" onclick="toggleMenu()">FAQ</a>
+        <a href="#form-section" class="nav-menu-cta" onclick="toggleMenu()">Request Catalog &rarr;</a>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 1. HERO (Dark — Video) -->
+    <!-- ============================================ -->
+    <section class="hero-video">
+        <!-- Hero nav: transparent, stays with the hero -->
+        <nav class="nav-bar nav-hero" id="navHero">
+            <div class="container">
+                <div class="nav-logo"><svg viewBox="0 0 308 89" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#nav-clip)"><path d="M78.1332 87.9249H72.5876L75.3928 70.8414H80.9707C82.6322 70.8414 84.0024 71.1902 85.092 71.888C86.1817 72.5857 86.9369 73.5778 87.3793 74.8751C87.8108 76.1725 87.8864 77.7096 87.5843 79.5085C87.293 81.2637 86.7427 82.7682 85.9012 84.0219C85.0705 85.2757 83.9916 86.235 82.6861 86.911C81.3806 87.5869 79.8594 87.9249 78.144 87.9249H78.1332ZM75.5114 85.6681H78.2411C79.5249 85.6681 80.647 85.4174 81.5856 84.905C82.5351 84.4035 83.3011 83.6622 83.8837 82.7028C84.4771 81.7434 84.8763 80.5769 85.1028 79.2032C85.3186 77.8841 85.3078 76.7721 85.0489 75.8563C84.7899 74.9514 84.2937 74.2537 83.5492 73.7849C82.8048 73.3161 81.823 73.0763 80.5823 73.0763H77.5721L75.5114 85.6572V85.6681Z" fill="white"/><path d="M94.7267 70.8305L91.9216 87.914H89.3646L92.1697 70.8305H94.7267Z" fill="white"/><path d="M106.907 75.4312C106.918 74.5808 106.648 73.9376 106.109 73.4906C105.569 73.0436 104.803 72.8256 103.843 72.8256C103.153 72.8256 102.527 72.9346 101.987 73.1526C101.448 73.3707 101.006 73.6759 100.66 74.0575C100.326 74.4391 100.11 74.8752 100.024 75.3548C99.959 75.7582 100.002 76.1071 100.142 76.4014C100.283 76.6958 100.498 76.9465 100.779 77.1428C101.06 77.339 101.372 77.5025 101.707 77.6334C102.041 77.7642 102.365 77.8732 102.678 77.9495L104.264 78.3856C104.771 78.5164 105.3 78.7018 105.828 78.9307C106.357 79.1597 106.832 79.454 107.252 79.8356C107.673 80.2062 107.997 80.675 108.202 81.2201C108.407 81.7652 108.45 82.4303 108.331 83.1934C108.169 84.1637 107.781 85.0249 107.166 85.7663C106.551 86.5185 105.742 87.1072 104.739 87.5433C103.735 87.9794 102.581 88.1974 101.254 88.1974C99.9267 88.1974 98.9233 87.9903 98.0602 87.5869C97.1971 87.1835 96.5713 86.6057 96.1613 85.8535C95.7621 85.1013 95.6219 84.2182 95.7298 83.1825H98.2867C98.2328 83.8039 98.3407 84.3163 98.632 84.7197C98.9125 85.134 99.3117 85.4283 99.8296 85.6246C100.347 85.8208 100.93 85.9189 101.588 85.9189C102.311 85.9189 102.969 85.799 103.573 85.57C104.178 85.3411 104.674 85.014 105.062 84.5998C105.451 84.1855 105.688 83.6949 105.785 83.1389C105.871 82.6374 105.807 82.2231 105.58 81.8961C105.354 81.569 105.008 81.3073 104.555 81.1002C104.102 80.8931 103.584 80.6968 103.002 80.5442L101.092 79.9991C99.808 79.6284 98.8262 79.0833 98.1573 78.3529C97.4884 77.6334 97.251 76.674 97.4344 75.4857C97.5963 74.5045 98.0062 73.6432 98.6536 72.9128C99.3009 72.1823 100.11 71.6045 101.081 71.2012C102.052 70.7978 103.099 70.5907 104.231 70.5907C105.364 70.5907 106.357 70.7978 107.155 71.2121C107.964 71.6263 108.558 72.1932 108.935 72.9128C109.324 73.6323 109.453 74.4718 109.335 75.4203H106.875L106.907 75.4312Z" fill="white"/><path d="M112.204 73.0545L112.571 70.8305H125.658L125.291 73.0545H120.015L117.566 87.9249H115.02L117.469 73.0545H112.204Z" fill="white"/><path d="M125.734 87.9249L128.539 70.8414H134.57C135.876 70.8414 136.933 71.0703 137.721 71.5173C138.508 71.9752 139.058 72.5966 139.361 73.4033C139.663 74.2101 139.717 75.1368 139.555 76.1943C139.382 77.23 139.015 78.1457 138.444 78.9416C137.882 79.7374 137.127 80.3479 136.189 80.7949C135.25 81.2419 134.117 81.4599 132.812 81.4599H128.248L128.626 79.2359H132.963C133.793 79.2359 134.484 79.116 135.034 78.8762C135.584 78.6363 136.027 78.2875 136.35 77.8296C136.663 77.3717 136.879 76.8266 136.987 76.1943C137.084 75.5401 137.052 74.9841 136.89 74.5153C136.728 74.0466 136.404 73.6868 135.919 73.4251C135.444 73.1744 134.786 73.0436 133.945 73.0436H130.74L128.291 87.9249H125.734ZM135.336 80.2171L138.249 87.9249H135.347L132.51 80.2171H135.336Z" fill="white"/><path d="M146.136 70.8305L143.33 87.914H140.773L143.579 70.8305H146.136Z" fill="white"/><path d="M147.042 87.9248L149.847 70.8414H156.04C157.238 70.8414 158.198 71.0376 158.921 71.441C159.644 71.8444 160.151 72.3786 160.42 73.0545C160.69 73.7304 160.766 74.4935 160.625 75.333C160.507 76.0416 160.269 76.6412 159.935 77.1318C159.6 77.6224 159.191 78.004 158.705 78.2984C158.23 78.5927 157.723 78.7999 157.195 78.9416L157.162 79.1051C157.712 79.1378 158.23 79.3122 158.716 79.6502C159.201 79.9882 159.568 80.4679 159.816 81.0784C160.064 81.6998 160.129 82.452 159.989 83.3351C159.838 84.2073 159.503 84.9922 158.986 85.679C158.468 86.3768 157.756 86.9219 156.839 87.3252C155.932 87.7286 154.821 87.9358 153.516 87.9358H147.031L147.042 87.9248ZM149.955 85.7117H153.634C154.853 85.7117 155.77 85.4719 156.375 84.9922C156.979 84.5125 157.346 83.9129 157.464 83.1934C157.551 82.6592 157.486 82.1577 157.292 81.7107C157.097 81.2637 156.774 80.9039 156.321 80.6314C155.868 80.3588 155.306 80.228 154.616 80.228H150.84L149.934 85.7008L149.955 85.7117ZM151.196 78.2329H154.616C155.188 78.2329 155.727 78.1239 156.224 77.895C156.72 77.6769 157.141 77.3608 157.475 76.9574C157.81 76.554 158.025 76.0743 158.101 75.5292C158.219 74.8206 158.079 74.2319 157.658 73.7522C157.249 73.2725 156.536 73.0327 155.533 73.0327H152.048L151.196 78.2329Z" fill="white"/><path d="M175.934 70.8305H178.491L176.646 82.0705C176.452 83.2697 175.999 84.3272 175.287 85.243C174.575 86.1587 173.679 86.8892 172.579 87.4125C171.478 87.9358 170.259 88.1974 168.9 88.1974C167.541 88.1974 166.418 87.9358 165.501 87.4125C164.584 86.8892 163.926 86.1587 163.516 85.243C163.117 84.3272 163.009 83.2588 163.203 82.0705L165.048 70.8305H167.605L165.793 81.8633C165.674 82.6374 165.728 83.3242 165.976 83.9238C166.213 84.5234 166.623 84.9922 167.184 85.3411C167.746 85.679 168.458 85.8535 169.31 85.8535C170.162 85.8535 170.939 85.679 171.619 85.3411C172.298 85.0031 172.859 84.5234 173.291 83.9238C173.723 83.3242 173.992 82.6374 174.122 81.8633L175.934 70.8305Z" fill="white"/><path d="M181.017 73.0545L181.384 70.8305H194.471L194.104 73.0545H188.828L186.379 87.9249H183.833L186.282 73.0545H181.017Z" fill="white"/><path d="M199.897 70.8305L197.092 87.914H194.535L197.34 70.8305H199.897Z" fill="white"/><path d="M216.88 79.5412C216.578 81.3401 216.006 82.8772 215.153 84.1637C214.301 85.4501 213.255 86.4313 212.014 87.1181C210.773 87.805 209.446 88.1538 208.011 88.1538C206.576 88.1538 205.249 87.7941 204.192 87.0745C203.135 86.355 202.379 85.3302 201.926 83.9892C201.473 82.6483 201.398 81.0675 201.7 79.2251C202.002 77.4262 202.574 75.8781 203.426 74.5917C204.278 73.3053 205.336 72.3241 206.576 71.6263C207.817 70.9395 209.166 70.5907 210.611 70.5907C212.057 70.5907 213.352 70.9504 214.398 71.67C215.445 72.3895 216.2 73.4143 216.653 74.7552C217.106 76.0853 217.182 77.6879 216.88 79.5412ZM214.398 79.2251C214.625 77.8514 214.592 76.7067 214.323 75.78C214.042 74.8533 213.568 74.1447 212.899 73.665C212.23 73.1853 211.421 72.9455 210.482 72.9455C209.479 72.9455 208.54 73.2071 207.666 73.7086C206.792 74.2101 206.048 74.9624 205.433 75.9436C204.818 76.9247 204.397 78.124 204.17 79.5303C203.944 80.904 203.976 82.0487 204.246 82.9754C204.526 83.902 205.001 84.5998 205.67 85.0795C206.339 85.5591 207.148 85.7881 208.098 85.7881C209.047 85.7881 210.018 85.5373 210.903 85.0249C211.777 84.5125 212.521 83.7712 213.136 82.8009C213.751 81.8197 214.172 80.6314 214.398 79.2142V79.2251Z" fill="white"/><path d="M235.123 70.8305L232.318 87.914H229.976L223.449 75.3766H223.287L221.227 87.914H218.67L221.475 70.8305H223.837L230.376 83.3787H230.537L232.598 70.8305H235.123Z" fill="white"/><path d="M1.04665 28.9013C5.32986 7.20622 19.8194 0.752218 41.0736 0.108998C56.2968 -0.545123 81.6401 1.13379 82.0285 20.6702C82.4276 28.3562 80.3885 36.6526 76.8929 43.3792C72.135 53.3872 60.7742 58.4785 48.108 59.5796C25.4081 61.3893 -5.94458 60.7352 0.98192 29.2174L1.04665 28.9013ZM56.4155 41.1878C59.9543 38.8657 61.0332 33.4692 62.1013 29.261C62.7163 26.3829 63.5794 23.5157 62.8134 20.7465C61.5942 16.6801 55.3258 16.8763 48.2591 16.8654C36.2726 17.4977 24.3616 13.2132 20.7365 28.5851C15.8599 43.9897 22.0204 43.4228 36.3697 43.3137C42.7028 43.063 51.3986 44.2513 56.2105 41.3078L56.4263 41.166L56.4155 41.1878Z" fill="white"/><path d="M77.0989 57.2138C74.3477 55.2515 75.0167 52.2643 76.1171 46.9877C78.3612 37.3503 82.0618 21.4552 84.2628 12.2539C85.2554 7.22804 87.4563 2.23491 93.1205 1.83153C99.1623 1.112 107.632 0.806742 112.465 2.99805C119.316 6.59572 118.852 16.2876 120.999 22.7634C122.812 29.7189 125.218 28.269 128.821 23.4066C135.316 15.3282 140.441 1.76612 152.557 1.59169C158.577 1.46086 170.423 0.0654036 173.239 4.02284C174.89 8.6235 172.376 13.3223 171.524 18.5552C169.593 26.7972 167.025 37.7755 165.18 45.6577C163.669 51.97 162.666 55.5458 158.534 57.3992C154.186 59.2089 145.986 59.7104 144.562 53.9105C144.098 51.4685 144.735 48.6776 145.242 46.1374C147.087 37.7864 150.216 25.6634 150.841 21.0627C150.938 20.2233 151.111 19.2748 150.712 18.7733C150.28 18.4244 149.158 19.5909 147.454 21.8586C142.825 27.8111 138.218 36.1511 132.889 41.7657C127.559 47.3039 117.525 49.3208 112.066 43.6626C108.948 40.392 108.117 35.3662 107.178 30.9945C106.531 28.8577 104.837 15.4373 102.68 20.5176C101.083 24.2788 98.3424 37.6883 96.0983 46.4753C95.1596 50.0185 94.0591 53.9214 91.103 56.1673C87.37 58.9364 81.1771 59.4706 77.25 57.312L77.0989 57.2138Z" fill="white"/><path d="M307.453 2.8345C304.152 0.316131 290.374 0.970253 285.142 4.05553C278.172 7.18441 273.684 16.462 266.509 18.4571C263.682 18.7079 261.837 15.906 260.37 13.5512C258.439 10.3242 256.465 6.75923 253.303 4.54612C249.527 1.7661 237.638 1.35182 236.343 1.35182C232.643 1.30822 227.766 1.34092 222.447 1.33002C210.212 1.39543 197.395 1.1992 185.247 1.41724C177.457 1.06837 177.338 7.31523 175.72 13.3986C174.08 20.3323 172.322 27.7892 170.649 34.8429C169.646 39.0838 168.686 43.1393 167.887 46.5189C166.668 52.2098 165.6 55.4041 168.513 57.3883L168.664 57.4755C173.411 59.8957 180.1 58.3912 183.801 54.4774C187.404 50.847 187.955 45.4505 191.85 42.5833C197.708 38.5168 206.005 40.4356 212.845 39.6725C221.692 39.607 229.589 31.714 220.688 27.8983C215.359 25.1619 195.744 29.3373 195.41 21.7168C199.035 14.4452 222.166 18.6533 234.304 17.1489C236.98 16.8218 239.591 18.1519 240.864 20.5503C242.504 23.6465 244.165 26.7645 245.535 29.4355C248.276 34.4286 250.185 39.9341 249.365 45.6468C249.053 49.179 248.103 53.1583 250.412 55.9928L250.552 56.1563C254.479 60.2991 261.988 58.7837 265.872 55.0661C271.105 49.8986 270.954 41.7329 276.133 36.4673C282.736 29.2283 290.73 21.9567 297.754 14.8703C300.57 12.0903 303.148 9.60466 305.004 7.6423C307.205 5.32016 308.23 3.73937 307.442 2.80179L307.453 2.8345Z" fill="white"/></g><defs><clipPath id="nav-clip"><rect width="307.711" height="88.2083" fill="white"/></clipPath></defs></svg></div>
+                <div style="display:flex;align-items:center;gap:16px;">
+                    <button class="nav-cta" onclick="scrollToForm()">Request Catalog</button>
+                    <button class="hamburger" id="hamburgerBtnHero" onclick="toggleMenu()">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <video autoplay muted loop playsinline>
+            <source src="hero-video.mp4" type="video/mp4">
+        </video>
+        <div class="container">
+            <h1 class="fade-in">Exclusive Scooter Brands That Sell Fast — And Won't Compete With Your Store</h1>
+            <p class="fade-in" style="animation-delay: 0.2s;">Premium pro scooter brands your competitors can't source. Own manufacturing, protected margins, and a partner-first approach — built by retailers, for retailers.</p>
+
+            <div class="social-proof-bar fade-in" style="animation-delay: 0.4s;">
+                <div class="proof-item">
+                    <strong>100+</strong>
+                    <span>Retailers</span>
+                </div>
+                <div class="proof-item">
+                    <strong>19</strong>
+                    <span>Countries</span>
+                </div>
+                <div class="proof-item">
+                    <strong>&euro;500</strong>
+                    <span>Min. Order</span>
+                </div>
+                <div class="proof-item">
+                    <strong>Free</strong>
+                    <span>1st Delivery</span>
+                </div>
+            </div>
+
+            <button class="hero-cta fade-in" style="animation-delay: 0.6s;" onclick="scrollToForm()">Request Catalog & Pricing &rarr;</button>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 2. BRANDS + BESTSELLERS (Light, Gemini background) -->
+    <!-- ============================================ -->
+    <section class="brands-section brands-section-b section-light" id="section-brands">
+        <div class="container">
+            <div id="section-bestsellers"></div>
+            <div class="section-tag fade-in">Top Products</div>
+            <h2 class="fade-in">Bestsellers</h2>
+            <div class="products-carousel-wrap fade-in" id="productsCarousel">
+                <div class="products-carousel-track" id="productsTrack">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="product-aero-complete.png" alt="Union Aero Complete">
+                            <span class="product-badge">Lightest in the World</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Union Aero Complete</h3>
+                            <p>The world's lightest pro scooter. Ultra-premium build, incredibly responsive. The flagship of your store.</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="product-ethic-pandora.jpg" alt="Ethic DTC Pandora Complete">
+                            <span class="product-badge">Fan Favourite</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Ethic DTC Pandora</h3>
+                            <p>The complete scooter riders ask for by name. Bold colourways, proven durability, and a brand the community trusts.</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="product-union-bars.png" alt="Union Titanium Bars">
+                            <span class="product-badge">Top Seller</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Union Titanium Bars</h3>
+                            <p>Industry-leading handlebars in titanium. Lightweight, ultra-strong, multiple sizes. The most-requested upgrade part.</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="product-union-wheels.jpg" alt="Union Turbomatic Wheels">
+                            <span class="product-badge">Fast Mover</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Union Turbomatic Wheels</h3>
+                            <p>High-rebound PU, precision ABEC bearings, 110mm and 120mm. The parts that keep riders coming back to your shop.</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="product-union-deck.png" alt="Union UNIQ Deck">
+                            <span class="product-badge">New 2026</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Union UNIQ Deck</h3>
+                            <p>Ultra-light forged aluminium deck with signature colourways. Eye-catching display piece that sells itself off the shelf.</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="product-boom-pads.png" alt="BOOM Protection Pads">
+                            <span class="product-badge">Essential Add-On</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>BOOM Protection Pads</h3>
+                            <p>Premium knee and elbow pads designed for scooter riders. High-margin accessory your customers need with every scooter.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-carousel-arrows">
+                    <button class="products-carousel-arrow" onclick="moveProducts(-1)">&#8249;</button>
+                    <div class="products-carousel-dots" id="productsDots"></div>
+                    <button class="products-carousel-arrow" onclick="moveProducts(1)">&#8250;</button>
+                </div>
+            </div>
+
+            <!-- Brand logos marquee -->
+            <div style="margin-top: 4rem;">
+                <div class="section-tag fade-in">Our Brands</div>
+                <h2 class="fade-in">Trusted By Riders Worldwide</h2>
+                <div class="marquee-wrapper marquee-no-fade fade-in">
+                    <div class="marquee-track">
+                        <!-- Set 1 -->
+                        <div class="brand-logo"><img src="brands-logo/1.png" alt="Ethic DTC"></div>
+                        <div class="brand-logo"><img src="brands-logo/2.png" alt="Eretic"></div>
+                        <div class="brand-logo"><img src="brands-logo/3.png" alt="Aest"></div>
+                        <div class="brand-logo"><img src="brands-logo/4.png" alt="Union" class="logo-on-black"></div>
+                        <div class="brand-logo"><img src="brands-logo/5.png" alt="Brand 5" class="logo-on-black"></div>
+                        <div class="brand-logo"><img src="brands-logo/6.png" alt="Versatyl" class="logo-on-black"></div>
+                        <div class="brand-logo"><img src="brands-logo/7.png" alt="BOOM"></div>
+                        <div class="brand-logo"><img src="brands-logo/8.png" alt="ODI" class="logo-on-black"></div>
+                        <div class="brand-logo"><img src="brands-logo/9.png" alt="LW" class="logo-on-black"></div>
+                        <div class="brand-logo"><img src="brands-logo/10.png" alt="Union Scooter Parts"></div>
+                        <!-- Set 2 (duplicate for seamless loop) -->
+                        <div class="brand-logo"><img src="brands-logo/1.png" alt="Ethic DTC"></div>
+                        <div class="brand-logo"><img src="brands-logo/2.png" alt="Eretic"></div>
+                        <div class="brand-logo"><img src="brands-logo/3.png" alt="Aest"></div>
+                        <div class="brand-logo"><img src="brands-logo/4.png" alt="Union" class="logo-on-black"></div>
+                        <div class="brand-logo"><img src="brands-logo/5.png" alt="Brand 5" class="logo-on-black"></div>
+                        <div class="brand-logo"><img src="brands-logo/6.png" alt="Versatyl" class="logo-on-black"></div>
+                        <div class="brand-logo"><img src="brands-logo/7.png" alt="BOOM"></div>
+                        <div class="brand-logo"><img src="brands-logo/8.png" alt="ODI" class="logo-on-black"></div>
+                        <div class="brand-logo"><img src="brands-logo/9.png" alt="LW" class="logo-on-black"></div>
+                        <div class="brand-logo"><img src="brands-logo/10.png" alt="Union Scooter Parts"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 3. WHY OMFY (Dark) -->
+    <!-- ============================================ -->
+    <section class="why-section section-dark" id="section-why">
+        <div class="container">
+            <div class="section-tag fade-in">Why OMFY</div>
+            <h2 class="fade-in">Built for Your Business, Not Against It</h2>
+            <p class="section-subtitle fade-in">Products your competitors can't get. Margins they can't undercut.</p>
+
+            <div class="why-grid">
+                <div class="why-accordion">
+                    <div class="why-accordion-item active" onclick="toggleWhyAccordion(this)">
+                        <div class="why-accordion-header">
+                            <i class="ph-light ph-shield-check"></i>
+                            <h4>No B2C = No Competition With You</h4>
+                            <span class="toggle-icon">&or;</span>
+                        </div>
+                        <div class="why-accordion-body">
+                            <div class="why-accordion-body-inner">We never sell directly to consumers. Your prices are protected, no dumping, no hidden competition. Period.</div>
+                        </div>
+                    </div>
+                    <div class="why-accordion-item" onclick="toggleWhyAccordion(this)">
+                        <div class="why-accordion-header">
+                            <i class="ph-light ph-storefront"></i>
+                            <h4>Built From Real Retail Experience</h4>
+                            <span class="toggle-icon">&or;</span>
+                        </div>
+                        <div class="why-accordion-body">
+                            <div class="why-accordion-body-inner">We started as a scooter shop. We know what sells, what margin you need, and what your customers ask for. Our catalog is built for retailers, by retailers.</div>
+                        </div>
+                    </div>
+                    <div class="why-accordion-item" onclick="toggleWhyAccordion(this)">
+                        <div class="why-accordion-header">
+                            <i class="ph-light ph-factory"></i>
+                            <h4>Own Manufacturing = Fast Reactions</h4>
+                            <span class="toggle-icon">&or;</span>
+                        </div>
+                        <div class="why-accordion-body">
+                            <div class="why-accordion-body-inner">We design and produce Union in-house. That means faster restocks, custom runs, and the ability to react to trends before competitors even notice them.</div>
+                        </div>
+                    </div>
+                    <div class="why-accordion-item" onclick="toggleWhyAccordion(this)">
+                        <div class="why-accordion-header">
+                            <i class="ph-light ph-lock-key"></i>
+                            <h4>Exclusive Brands for Your Store</h4>
+                            <span class="toggle-icon">&or;</span>
+                        </div>
+                        <div class="why-accordion-body">
+                            <div class="why-accordion-body-inner">Carry brands your competitors can't source. Build customer loyalty with unique products they'll only find in your shop.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="why-image fade-in">
+                    <img src="Gemini_Generated_Image_innemeinnemeinne-2.png" alt="OMFY Warehouse">
+                </div>
+            </div>
+
+            <div class="why-highlight fade-in">
+                <strong>YOUR MARGINS ARE PROTECTED.</strong> We never sell to consumers. No price dumping. No hidden competition.
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 4. HOW IT WORKS (Light) -->
+    <!-- ============================================ -->
+    <section class="how-section section-light" id="section-how">
+        <div class="container">
+            <div class="section-tag fade-in">4 Simple Steps</div>
+            <h2 class="fade-in">How It Works</h2>
+            <p class="section-subtitle fade-in">From first request to ongoing sales — we keep it simple.</p>
+
+            <div class="how-layout">
+                <div class="steps-grid-2x2">
+                    <div class="step-card fade-in">
+                        <div class="step-icon"><i class="ph-light ph-envelope-simple"></i></div>
+                        <h4>Request a Catalog</h4>
+                        <p>Product range + B2B pricing</p>
+                    </div>
+                    <div class="step-card fade-in">
+                        <div class="step-icon"><i class="ph-light ph-shopping-cart"></i></div>
+                        <h4>Place Your First Order</h4>
+                        <p>From &euro;500 &middot; Free 1st delivery</p>
+                    </div>
+                    <div class="step-card fade-in">
+                        <div class="step-icon"><i class="ph-light ph-arrows-clockwise"></i></div>
+                        <h4>Sell & Reorder</h4>
+                        <p>Partner Portal for easy reorders</p>
+                    </div>
+                    <div class="step-card fade-in">
+                        <div class="step-icon"><i class="ph-light ph-chart-line-up"></i></div>
+                        <h4>Scale & Grow</h4>
+                        <p>Marketing support + bigger orders</p>
+                    </div>
+                </div>
+                <div class="how-image fade-in">
+                    <img src="Gemini_Generated_Image_innemeinnemeinne-3.png" alt="Scooter Manufacturing Workshop">
+                </div>
+            </div>
+
+            <!-- flow-bar removed per request -->
+        </div>
+    </section>
+
+    <!-- How It Works Variant B removed -->
+
+    <!-- ============================================ -->
+    <!-- 5. WHAT YOU GET (Dark) -->
+    <!-- ============================================ -->
+    <section class="benefits-section section-dark" id="section-benefits">
+        <div class="container">
+            <div class="section-tag fade-in">Partnership Benefits</div>
+            <h2 class="fade-in">What You Get With OMFY</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item fade-in">
+                    <div class="benefit-stat">42%+</div>
+                    <p>Average margin across all SKUs</p>
+                </div>
+                <div class="benefit-item fade-in" style="animation-delay: 0.1s;">
+                    <div class="benefit-stat">&euro;500</div>
+                    <p>Minimum order — no overcommitment</p>
+                </div>
+                <div class="benefit-item fade-in" style="animation-delay: 0.2s;">
+                    <div class="benefit-stat">&lt;1%</div>
+                    <p>Picking errors in our warehouse</p>
+                </div>
+                <div class="benefit-item fade-in" style="animation-delay: 0.4s;">
+                    <div class="benefit-stat">24/7</div>
+                    <p>Dedicated account manager support</p>
+                </div>
+                <div class="benefit-item fade-in" style="animation-delay: 0.5s;">
+                    <div class="benefit-stat">Full Suite</div>
+                    <p>Marketing materials and POS support</p>
+                </div>
+                <div class="benefit-item fade-in" style="animation-delay: 0.6s;">
+                    <div class="benefit-stat">5 Days</div>
+                    <p>Delivery anywhere in Europe</p>
+                </div>
+                <!-- 0 Risk card removed -->
+            </div>
+
+            <!-- Shipping promo banner -->
+            <div class="shipping-promo fade-in">
+                <div class="shipping-promo-main">
+                    <div class="promo-stat">Free First Delivery</div>
+                    <div class="promo-detail">Your first order ships free — starting from just &euro;500</div>
+                </div>
+                <div class="shipping-promo-divider"></div>
+                <div class="shipping-promo-secondary">
+                    <div class="promo-stat">Free Shipping from &euro;2,000+</div>
+                    <div class="promo-detail">All orders above &euro;2,000 always ship free across Europe</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 6. MID-PAGE CTA (Light) -->
+    <!-- ============================================ -->
+    <section class="mid-cta section-light">
+        <div class="container">
+            <h2 class="fade-in">Ready to Stock the Brands Riders Actually Want?</h2>
+            <p class="section-subtitle fade-in" style="max-width: 600px; margin: 0 auto 2rem;">Get our full catalog with B2B pricing. No commitment, no credit card. Just a conversation about growing your scooter sales.</p>
+            <button class="mid-cta-btn fade-in" onclick="scrollToForm()">Request Catalog &rarr;</button>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 7. MAP — DESKTOP (side-by-side + logos) -->
+    <!-- ============================================ -->
+    <div class="map-desktop">
+    <section class="map-gradient-section" id="map-brandbook">
+        <!-- Partner logos marquee at top of gradient -->
+        <div class="map-partners-top">
+            <div class="container">
+                <div class="marquee-wrapper">
+                    <div class="marquee-track" style="animation-duration: 20s;">
+                        <div class="brand-logo"><img src="partners-logo/1.png" alt="Scootive"></div>
+                        <div class="brand-logo"><img src="partners-logo/2.png" alt="Scootering.cz"></div>
+                        <div class="brand-logo"><img src="partners-logo/3.png" alt="Fantic26"></div>
+                        <div class="brand-logo"><img src="partners-logo/4.png" alt="Scooty24"></div>
+                        <div class="brand-logo"><img src="partners-logo/5-samokat-white.png" alt="Samokat"></div>
+                        <div class="brand-logo"><img src="partners-logo/6.png" alt="ScootWorld"></div>
+                        <div class="brand-logo"><img src="partners-logo/1.png" alt="Scootive"></div>
+                        <div class="brand-logo"><img src="partners-logo/2.png" alt="Scootering.cz"></div>
+                        <div class="brand-logo"><img src="partners-logo/3.png" alt="Fantic26"></div>
+                        <div class="brand-logo"><img src="partners-logo/4.png" alt="Scooty24"></div>
+                        <div class="brand-logo"><img src="partners-logo/5-samokat-white.png" alt="Samokat"></div>
+                        <div class="brand-logo"><img src="partners-logo/6.png" alt="ScootWorld"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Side-by-side: text+stats left, map right -->
+        <div class="map-gradient-inner">
+            <div class="map-gradient-left">
+                <div class="section-tag">Our Network</div>
+                <h2>100+ Partners Across Europe</h2>
+                <p>From Scandinavia to the Mediterranean — trusted retailers rely on OMFY for quality, reliability, and real partnership.</p>
+                <div class="map-gradient-stats">
+                    <div class="map-gradient-stat-card fade-in">
+                        <div class="stat-num">100+</div>
+                        <p>Active Partners</p>
+                    </div>
+                    <div class="map-gradient-stat-card fade-in">
+                        <div class="stat-num">19</div>
+                        <p>EU Countries</p>
+                    </div>
+                    <div class="map-gradient-stat-card fade-in">
+                        <div class="stat-num">Free</div>
+                        <p>1st Delivery</p>
+                    </div>
+                    <div class="map-gradient-stat-card fade-in">
+                        <div class="stat-num">1–5 days</div>
+                        <p>Max Delivery</p>
+                    </div>
+                </div>
+            </div>
+            <div class="map-gradient-right">
+                <img src="europe-map-transparent.png" alt="OMFY Distribution network across Europe">
+            </div>
+        </div>
+    </section>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 7. MAP — MOBILE (vertical, full-width) -->
+    <!-- ============================================ -->
+    <div class="map-mobile">
+    <section class="map-gradient-section">
+        <div class="map-gradient-header fade-in" style="padding-top:60px;">
+            <div class="section-tag">Our Network</div>
+            <h2>100+ Partners Across Europe</h2>
+            <p>From Scandinavia to the Mediterranean — trusted retailers rely on OMFY for quality, reliability, and real partnership.</p>
+        </div>
+
+        <!-- Partner logos -->
+        <div class="map-partners-top">
+            <div class="container">
+                <div class="marquee-wrapper">
+                    <div class="marquee-track" style="animation-duration: 20s;">
+                        <div class="brand-logo"><img src="partners-logo/1.png" alt="Scootive"></div>
+                        <div class="brand-logo"><img src="partners-logo/2.png" alt="Scootering.cz"></div>
+                        <div class="brand-logo"><img src="partners-logo/3.png" alt="Fantic26"></div>
+                        <div class="brand-logo"><img src="partners-logo/4.png" alt="Scooty24"></div>
+                        <div class="brand-logo"><img src="partners-logo/5-samokat-white.png" alt="Samokat"></div>
+                        <div class="brand-logo"><img src="partners-logo/6.png" alt="ScootWorld"></div>
+                        <div class="brand-logo"><img src="partners-logo/1.png" alt="Scootive"></div>
+                        <div class="brand-logo"><img src="partners-logo/2.png" alt="Scootering.cz"></div>
+                        <div class="brand-logo"><img src="partners-logo/3.png" alt="Fantic26"></div>
+                        <div class="brand-logo"><img src="partners-logo/4.png" alt="Scooty24"></div>
+                        <div class="brand-logo"><img src="partners-logo/5-samokat-white.png" alt="Samokat"></div>
+                        <div class="brand-logo"><img src="partners-logo/6.png" alt="ScootWorld"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <img class="map-gradient-img" src="europe-map-transparent.png" alt="OMFY Distribution network across Europe">
+
+        <div class="map-gradient-stats">
+            <div class="map-gradient-stat-card fade-in">
+                <div class="stat-num">100+</div>
+                <p>Active Partners</p>
+            </div>
+            <div class="map-gradient-stat-card fade-in">
+                <div class="stat-num">19</div>
+                <p>EU Countries</p>
+            </div>
+            <div class="map-gradient-stat-card fade-in">
+                <div class="stat-num">Free</div>
+                <p>1st Delivery</p>
+            </div>
+            <div class="map-gradient-stat-card fade-in">
+                <div class="stat-num">1–5 days</div>
+                <p>Max Delivery</p>
+            </div>
+        </div>
+    </section>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 8. TRUST — TESTIMONIALS + SUPPLY CHAIN (Light) -->
+    <!-- ============================================ -->
+    <section class="trust-section section-light" id="section-testimonials">
+        <div class="container">
+            <div class="section-tag fade-in">What Partners Say</div>
+            <h2 class="fade-in">Trusted Across Europe</h2>
+
+            <div class="testimonial-carousel" id="testimonialCarousel">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide">
+                        <div class="carousel-slide-img">
+                            <img src="Gemini_Generated_Image_zghxwozghxwozghx-2.png" alt="Scooter retail shop">
+                        </div>
+                        <div class="carousel-slide-text">
+                            <p class="quote">We switched to OMFY eight months ago and the difference is night and day. Delivery is always on time, the margins are real, and our customers keep coming back for Scootive parts. Best distributor we've worked with in the action sports space.</p>
+                            <div class="author">Marcus Lindberg</div>
+                            <div class="role">Owner, RideZone Skate Shop — Stockholm, Sweden</div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="carousel-slide-img">
+                            <img src="Gemini_Generated_Image_zghxwozghxwozghx-3.png" alt="Rider performing tricks">
+                        </div>
+                        <div class="carousel-slide-text">
+                            <p class="quote">Our local riders specifically ask for Ethic DTC and Versatyl — these are the brands the community trusts. Since partnering with OMFY, we always have the right stock. Their Partner Portal makes reordering a breeze.</p>
+                            <div class="author">Tomas Dvorak</div>
+                            <div class="role">Manager, TrickShop Prague — Czech Republic</div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="carousel-slide-img">
+                            <img src="Gemini_Generated_Image_zghxwozghxwozghx-4.png" alt="Shop owner with scooter">
+                        </div>
+                        <div class="carousel-slide-text">
+                            <p class="quote">What I appreciate most is that OMFY doesn't sell to end consumers. That was a dealbreaker with our previous supplier — they undercut our prices online. With OMFY, my margins are protected.</p>
+                            <div class="author">Pierre Moreau</div>
+                            <div class="role">Founder, UrbanRide Paris — France</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-arrows">
+                    <button class="carousel-arrow" onclick="moveCarousel(-1)">&#8249;</button>
+                    <button class="carousel-arrow" onclick="moveCarousel(1)">&#8250;</button>
+                </div>
+            </div>
+            <div class="carousel-dots" id="carouselDots">
+                <button class="carousel-dot active" onclick="goToSlide(0)"></button>
+                <button class="carousel-dot" onclick="goToSlide(1)"></button>
+                <button class="carousel-dot" onclick="goToSlide(2)"></button>
+            </div>
+
+            <!-- Supply Chain block removed -->
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 9. LEAD FORM (Dark) -->
+    <!-- ============================================ -->
+    <section class="form-section section-dark" id="form-section">
+        <div class="form-container">
+            <div class="form-header">
+                <div class="section-tag">Let's Talk</div>
+                <h2>Get Your Personalized B2B Offer</h2>
+                <p>Tell us about your store and we'll send you our catalog with custom pricing within 24 hours.</p>
+            </div>
+
+            <div class="form-box">
+                <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="company">Company Website / Store Name *</label>
+                        <input type="text" id="company" name="company" placeholder="https://mystore.com or Your Store Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Contact Person *</label>
+                        <input type="text" id="contact" name="contact" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone (Optional)</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+371 20 180 440">
+                    </div>
+                    <button type="submit" class="form-submit">Request Catalog & Pricing &rarr;</button>
+                    <div class="form-disclaimer">
+                        <p><strong>No commitment. No credit card. Just a conversation about growing your scooter sales.</strong></p>
+                        <p>Currently accepting new partners in select European territories.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 10. FAQ (Light) -->
+    <!-- ============================================ -->
+    <section class="faq-section section-light" id="section-faq">
+        <div class="container">
+            <h2 class="fade-in" style="text-align: center;">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>What is the minimum order quantity?</h4>
+                        <span class="faq-toggle">&or;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-content">&euro;500 for your first order. No minimum on reorders through our Partner Portal — order exactly what you need when you need it.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>Do you sell directly to consumers?</h4>
+                        <span class="faq-toggle">&or;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-content">Never. We are 100% B2B. No price dumping, no competing with our partners, no DTC sales. Period.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>How long does delivery take?</h4>
+                        <span class="faq-toggle">&or;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-content">Up to 5 business days anywhere in Europe from our warehouse in Jurmala, Latvia. Your first order ships free, and all orders above &euro;2,000 ship free as well.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>How does shipping work?</h4>
+                        <span class="faq-toggle">&or;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-content">Your first order always ships free — even at the &euro;500 minimum. After that, orders above &euro;2,000 ship free across Europe. For smaller reorders, a small flat-rate shipping fee applies.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>Can I get exclusive territory rights?</h4>
+                        <span class="faq-toggle">&or;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-content">Yes, we offer territory protection for committed partners. Let's discuss your region and business goals. Email us at b2b@omfydistribution.com.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>What brands do you carry?</h4>
+                        <span class="faq-toggle">&or;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-content">Ethic DTC, Versatyl, Union, BOOM, Aest, ODI, LW, and more. Our catalog includes 500+ SKUs across pro scooters and parts. Request our full catalog to see the complete range.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>Do you provide marketing support?</h4>
+                        <span class="faq-toggle">&or;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-content">Yes. You get product photos, descriptions, POS materials, and access to our Partner Portal with real-time inventory visibility.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 11. FOOTER (Dark) -->
+    <!-- ============================================ -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img class="footer-logo-svg" src="omfy-branding/logo/SVG/Logo full Orange and white.svg" alt="OMFY Distribution">
+                    <h3>OMFY Distribution</h3>
+                    <p>B2B distributor of premium scooter brands and parts to retailers across Europe.</p>
+                    <div class="footer-contact">
+                        <div class="contact-item"><strong>Email:</strong> <a href="mailto:b2b@omfydistribution.com">b2b@omfydistribution.com</a></div>
+                        <div class="contact-item"><strong>Phone:</strong> <a href="tel:+37120180440">+371 201 80 440</a></div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/omfy-distribution/" target="_blank" rel="noopener">
+                            <i class="ph ph-linkedin-logo"></i>
+                        </a>
+                        <a href="https://www.instagram.com/omfydistribution/" target="_blank" rel="noopener">
+                            <i class="ph ph-instagram-logo"></i>
+                        </a>
+                        <a href="https://www.facebook.com/omfydistribution/" target="_blank" rel="noopener">
+                            <i class="ph ph-facebook-logo"></i>
+                        </a>
+                        <a href="https://wa.me/37120180440" target="_blank" rel="noopener" title="Partner WhatsApp Channel">
+                            <i class="ph ph-whatsapp-logo"></i>
+                        </a>
+                    </div>
+                    <a href="https://portal.omfydistribution.com" target="_blank" class="partner-register-btn">Register as Partner &rarr;</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#" onclick="scrollToForm(); return false;">Request Catalog</a></li>
+                        <li><a href="#form-section">Contact Us</a></li>
+                        <li><a href="https://portal.omfydistribution.com" target="_blank">Partner Portal</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About OMFY</a></li>
+                        <li><a href="#">Our Brands</a></li>
+                        <li><a href="#">Become a Partner</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://wa.me/37120180440" target="_blank">WhatsApp Partner Chat</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 OMFY, SIA. Reg. No: LV40203174363 &middot; Jauna iela 5, Jurmala, LV-2015, Latvia</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================================ -->
+    <script>
+        // ===== HAMBURGER MENU =====
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            const overlay = document.getElementById('menuOverlay');
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.querySelectorAll('.hamburger').forEach(btn => {
+                btn.classList.toggle('active', menu.classList.contains('active'));
+            });
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // ===== STICKY NAV ON SCROLL =====
+        (function() {
+            const navScrolled = document.getElementById('navScrolled');
+            const navHero = document.getElementById('navHero');
+            const SCROLL_THRESHOLD = 500;
+
+            window.addEventListener('scroll', function() {
+                const y = window.pageYOffset || document.documentElement.scrollTop;
+                if (y > SCROLL_THRESHOLD) {
+                    navScrolled.classList.add('visible');
+                    navHero.style.opacity = '0';
+                } else {
+                    navScrolled.classList.remove('visible');
+                    navHero.style.opacity = '1';
+                }
+            }, { passive: true });
+        })();
+
+        // ===== TESTIMONIAL CAROUSEL =====
+        let currentSlide = 0;
+        const totalSlides = 3;
+
+        function moveCarousel(dir) {
+            currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            if (track) track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.carousel-dot').forEach((dot, i) =>
+                dot.classList.toggle('active', i === currentSlide)
+            );
+        }
+        setInterval(() => moveCarousel(1), 6000);
+
+        // ===== WHY OMFY ACCORDION =====
+        function toggleWhyAccordion(item) {
+            const wasActive = item.classList.contains('active');
+            document.querySelectorAll('.why-accordion-item').forEach(el => el.classList.remove('active'));
+            if (!wasActive) item.classList.add('active');
+        }
+
+        // ===== FAQ TOGGLE =====
+        function toggleFAQ(button) {
+            const item = button.parentElement;
+            const isActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+            if (!isActive) item.classList.add('active');
+        }
+
+        // ===== PRODUCTS CAROUSEL =====
+        let productSlide = 0;
+        function getVisibleProducts() {
+            if (window.innerWidth <= 600) return 1;
+            if (window.innerWidth <= 992) return 2;
+            return 3;
+        }
+        function getTotalProductSlides() {
+            const total = document.querySelectorAll('#productsTrack .product-card').length;
+            return Math.max(1, total - getVisibleProducts() + 1);
+        }
+        function moveProducts(dir) {
+            const max = getTotalProductSlides() - 1;
+            productSlide = Math.max(0, Math.min(max, productSlide + dir));
+            updateProducts();
+        }
+        function goToProduct(i) {
+            productSlide = i;
+            updateProducts();
+        }
+        function updateProducts() {
+            const track = document.getElementById('productsTrack');
+            if (!track) return;
+            const card = track.querySelector('.product-card');
+            if (!card) return;
+            const gap = 24; // 1.5rem
+            const cardW = card.offsetWidth + gap;
+            track.style.transform = `translateX(-${productSlide * cardW}px)`;
+            // Update dots
+            const dots = document.querySelectorAll('.products-carousel-dot');
+            dots.forEach((d, i) => d.classList.toggle('active', i === productSlide));
+        }
+        function buildProductDots() {
+            const container = document.getElementById('productsDots');
+            if (!container) return;
+            const count = getTotalProductSlides();
+            container.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'products-carousel-dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToProduct(i);
+                container.appendChild(dot);
+            }
+        }
+        window.addEventListener('resize', () => { buildProductDots(); productSlide = 0; updateProducts(); });
+
+        // ===== SCROLL TO FORM =====
+        function scrollToForm() {
+            document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ===== FORM SUBMISSION =====
+        const MAKE_WEBHOOK_URL = 'YOUR_MAKE_WEBHOOK_URL';
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            const formData = {
+                company: document.getElementById('company').value,
+                contact: document.getElementById('contact').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                timestamp: new Date().toISOString(),
+                source: 'OMFY B2B Landing Page v4'
+            };
+            try {
+                const response = await fetch(MAKE_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                if (response.ok) { showFormSuccess(); } else { throw new Error('fail'); }
+            } catch (error) {
+                console.error('Form error:', error);
+                showFormSuccess(); // fallback
+            }
+        }
+
+        function showFormSuccess() {
+            const form = document.getElementById('contactForm');
+            form.innerHTML = `<div style="text-align:center;padding:3rem;background:rgba(255,78,0,.06);border-radius:12px;border:1px solid rgba(255,78,0,.15);">
+                <h3 style="color:#1a1a1a;margin-bottom:1rem;font-family:Geist,sans-serif;">Thank you for your interest!</h3>
+                <p style="color:#555;margin-bottom:0;">We'll send you our catalog and custom pricing within 24 hours. Look for an email from b2b@omfydistribution.com</p>
+            </div>`;
+        }
+
+        // ===== FADE-IN ON SCROLL =====
+        function observeElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.style.opacity = '1';
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        }
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', () => {
+            observeElements();
+            buildProductDots();
+        });
+
+        // Smooth anchor scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
