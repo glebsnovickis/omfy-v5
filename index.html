@@ -429,8 +429,30 @@
         }
         .proof-item span { font-size: 0.9rem; color: rgba(255,255,255,.7); }
         @media (max-width: 768px) {
-            .hero-video h1 { font-size: 2rem; }
-            .social-proof-bar { gap: 1.5rem; flex-direction: column; align-items: center; }
+            .nav-bar { padding: 0.15rem 0; }
+            .nav-logo svg { height: 26px; }
+            .hero-video { min-height: 100svh; }
+            .hero-video .container { padding: 48px 0 20px; }
+            .hero-video h1 { font-size: 1.75rem; line-height: 1.1; margin-bottom: 1.75rem; letter-spacing: 0; }
+            .hero-video p { font-size: 0.95rem; line-height: 1.55; margin-bottom: 2rem; }
+            .hero-cta { padding: 0.95rem 1.6rem; font-size: 0.95rem; margin-bottom: 1.25rem; }
+            .social-proof-bar {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.6rem;
+                background: transparent;
+                border: none;
+                padding: 0;
+                margin-bottom: 2rem;
+            }
+            .social-proof-bar .proof-item {
+                background: rgba(255, 78, 0, 0.12);
+                border: 1px solid rgba(255, 78, 0, 0.3);
+                border-radius: 10px;
+                padding: 0.75rem 0.5rem;
+            }
+            .proof-item strong { font-size: 1.15rem; margin-bottom: 0.2rem; }
+            .proof-item span { font-size: 0.72rem; line-height: 1.25; }
         }
 
         /* ===== BRANDS MARQUEE ===== */
@@ -824,6 +846,12 @@
         .flow-bar .flow-arrow { font-size: 22px; color: var(--primary); }
         @media (max-width: 768px) {
             .how-layout { grid-template-columns: 1fr; }
+            .how-image { display: none; }
+            .steps-grid-2x2 { gap: 10px; }
+            .step-card { padding: 14px 12px; }
+            .step-card .step-icon { font-size: 22px; margin-bottom: 6px; }
+            .step-card h4 { font-size: 12px; line-height: 1.2; margin-bottom: 4px; }
+            .step-card p { font-size: 11px; line-height: 1.35; }
         }
 
         /* ===== BENEFITS (What You Get) ===== */
@@ -858,7 +886,12 @@
         }
         .benefit-item p { margin-bottom: 0; font-size: 0.95rem; }
         @media (max-width: 768px) {
-            .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+            .benefits-section { padding: 48px 0; }
+            .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 1.5rem; }
+            .benefit-item { padding: 1rem 0.75rem; border-radius: 12px; }
+            .benefit-stat { font-size: 1.5rem; margin-bottom: 0.35rem; line-height: 1.1; }
+            .benefit-item p { font-size: 0.78rem; line-height: 1.35; }
+            .benefit-item.benefit-highlight .benefit-stat { font-size: 1.65rem; }
         }
 
         /* Highlighted benefit card (first delivery free) */
@@ -927,8 +960,12 @@
             margin-top: 2px;
         }
         @media (max-width: 600px) {
-            .shipping-promo { gap: 1.5rem; padding: 24px 20px; }
+            .shipping-promo { gap: 1rem; padding: 20px 14px; }
             .shipping-promo-divider { width: 60px; height: 1px; }
+            .shipping-promo-main .promo-stat { font-size: 1.5rem; white-space: nowrap; }
+            .shipping-promo-main .promo-detail { font-size: 0.82rem; }
+            .shipping-promo-secondary .promo-stat { font-size: 1.15rem; white-space: nowrap; }
+            .shipping-promo-secondary .promo-detail { font-size: 0.78rem; }
         }
 
         /* ===== MID-PAGE CTA ===== */
