@@ -2633,10 +2633,41 @@
             document.querySelectorAll('.why-img1b-card').forEach(el => revealObserver.observe(el));
         }
 
+        // ===== PRODUCTS TOUCH SWIPE =====
+        function enableProductsSwipe() {
+            const track = document.getElementById('productsTrack');
+            if (!track) return;
+            let startX = 0, startY = 0, deltaX = 0, deltaY = 0, active = false, locked = null;
+            const threshold = 40;
+            track.addEventListener('touchstart', (e) => {
+                const t = e.touches[0];
+                startX = t.clientX; startY = t.clientY;
+                deltaX = 0; deltaY = 0; active = true; locked = null;
+            }, { passive: true });
+            track.addEventListener('touchmove', (e) => {
+                if (!active) return;
+                const t = e.touches[0];
+                deltaX = t.clientX - startX;
+                deltaY = t.clientY - startY;
+                if (locked === null && (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8)) {
+                    locked = Math.abs(deltaX) > Math.abs(deltaY) ? 'x' : 'y';
+                }
+                if (locked === 'x' && e.cancelable) e.preventDefault();
+            }, { passive: false });
+            track.addEventListener('touchend', () => {
+                if (!active) return;
+                active = false;
+                if (locked === 'x' && Math.abs(deltaX) > threshold) {
+                    moveProducts(deltaX < 0 ? 1 : -1);
+                }
+            });
+        }
+
         // ===== INIT =====
         document.addEventListener('DOMContentLoaded', () => {
             observeElements();
             buildProductDots();
+            enableProductsSwipe();
         });
 
         // Smooth anchor scroll
