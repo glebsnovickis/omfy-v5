@@ -451,8 +451,13 @@
         @media (max-width: 768px) {
             .nav-bar { padding: 0.15rem 0; }
             .nav-logo svg { height: 26px; }
-            .hero-video { min-height: 100svh; }
-            .hero-video .container { padding: 48px 0 20px; }
+            .hero-video { min-height: 85svh; align-items: flex-start; }
+            .hero-video .container { padding: 88px 0 20px; }
+            .nav-bar { padding: 0.25rem 0; }
+            .nav-hero { top: 0; }
+            .nav-hero .container { padding-left: 20px; padding-right: 20px; padding-top: 4px; padding-bottom: 4px; }
+            .hero-cta { margin-top: 1.25rem; }
+            .brands-section { padding: 40px 0; }
             .hero-video h1 { font-size: 1.75rem; line-height: 1.1; margin-bottom: 1.75rem; letter-spacing: 0; }
             .hero-video p { font-size: 0.95rem; line-height: 1.55; margin-bottom: 2rem; }
             .hero-cta { padding: 0.95rem 1.6rem; font-size: 0.95rem; margin-bottom: 1.25rem; }
@@ -660,92 +665,202 @@
             border-radius: 5px;
         }
 
-        /* ===== WHY OMFY (Accordion Style) ===== */
+        /* ===== WHY OMFY — base ===== */
         .why-section { padding: 80px 0; }
-        .why-grid {
+        .why-variant-label {
+            display: inline-block;
+            background: var(--primary);
+            color: #000;
+            font-family: 'Geist', sans-serif;
+            font-weight: 800;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Variant 1: full-bleed image with overlay --- */
+        .why-img1-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: start;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
             margin-top: 2.5rem;
         }
-        .why-accordion { display: flex; flex-direction: column; gap: 12px; }
-        .why-accordion-item {
-            border-radius: 12px;
+        .why-img1-card {
+            position: relative;
+            border-radius: 14px;
             overflow: hidden;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: 1px solid;
-        }
-        .section-dark .why-accordion-item {
-            background: var(--dark-card);
-            border-color: var(--dark-border);
-        }
-        .section-dark .why-accordion-item:hover,
-        .section-dark .why-accordion-item.active { border-color: var(--primary); }
-        .why-accordion-header {
-            padding: 1.25rem 1.5rem;
+            min-height: 280px;
+            padding: 28px;
             display: flex;
-            align-items: center;
-            gap: 14px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            width: 100%;
-            text-align: left;
+            flex-direction: column;
+            justify-content: flex-end;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #141414;
+            transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
         }
-        .why-accordion-header i {
-            font-size: 24px;
-            color: var(--primary);
-            flex-shrink: 0;
+        .why-img1-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 120% 110% at 50% 40%, transparent 55%, rgba(0,0,0,0.95) 100%),
+                linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.9) 100%);
+            z-index: 0;
         }
-        .why-accordion-header h4 {
+        .why-img1-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: 0 14px 34px rgba(0,0,0,0.45);
+        }
+        .why-img1-card > * { position: relative; z-index: 1; }
+        .why-img1-card h4 {
             font-family: 'Geist', sans-serif;
-            font-size: 1rem;
+            font-size: 1.25rem;
             font-weight: 600;
-            margin: 0;
-            flex: 1;
+            color: #fff;
+            margin: 0 0 10px;
         }
-        .section-dark .why-accordion-header h4 { color: #fff; }
-        .why-accordion-header .toggle-icon {
-            font-size: 18px;
-            color: var(--primary);
-            transition: transform 0.3s;
-            flex-shrink: 0;
-        }
-        .why-accordion-item.active .toggle-icon { transform: rotate(180deg); }
-        .why-accordion-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-        .why-accordion-item.active .why-accordion-body { max-height: 200px; }
-        .why-accordion-body-inner {
-            padding: 0 1.5rem 1.25rem 3.5rem;
+        .why-img1-card p {
             font-size: 0.95rem;
-            line-height: 1.7;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.85);
+            margin: 0;
         }
-        .section-dark .why-accordion-body-inner { color: var(--dark-text-secondary); }
-        .why-image {
-            border-radius: 16px;
+        @media (max-width: 768px) {
+            .why-img1-grid { grid-template-columns: 1fr; gap: 14px; }
+            .why-img1-card { min-height: 240px; padding: 22px; }
+        }
+
+
+        /* --- Variant 1b: hover-reveal (desktop) / in-view reveal (mobile) --- */
+        .why-img1b-card h4 {
+            transform: translateY(14px);
+            transition: transform 0.4s ease;
+        }
+        .why-img1b-card p {
+            max-height: 0;
+            opacity: 0;
+            margin: 0;
             overflow: hidden;
-            aspect-ratio: 4/3;
+            transform: translateY(10px);
+            transition: max-height 0.45s ease, opacity 0.35s ease 0.05s, transform 0.4s ease, margin-top 0.35s ease;
         }
-        .why-image img { width: 100%; height: 100%; object-fit: cover; }
+        @media (hover: hover) and (pointer: fine) {
+            .why-img1b-card:hover h4 { transform: translateY(0); }
+            .why-img1b-card:hover p {
+                max-height: 240px;
+                opacity: 1;
+                transform: translateY(0);
+                margin-top: 10px;
+            }
+        }
+        @media (max-width: 768px), (hover: none) {
+            .why-img1b-card h4 { transition: transform 0.8s ease; }
+            .why-img1b-card p {
+                transition: max-height 0.9s ease, opacity 0.7s ease 0.1s, transform 0.8s ease, margin-top 0.7s ease;
+            }
+            .why-img1b-card.in-view h4 { transform: translateY(0); }
+            .why-img1b-card.in-view p {
+                max-height: 240px;
+                opacity: 1;
+                transform: translateY(0);
+                margin-top: 10px;
+            }
+        }
+
+        /* --- Variant 2: image on top, text below --- */
+        .why-img2-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 2.5rem;
+        }
+        .why-img2-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s, border-color 0.25s;
+        }
+        .why-img2-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+        .why-img2-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-size: cover;
+            background-position: center;
+        }
+        .why-img2-body { padding: 24px 26px 28px; }
+        .why-img2-card h4 {
+            font-family: 'Geist', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 0 0 10px;
+        }
+        .why-img2-card p {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: var(--dark-text-secondary);
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .why-img2-grid { grid-template-columns: 1fr; gap: 14px; }
+        }
+
+        /* --- Variant 3: thumbnail beside heading (horizontal row list) --- */
+        .why-img3-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 16px; }
+        .why-img3-item {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 24px;
+            padding: 20px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 14px;
+            align-items: center;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .why-img3-item:hover { border-color: var(--primary); transform: translateX(3px); }
+        .why-img3-thumb {
+            width: 140px;
+            aspect-ratio: 1/1;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+        .why-img3-item h4 {
+            font-family: 'Geist', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 0 0 8px;
+        }
+        .why-img3-item p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--dark-text-secondary);
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .why-img3-item { grid-template-columns: 90px 1fr; gap: 16px; padding: 14px; }
+            .why-img3-thumb { width: 90px; border-radius: 8px; }
+            .why-img3-item h4 { font-size: 1.05rem; }
+            .why-img3-item p { font-size: 0.9rem; }
+        }
         .why-highlight {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             padding: 16px 20px;
             border-radius: 0 8px 8px 0;
-            font-weight: 500;
             font-size: 1rem;
-        }
-        .section-dark .why-highlight {
             background: linear-gradient(90deg, rgba(255,78,0,.15) 0%, transparent 100%);
             border-left: 3px solid var(--primary);
             color: #fff;
-        }
-        @media (max-width: 768px) {
-            .why-grid { grid-template-columns: 1fr; }
         }
 
         /* ===== HOW IT WORKS ===== */
@@ -1717,8 +1832,8 @@
             <source src="hero-video.mp4" type="video/mp4">
         </video>
         <div class="container">
-            <h1 class="fade-in">Exclusive Scooter Brands That Sell Fast — And Won't Compete With Your Store</h1>
-            <p class="fade-in" style="animation-delay: 0.2s;">Premium pro scooter brands your competitors can't source. Own manufacturing, protected margins, and a partner-first approach — built by retailers, for retailers.</p>
+            <h1 class="fade-in">Exclusive Scooter Brands That Sell Fast, Without Competing With Your Store</h1>
+            <p class="fade-in" style="animation-delay: 0.2s;">Premium pro scooter brands your competitors can't source. Own manufacturing, protected margins, and a partner-first approach, built by retailers, for retailers.</p>
 
             <div class="social-proof-bar fade-in" style="animation-delay: 0.4s;">
                 <div class="proof-item">
@@ -1864,57 +1979,23 @@
             <h2 class="fade-in">Built for Your Business, Not Against It</h2>
             <p class="section-subtitle fade-in">Products your competitors can't get. Margins they can't undercut.</p>
 
-            <div class="why-grid">
-                <div class="why-accordion">
-                    <div class="why-accordion-item active" onclick="toggleWhyAccordion(this)">
-                        <div class="why-accordion-header">
-                            <i class="ph-light ph-shield-check"></i>
-                            <h4>No B2C = No Competition With You</h4>
-                            <span class="toggle-icon">&or;</span>
-                        </div>
-                        <div class="why-accordion-body">
-                            <div class="why-accordion-body-inner">We never sell directly to consumers. Your prices are protected, no dumping, no hidden competition. Period.</div>
-                        </div>
-                    </div>
-                    <div class="why-accordion-item" onclick="toggleWhyAccordion(this)">
-                        <div class="why-accordion-header">
-                            <i class="ph-light ph-storefront"></i>
-                            <h4>Built From Real Retail Experience</h4>
-                            <span class="toggle-icon">&or;</span>
-                        </div>
-                        <div class="why-accordion-body">
-                            <div class="why-accordion-body-inner">We started as a scooter shop. We know what sells, what margin you need, and what your customers ask for. Our catalog is built for retailers, by retailers.</div>
-                        </div>
-                    </div>
-                    <div class="why-accordion-item" onclick="toggleWhyAccordion(this)">
-                        <div class="why-accordion-header">
-                            <i class="ph-light ph-factory"></i>
-                            <h4>Own Manufacturing = Fast Reactions</h4>
-                            <span class="toggle-icon">&or;</span>
-                        </div>
-                        <div class="why-accordion-body">
-                            <div class="why-accordion-body-inner">We design and produce Union in-house. That means faster restocks, custom runs, and the ability to react to trends before competitors even notice them.</div>
-                        </div>
-                    </div>
-                    <div class="why-accordion-item" onclick="toggleWhyAccordion(this)">
-                        <div class="why-accordion-header">
-                            <i class="ph-light ph-lock-key"></i>
-                            <h4>Exclusive Brands for Your Store</h4>
-                            <span class="toggle-icon">&or;</span>
-                        </div>
-                        <div class="why-accordion-body">
-                            <div class="why-accordion-body-inner">Carry brands your competitors can't source. Build customer loyalty with unique products they'll only find in your shop.</div>
-                        </div>
-                    </div>
+            <div class="why-img1-grid">
+                <div class="why-img1-card why-img1b-card fade-in" style="background-image: url('why-images/01-nob2c-A.png');">
+                    <h4>No B2C = No Competition With You</h4>
+                    <p>We never sell directly to consumers. Your prices are protected, no dumping, no hidden competition. Period.</p>
                 </div>
-
-                <div class="why-image fade-in">
-                    <img src="Gemini_Generated_Image_innemeinnemeinne-2.png" alt="OMFY Warehouse">
+                <div class="why-img1-card why-img1b-card fade-in" style="background-image: url('why-images/02-retail-A.png');">
+                    <h4>Built From Real Retail Experience</h4>
+                    <p>We started as a scooter shop. We know what sells, what margin you need, and what your customers ask for. Our catalog is built for retailers, by retailers.</p>
                 </div>
-            </div>
-
-            <div class="why-highlight fade-in">
-                <strong>YOUR MARGINS ARE PROTECTED.</strong> We never sell to consumers. No price dumping. No hidden competition.
+                <div class="why-img1-card why-img1b-card fade-in" style="background-image: url('why-images/03-mfg-gemini-1.png');">
+                    <h4>Own Manufacturing = Fast Reactions</h4>
+                    <p>We design and produce Union in-house. That means faster restocks, custom runs, and the ability to react to trends before competitors even notice them.</p>
+                </div>
+                <div class="why-img1-card why-img1b-card fade-in" style="background-image: url('why-images/04-excl-gemini-1.png');">
+                    <h4>Exclusive Brands for Your Store</h4>
+                    <p>Carry brands your competitors can't source. Build customer loyalty with unique products they'll only find in your shop.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1926,7 +2007,7 @@
         <div class="container">
             <div class="section-tag fade-in">4 Simple Steps</div>
             <h2 class="fade-in">How It Works</h2>
-            <p class="section-subtitle fade-in">From first request to ongoing sales — we keep it simple.</p>
+            <p class="section-subtitle fade-in">From first request to ongoing sales, we keep it simple.</p>
 
             <div class="how-layout">
                 <div class="steps-grid-2x2">
@@ -1976,7 +2057,7 @@
                 </div>
                 <div class="benefit-item fade-in" style="animation-delay: 0.1s;">
                     <div class="benefit-stat">&euro;500</div>
-                    <p>Minimum order — no overcommitment</p>
+                    <p>Minimum order, no overcommitment</p>
                 </div>
                 <div class="benefit-item fade-in" style="animation-delay: 0.2s;">
                     <div class="benefit-stat">&lt;1%</div>
@@ -2001,7 +2082,7 @@
             <div class="shipping-promo fade-in">
                 <div class="shipping-promo-main">
                     <div class="promo-stat">Free First Delivery</div>
-                    <div class="promo-detail">Your first order ships free — starting from just &euro;500</div>
+                    <div class="promo-detail">Your first order ships free. Starting from just &euro;500.</div>
                 </div>
                 <div class="shipping-promo-divider"></div>
                 <div class="shipping-promo-secondary">
@@ -2055,7 +2136,7 @@
             <div class="map-gradient-left">
                 <div class="section-tag">Our Network</div>
                 <h2>100+ Partners Across Europe</h2>
-                <p>From Scandinavia to the Mediterranean — trusted retailers rely on OMFY for quality, reliability, and real partnership.</p>
+                <p>From Scandinavia to the Mediterranean, trusted retailers rely on OMFY for quality, reliability, and real partnership.</p>
                 <div class="map-gradient-stats">
                     <div class="map-gradient-stat-card fade-in">
                         <div class="stat-num">100+</div>
@@ -2090,7 +2171,7 @@
         <div class="map-gradient-header fade-in" style="padding-top:60px;">
             <div class="section-tag">Our Network</div>
             <h2>100+ Partners Across Europe</h2>
-            <p>From Scandinavia to the Mediterranean — trusted retailers rely on OMFY for quality, reliability, and real partnership.</p>
+            <p>From Scandinavia to the Mediterranean, trusted retailers rely on OMFY for quality, reliability, and real partnership.</p>
         </div>
 
         <!-- Partner logos -->
@@ -2155,7 +2236,7 @@
                         <div class="carousel-slide-text">
                             <p class="quote">We switched to OMFY eight months ago and the difference is night and day. Delivery is always on time, the margins are real, and our customers keep coming back for Scootive parts. Best distributor we've worked with in the action sports space.</p>
                             <div class="author">Marcus Lindberg</div>
-                            <div class="role">Owner, RideZone Skate Shop — Stockholm, Sweden</div>
+                            <div class="role">Owner, RideZone Skate Shop - Stockholm, Sweden</div>
                         </div>
                     </div>
                     <div class="carousel-slide">
@@ -2163,9 +2244,9 @@
                             <img src="Gemini_Generated_Image_zghxwozghxwozghx-3.png" alt="Rider performing tricks">
                         </div>
                         <div class="carousel-slide-text">
-                            <p class="quote">Our local riders specifically ask for Ethic DTC and Versatyl — these are the brands the community trusts. Since partnering with OMFY, we always have the right stock. Their Partner Portal makes reordering a breeze.</p>
+                            <p class="quote">Our local riders specifically ask for Ethic DTC and Versatyl. These are the brands the community trusts. Since partnering with OMFY, we always have the right stock. Their Partner Portal makes reordering a breeze.</p>
                             <div class="author">Tomas Dvorak</div>
-                            <div class="role">Manager, TrickShop Prague — Czech Republic</div>
+                            <div class="role">Manager, TrickShop Prague - Czech Republic</div>
                         </div>
                     </div>
                     <div class="carousel-slide">
@@ -2173,9 +2254,9 @@
                             <img src="Gemini_Generated_Image_zghxwozghxwozghx-4.png" alt="Shop owner with scooter">
                         </div>
                         <div class="carousel-slide-text">
-                            <p class="quote">What I appreciate most is that OMFY doesn't sell to end consumers. That was a dealbreaker with our previous supplier — they undercut our prices online. With OMFY, my margins are protected.</p>
+                            <p class="quote">What I appreciate most is that OMFY doesn't sell to end consumers. That was a dealbreaker with our previous supplier. They undercut our prices online. With OMFY, my margins are protected.</p>
                             <div class="author">Pierre Moreau</div>
-                            <div class="role">Founder, UrbanRide Paris — France</div>
+                            <div class="role">Founder, UrbanRide Paris - France</div>
                         </div>
                     </div>
                 </div>
@@ -2246,7 +2327,7 @@
                         <span class="faq-toggle">&or;</span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-content">&euro;500 for your first order. No minimum on reorders through our Partner Portal — order exactly what you need when you need it.</div>
+                        <div class="faq-content">&euro;500 for your first order. No minimum on reorders through our Partner Portal. Order exactly what you need when you need it.</div>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -2273,7 +2354,7 @@
                         <span class="faq-toggle">&or;</span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-content">Your first order always ships free — even at the &euro;500 minimum. After that, orders above &euro;2,000 ship free across Europe. For smaller reorders, a small flat-rate shipping fee applies.</div>
+                        <div class="faq-content">Your first order always ships free, even at the &euro;500 minimum. After that, orders above &euro;2,000 ship free across Europe. For smaller reorders, a small flat-rate shipping fee applies.</div>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -2434,13 +2515,6 @@
         }
         setInterval(() => moveCarousel(1), 6000);
 
-        // ===== WHY OMFY ACCORDION =====
-        function toggleWhyAccordion(item) {
-            const wasActive = item.classList.contains('active');
-            document.querySelectorAll('.why-accordion-item').forEach(el => el.classList.remove('active'));
-            if (!wasActive) item.classList.add('active');
-        }
-
         // ===== FAQ TOGGLE =====
         function toggleFAQ(button) {
             const item = button.parentElement;
@@ -2542,6 +2616,21 @@
                 });
             }, { threshold: 0.1 });
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+            // Variant 1b: reveal description when card enters viewport (mobile/touch)
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const vh = window.innerHeight || document.documentElement.clientHeight;
+                    const fits = entry.boundingClientRect.height <= vh;
+                    // If card fits in viewport — require it fully visible (ratio === 1).
+                    // If card is taller than viewport — reveal once it covers the screen.
+                    const revealed = fits
+                        ? entry.intersectionRatio >= 0.999
+                        : entry.boundingClientRect.top <= 0 && entry.boundingClientRect.bottom >= vh;
+                    entry.target.classList.toggle('in-view', revealed);
+                });
+            }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+            document.querySelectorAll('.why-img1b-card').forEach(el => revealObserver.observe(el));
         }
 
         // ===== INIT =====
