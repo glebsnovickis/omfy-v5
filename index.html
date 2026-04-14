@@ -702,37 +702,36 @@
             border-radius: 5px;
         }
 
-        /* ===== SWIPE TEST VARIANTS (mobile-only) ===== */
-        .swipe-test-variants { display: none; }
+        /* ===== Mobile: native scroll-snap carousel ===== */
         @media (max-width: 600px) {
-            .swipe-test-variants { display: block; margin-top: 3rem; }
+            .products-carousel-wrap { overflow: visible; }
+            .products-carousel-track {
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                gap: 1rem;
+                padding: 0.5rem 12vw 1rem;
+                margin: 0 -20px;
+                scrollbar-width: none;
+                transform: none;
+                transition: none;
+            }
+            .products-carousel-track::-webkit-scrollbar { display: none; }
+            .product-card { flex: 0 0 76vw; scroll-snap-align: center; }
+            .products-carousel-arrow { display: none; }
+            .products-carousel-arrows { margin-top: 1.25rem; }
         }
-        .swipe-test-label {
-            font-family: 'Geist', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--primary);
-            text-align: center;
-            margin: 2rem 0 0.75rem;
-            font-weight: 700;
+        /* Nudge animation: one-time hint that carousel is swipeable */
+        @keyframes productsNudge {
+            0%   { transform: translateX(0); }
+            30%  { transform: translateX(-40px); }
+            60%  { transform: translateX(12px); }
+            100% { transform: translateX(0); }
         }
-        /* Variant B — native CSS scroll-snap */
-        .swipe-snap-wrapper {
-            display: flex;
-            gap: 1rem;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            padding: 0.5rem 12vw 1rem;
-            margin: 0 -20px;
-            scrollbar-width: none;
-        }
-        .swipe-snap-wrapper::-webkit-scrollbar { display: none; }
-        .swipe-snap-wrapper .product-card {
-            flex: 0 0 76vw;
-            scroll-snap-align: center;
+        .products-carousel-track.is-nudging {
+            animation: productsNudge 900ms cubic-bezier(.4,0,.2,1) 1;
         }
 
         /* ===== WHY OMFY — base ===== */
@@ -2038,99 +2037,6 @@
                 </div>
             </div>
 
-            <!-- ===== SWIPE TEST VARIANTS (mobile only) ===== -->
-            <div class="swipe-test-variants">
-                <div class="swipe-test-label">Swipe test · Variant B — native CSS scroll-snap</div>
-                <div class="swipe-snap-wrapper">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="product-aero-complete.png" alt="Union Aero Complete">
-                            <span class="product-badge">Lightest in the World</span>
-                        </div>
-                        <div class="product-info">
-                            <h3>Union Aero Complete</h3>
-                            <p>The world's lightest pro scooter. Ultra-premium build, incredibly responsive.</p>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="product-ethic-pandora.jpg" alt="Ethic DTC Pandora Complete">
-                            <span class="product-badge">Fan Favourite</span>
-                        </div>
-                        <div class="product-info">
-                            <h3>Ethic DTC Pandora</h3>
-                            <p>The complete scooter riders ask for by name. Bold colourways, proven durability.</p>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="product-union-bars.png" alt="Union Titanium Bars">
-                            <span class="product-badge">Top Seller</span>
-                        </div>
-                        <div class="product-info">
-                            <h3>Union Titanium Bars</h3>
-                            <p>Industry-leading handlebars in titanium. Lightweight, ultra-strong, multiple sizes.</p>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="product-union-wheels.jpg" alt="Union Turbomatic Wheels">
-                            <span class="product-badge">Fast Mover</span>
-                        </div>
-                        <div class="product-info">
-                            <h3>Union Turbomatic Wheels</h3>
-                            <p>High-rebound PU, precision ABEC bearings, 110mm and 120mm.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swipe-test-label">Swipe test · Variant C — fast JS drag (low threshold)</div>
-                <div class="products-carousel-wrap" id="productsCarouselC">
-                    <div class="products-carousel-track" id="productsTrackC">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="product-aero-complete.png" alt="Union Aero Complete">
-                                <span class="product-badge">Lightest in the World</span>
-                            </div>
-                            <div class="product-info">
-                                <h3>Union Aero Complete</h3>
-                                <p>The world's lightest pro scooter. Ultra-premium build, incredibly responsive.</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="product-ethic-pandora.jpg" alt="Ethic DTC Pandora Complete">
-                                <span class="product-badge">Fan Favourite</span>
-                            </div>
-                            <div class="product-info">
-                                <h3>Ethic DTC Pandora</h3>
-                                <p>The complete scooter riders ask for by name. Bold colourways, proven durability.</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="product-union-bars.png" alt="Union Titanium Bars">
-                                <span class="product-badge">Top Seller</span>
-                            </div>
-                            <div class="product-info">
-                                <h3>Union Titanium Bars</h3>
-                                <p>Industry-leading handlebars in titanium. Lightweight, ultra-strong, multiple sizes.</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="product-union-wheels.jpg" alt="Union Turbomatic Wheels">
-                                <span class="product-badge">Fast Mover</span>
-                            </div>
-                            <div class="product-info">
-                                <h3>Union Turbomatic Wheels</h3>
-                                <p>High-rebound PU, precision ABEC bearings, 110mm and 120mm.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Brand logos marquee -->
             <div style="margin-top: 4rem;">
                 <div class="section-tag fade-in">Our Brands</div>
@@ -2738,15 +2644,19 @@
             productSlide = i;
             updateProducts();
         }
+        function isMobileCarousel() { return window.innerWidth <= 600; }
         function updateProducts() {
             const track = document.getElementById('productsTrack');
             if (!track) return;
             const card = track.querySelector('.product-card');
             if (!card) return;
-            const gap = 24; // 1.5rem
-            const cardW = card.offsetWidth + gap;
-            track.style.transform = `translateX(-${productSlide * cardW}px)`;
-            // Update dots
+            if (isMobileCarousel()) {
+                const cardW = card.offsetWidth + 16; // 1rem gap on mobile
+                track.scrollTo({ left: productSlide * cardW, behavior: 'smooth' });
+            } else {
+                const cardW = card.offsetWidth + 24;
+                track.style.transform = `translateX(-${productSlide * cardW}px)`;
+            }
             const dots = document.querySelectorAll('.products-carousel-dot');
             dots.forEach((d, i) => d.classList.toggle('active', i === productSlide));
         }
@@ -2828,10 +2738,11 @@
             document.querySelectorAll('.why-img1b-card').forEach(el => revealObserver.observe(el));
         }
 
-        // ===== PRODUCTS TOUCH SWIPE (Variant A — real-time drag + velocity) =====
+        // ===== PRODUCTS TOUCH SWIPE (desktop/tablet only — mobile uses native scroll-snap) =====
         function enableProductsSwipe() {
             const track = document.getElementById('productsTrack');
             if (!track) return;
+            if (isMobileCarousel()) return;
             const opts = {
                 distThreshold: 50,      // min distance to change slide
                 flickVelocity: 0.3,     // px/ms — flick detection
@@ -2882,60 +2793,46 @@
             });
         }
 
-        // ===== SWIPE TEST — Variant C (low threshold, snappy transition) =====
-        function enableSwipeVariantC(trackId) {
-            const track = document.getElementById(trackId);
+        // ===== Mobile: sync dots with native scroll + one-time nudge hint =====
+        function attachMobileCarouselSync() {
+            const track = document.getElementById('productsTrack');
             if (!track) return;
-            const opts = {
-                distThreshold: 25,
-                flickVelocity: 0.15,
-                lockDeadzone: 4,
-                transition: 'transform 0.22s ease-out'
-            };
-            let slide = 0;
-            const cardWidth = () => {
-                const c = track.querySelector('.product-card');
-                return c ? c.offsetWidth + 24 : 0;
-            };
-            const maxSlide = () => Math.max(0, track.querySelectorAll('.product-card').length - 1);
-            const apply = (px, withTransition = true) => {
-                track.style.transition = withTransition ? opts.transition : 'none';
-                track.style.transform = `translateX(${px}px)`;
-            };
-            const snap = () => apply(-slide * cardWidth(), true);
-            let startX=0, startY=0, lastX=0, lastT=0, deltaX=0, deltaY=0, active=false, locked=null, velocity=0;
-            track.addEventListener('touchstart', (e) => {
-                const t = e.touches[0];
-                startX = lastX = t.clientX; startY = t.clientY; lastT = Date.now();
-                deltaX = 0; deltaY = 0; active = true; locked = null; velocity = 0;
+            let raf = null;
+            track.addEventListener('scroll', () => {
+                if (!isMobileCarousel()) return;
+                if (raf) return;
+                raf = requestAnimationFrame(() => {
+                    raf = null;
+                    const card = track.querySelector('.product-card');
+                    if (!card) return;
+                    const cardW = card.offsetWidth + 16;
+                    const idx = Math.max(0, Math.round(track.scrollLeft / cardW));
+                    if (idx !== productSlide) {
+                        productSlide = idx;
+                        document.querySelectorAll('.products-carousel-dot').forEach((d, i) => {
+                            d.classList.toggle('active', i === productSlide);
+                        });
+                    }
+                });
             }, { passive: true });
-            track.addEventListener('touchmove', (e) => {
-                if (!active) return;
-                const t = e.touches[0];
-                deltaX = t.clientX - startX;
-                deltaY = t.clientY - startY;
-                if (locked === null && (Math.abs(deltaX) > opts.lockDeadzone || Math.abs(deltaY) > opts.lockDeadzone)) {
-                    locked = Math.abs(deltaX) > Math.abs(deltaY) ? 'x' : 'y';
-                }
-                if (locked === 'x') {
-                    if (e.cancelable) e.preventDefault();
-                    const now = Date.now(), dt = Math.max(1, now - lastT);
-                    velocity = (t.clientX - lastX) / dt;
-                    lastX = t.clientX; lastT = now;
-                    apply(-slide * cardWidth() + deltaX, false);
-                }
-            }, { passive: false });
-            track.addEventListener('touchend', () => {
-                if (!active) return;
-                active = false;
-                if (locked === 'x') {
-                    let dir = 0;
-                    if (Math.abs(velocity) > opts.flickVelocity) dir = velocity < 0 ? 1 : -1;
-                    else if (Math.abs(deltaX) > opts.distThreshold) dir = deltaX < 0 ? 1 : -1;
-                    slide = Math.max(0, Math.min(maxSlide(), slide + dir));
-                }
-                snap();
-            });
+        }
+        function nudgeProductsCarousel() {
+            const track = document.getElementById('productsTrack');
+            if (!track) return;
+            if (sessionStorage.getItem('omfy.nudged')) return;
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    io.disconnect();
+                    if (!isMobileCarousel()) return;
+                    sessionStorage.setItem('omfy.nudged', '1');
+                    setTimeout(() => {
+                        track.classList.add('is-nudging');
+                        setTimeout(() => track.classList.remove('is-nudging'), 950);
+                    }, 450);
+                });
+            }, { threshold: 0.35 });
+            io.observe(track);
         }
 
         // ===== INIT =====
@@ -2943,7 +2840,8 @@
             observeElements();
             buildProductDots();
             enableProductsSwipe();
-            enableSwipeVariantC('productsTrackC');
+            attachMobileCarouselSync();
+            nudgeProductsCarousel();
         });
 
         // Smooth anchor scroll
