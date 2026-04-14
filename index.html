@@ -362,8 +362,7 @@
         .hero-video {
             min-height: 100vh;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
             position: relative;
             overflow: hidden;
             background: #000;
@@ -387,12 +386,46 @@
             background: linear-gradient(180deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.6) 50%, rgba(0,0,0,.85) 100%);
             z-index: 1;
         }
-        .hero-video .container {
+        .hero-video > .container {
             position: relative;
             z-index: 2;
             text-align: center;
             max-width: 900px;
+            margin: auto;
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
+        /* Brands strip pinned to hero bottom */
+        .hero-brands-strip {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 1.75rem 0 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0) 100%);
+        }
+        .hero-brands-strip__label {
+            text-align: center;
+            font-family: 'Geist', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.85);
+            margin: 0 0 1.5rem;
+        }
+        .hero-brands-strip .marquee-wrapper { margin: 0; overflow: hidden; }
+        .hero-brands-strip .marquee-wrapper::before,
+        .hero-brands-strip .marquee-wrapper::after { display: none; }
+        .hero-brands-strip .marquee-track { gap: 3rem; animation: marquee 40s linear infinite; }
+        .hero-brands-strip .brand-logo {
+            height: 110px;
+            min-width: 180px;
+            opacity: 0.9;
+        }
+        .hero-brands-strip .brand-logo img { filter: brightness(0) invert(1); }
+        .hero-brands-strip .brand-logo img.logo-on-black { filter: brightness(0) invert(1); }
         .hero-video h1 {
             font-size: 3.5rem;
             color: #fff;
@@ -451,8 +484,12 @@
         @media (max-width: 768px) {
             .nav-bar { padding: 0.15rem 0; }
             .nav-logo svg { height: 26px; }
-            .hero-video { min-height: 85svh; align-items: flex-start; }
-            .hero-video .container { padding: 88px 0 20px; }
+            .hero-video { min-height: 100vh; }
+            .hero-video > .container { padding: 88px 0 20px; }
+            .hero-brands-strip { padding: 1.25rem 0 1.5rem; }
+            .hero-brands-strip__label { font-size: 0.95rem; margin-bottom: 1rem; letter-spacing: 0.2em; }
+            .hero-brands-strip .brand-logo { height: 60px; min-width: 100px; }
+            .hero-brands-strip .marquee-track { gap: 1.75rem; }
             .nav-bar { padding: 0.25rem 0; }
             .nav-hero { top: 0; }
             .nav-hero .container { padding-left: 20px; padding-right: 20px; padding-top: 4px; padding-bottom: 4px; }
@@ -1855,6 +1892,37 @@
             </div>
 
             <button class="hero-cta fade-in" style="animation-delay: 0.6s;" onclick="scrollToForm()">Request Catalog & Pricing &rarr;</button>
+        </div>
+
+        <!-- Brands strip (same marquee as section-brands, pinned to hero bottom) -->
+        <div class="hero-brands-strip fade-in" style="animation-delay: 0.8s;">
+            <div class="hero-brands-strip__label">Our Brands</div>
+            <div class="marquee-wrapper">
+                <div class="marquee-track">
+                    <!-- Set 1 -->
+                    <div class="brand-logo"><img src="brands-logo/1.png" alt="Ethic DTC"></div>
+                    <div class="brand-logo"><img src="brands-logo/2.png" alt="Eretic"></div>
+                    <div class="brand-logo"><img src="brands-logo/3.png" alt="Aest"></div>
+                    <div class="brand-logo"><img src="brands-logo/4.png" alt="Union" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/5.png" alt="Brand 5" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/6.png" alt="Versatyl" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/7.png" alt="BOOM"></div>
+                    <div class="brand-logo"><img src="brands-logo/8.png" alt="ODI" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/9.png" alt="LW" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/10.png" alt="Union Scooter Parts"></div>
+                    <!-- Set 2 (duplicate for seamless loop) -->
+                    <div class="brand-logo"><img src="brands-logo/1.png" alt="Ethic DTC"></div>
+                    <div class="brand-logo"><img src="brands-logo/2.png" alt="Eretic"></div>
+                    <div class="brand-logo"><img src="brands-logo/3.png" alt="Aest"></div>
+                    <div class="brand-logo"><img src="brands-logo/4.png" alt="Union" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/5.png" alt="Brand 5" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/6.png" alt="Versatyl" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/7.png" alt="BOOM"></div>
+                    <div class="brand-logo"><img src="brands-logo/8.png" alt="ODI" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/9.png" alt="LW" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/10.png" alt="Union Scooter Parts"></div>
+                </div>
+            </div>
         </div>
     </section>
 
