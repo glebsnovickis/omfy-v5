@@ -615,6 +615,8 @@
             transition: all 0.3s;
             position: relative;
             border: 1px solid;
+            display: flex;
+            flex-direction: column;
         }
         @media (max-width: 992px) {
             .product-card { flex: 0 0 calc(50% - 0.75rem); }
@@ -642,22 +644,177 @@
             justify-content: center;
         }
         .product-image img { max-width: 90%; max-height: 90%; object-fit: contain; }
-        .product-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
+        .product-kicker {
+            color: var(--primary);
+            font-family: 'Geist', sans-serif;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .product-info { padding: 1.5rem 2rem; display: flex; flex-direction: column; flex: 1; }
+        .product-info h3 { margin-bottom: 0.5rem; }
+        .product-info p { margin-bottom: 1rem; font-size: 0.95rem; }
+        .product-more-btn {
+            align-self: flex-start;
+            margin-top: auto;
+            padding: 0.55rem 1.1rem;
+            font-family: 'Geist', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary);
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .product-more-btn:hover {
             background: var(--primary);
             color: #000;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-family: 'Geist', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
         }
-        .product-info { padding: 1.5rem 2rem; }
-        .product-info h3 { margin-bottom: 0.5rem; }
-        .product-info p { margin-bottom: 0; font-size: 0.95rem; }
+
+        /* Product details modal */
+        .product-modal {
+            padding: 0;
+            border: 0;
+            border-radius: 18px;
+            width: min(720px, 92vw);
+            max-height: 90vh;
+            margin: auto;
+            background: #fff;
+            color: var(--light-text, #141414);
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+            position: fixed;
+            inset: 0;
+        }
+        .product-modal::backdrop {
+            background: rgba(0,0,0,0.62);
+            backdrop-filter: blur(3px);
+        }
+        .product-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 0;
+            background: rgba(0,0,0,0.08);
+            color: #141414;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.2s;
+        }
+        .product-modal-close:hover { background: rgba(0,0,0,0.18); }
+        .product-modal-body {
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .product-modal-carousel {
+            position: relative;
+            background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
+            overflow: hidden;
+        }
+        .product-modal-track {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+            width: 100%;
+        }
+        .product-modal-slide {
+            flex: 0 0 100%;
+            height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-modal-slide img {
+            max-width: 85%;
+            max-height: 85%;
+            object-fit: contain;
+        }
+        .product-modal-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 0;
+            background: rgba(255,255,255,0.9);
+            color: #141414;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .product-modal-arrow:hover { background: #fff; }
+        .product-modal-arrow.prev { left: 12px; }
+        .product-modal-arrow.next { right: 12px; }
+        .product-modal-dots {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 14px;
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+        }
+        .product-modal-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 0;
+            background: rgba(0,0,0,0.25);
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.2s;
+        }
+        .product-modal-dot.active {
+            background: var(--primary);
+            width: 22px;
+            border-radius: 4px;
+        }
+        .product-modal-info {
+            padding: 1.5rem 1.75rem 2rem;
+        }
+        .product-modal-info h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.4rem;
+        }
+        .product-modal-info p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(20,20,20,0.78);
+        }
+        @media (max-width: 600px) {
+            /* Поп-ап — плавающий контейнер по центру, не полноэкранный */
+            .product-modal {
+                width: 90vw;
+                max-width: 90vw;
+                height: auto;
+                max-height: 84vh;
+                border-radius: 18px;
+                margin: auto;
+            }
+            .product-modal-body { max-height: 84vh; }
+            .product-modal-slide { height: 240px; }
+            /* Стрелки скрыты на мобильном — свайп пальцем */
+            .product-modal-arrow { display: none; }
+        }
+        /* Скрыть Variant B бестселлеров на мобильном */
+        @media (max-width: 767px) {
+            .bestsellers-variant-b { display: none; }
+        }
 
         .products-carousel-arrows {
             display: flex;
@@ -737,6 +894,63 @@
             animation: productsNudge 900ms cubic-bezier(.4,0,.2,1) 1;
         }
 
+        /* Bestsellers A/B variant labels (same pattern as map A/B) */
+        .bestsellers-variant-label {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 0 1rem;
+            font-family: 'Geist', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Desktop (>=1024px): variant A = 5 cards as grid, no carousel arrows — placed AFTER base rules to win cascade */
+        @media (min-width: 1024px) {
+            .bestsellers-variant-a .products-carousel-wrap { overflow: visible; }
+            .bestsellers-variant-a .products-carousel-track {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 16px;
+                transform: none !important;
+                width: 100%;
+            }
+            .bestsellers-variant-a .products-carousel-track > .product-card { flex: unset; }
+            .bestsellers-variant-a .products-carousel-arrows { display: none; }
+            .product-image { height: 220px; }
+            .product-info { padding: 1.25rem 1.25rem 1.5rem; }
+            .product-info h3 { font-size: 1.05rem; }
+            .product-info p { font-size: 0.88rem; line-height: 1.5; }
+
+            /* Variant A breakout: wider than .container (1200px) */
+            /* NOTE: avoid transform — it conflicts with .fade-in's fadeInUp animation */
+            .bestsellers-fullbleed {
+                width: min(1560px, calc(100vw - 48px));
+                position: relative;
+                left: 50%;
+                margin-left: calc(min(1560px, calc(100vw - 48px)) / -2);
+            }
+
+            /* Variant B: keep as 3-card carousel on desktop (override grid) */
+            .bestsellers-variant-b .products-carousel-wrap { overflow: hidden; }
+            .bestsellers-variant-b .products-carousel-track {
+                display: flex !important;
+                grid-template-columns: unset;
+                gap: 1.5rem;
+                width: auto;
+            }
+            .bestsellers-variant-b .products-carousel-track > .product-card {
+                flex: 0 0 calc(33.333% - 1rem);
+            }
+            .bestsellers-variant-b .products-carousel-arrows { display: flex; }
+            .bestsellers-variant-b .product-image { height: 280px; }
+            .bestsellers-variant-b .product-info { padding: 1.5rem 2rem; }
+            .bestsellers-variant-b .product-info h3 { font-size: 1.25rem; }
+            .bestsellers-variant-b .product-info p { font-size: 0.95rem; }
+        }
+
         /* ===== WHY OMFY — base ===== */
         .why-section { padding: 80px 0; }
         .why-variant-label {
@@ -807,6 +1021,22 @@
             .why-img1-card { min-height: 240px; padding: 22px; }
         }
 
+        /* --- Video background variant (replaces static image) --- */
+        .why-video-card > video.why-card-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border: 0;
+            pointer-events: none;
+        }
+        .why-video-card > video.why-card-bg.loaded { opacity: 1; }
+        .why-video-card::before { z-index: 1; }
+        .why-video-card > .why-card-content { position: relative; z-index: 2; }
 
         /* --- Variant 1b: hover-reveal (desktop) / in-view reveal (mobile) --- */
         .why-img1b-card h4 {
@@ -841,6 +1071,19 @@
                 opacity: 1;
                 transform: translateY(0);
                 margin-top: 10px;
+            }
+        }
+
+        /* --- Why OMFY десктоп: swap карточек 3↔4 + убрать чёрные полосы видео --- */
+        @media (min-width: 769px) {
+            /* Меняем местами "Own Manufacturing" (3) и "Exclusive Brands" (4) */
+            /* Видео становятся по диагонали: top-right + bottom-left */
+            .why-img1-card:nth-child(3) { order: 4; }
+            .why-img1-card:nth-child(4) { order: 3; }
+            /* Exclusive Brands видео — масштабируем чуть крупнее, чтобы обрезать чёрные полосы */
+            .why-img1-card:nth-child(4) video.why-card-bg {
+                transform: scale(1.18);
+                transform-origin: center center;
             }
         }
 
@@ -1306,7 +1549,7 @@
         }
         .map-gradient-left {
             text-align: left;
-            padding: 50px 0;
+            padding: 40px 0;
         }
         .map-gradient-left .section-tag { color: rgba(255,255,255,.7); }
         .map-gradient-left h2 {
@@ -1370,6 +1613,7 @@
             padding-left: max(20px, calc((100vw - 1200px) / 2));
             padding-right: 0;
             grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+            align-items: center;
         }
         .map-variant-b .map-gradient-right {
             padding-bottom: 0;
@@ -1380,6 +1624,90 @@
             max-width: none;
             margin: 0;
             display: block;
+        }
+        /* Marquee inside left column, above heading — wider than column (extends right), bigger logos */
+        /* Uses unused vertical space above left-col content (map is taller, dictates section height) */
+        .map-variant-b .map-gradient-inner { overflow: visible; }
+        .map-variant-b .map-gradient-left {
+            align-self: start;
+            padding-top: 40px;
+            overflow: visible;
+        }
+        .map-variant-b .map-gradient-left .map-partners-top-wide {
+            width: 960px;
+            max-width: none;
+            padding: 0;
+            margin-bottom: 1.75rem;
+            overflow: visible;
+        }
+        .map-variant-b .map-gradient-left .map-partners-top-wide .marquee-wrapper {
+            width: 100%;
+            overflow: hidden;
+        }
+        .map-variant-b .map-gradient-left .map-partners-top-wide .brand-logo {
+            height: 78px;
+            min-width: 140px;
+        }
+        .map-variant-b .map-gradient-left .map-partners-top-wide .marquee-track {
+            gap: 1.25rem;
+        }
+        .map-variant-b .map-gradient-left .map-partners-top-wide img[alt="Samokat"] {
+            max-width: 140px;
+            max-height: 52px;
+        }
+
+        /* ===== MAP TEST VARIANT: sticky left col + wider spacing ===== */
+        /* overflow:hidden убивает sticky — меняем на clip (визуально то же, sticky работает) */
+        .map-variant-test.map-gradient-section {
+            min-height: 130vh;
+            overflow: clip;
+        }
+        /* Левая колонка — обёртка, которая занимает всю высоту секции */
+        .map-variant-test .map-gradient-left--sticky {
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Маркиза остаётся сверху (не sticky) */
+        .map-variant-test .map-partners-top-wide {
+            flex-shrink: 0;
+            width: 1200px;
+        }
+        /* Блок с контентом (тег, h2, p, карточки) — sticky */
+        .map-variant-test .map-gradient-left__inner {
+            position: sticky;
+            top: 100px; /* отступ от верха вьюпорта (с запасом под nav) */
+            padding-bottom: 40px;
+        }
+        /* Увеличенные отступы: section-tag → h2 */
+        .map-variant-test .map-gradient-left__inner .section-tag {
+            margin-bottom: 1.25rem;
+            color: rgba(255,255,255,.7);
+        }
+        /* h2 → p */
+        .map-variant-test .map-gradient-left__inner h2 {
+            margin-bottom: 1.5rem;
+        }
+        /* p → карточки */
+        .map-variant-test .map-gradient-left__inner > p {
+            margin-bottom: 3rem;
+        }
+        /* Правая колонка — карта растягивается на всю высоту секции */
+        .map-variant-test .map-gradient-right {
+            align-self: stretch;
+            display: flex;
+            align-items: stretch;
+            overflow: visible;
+        }
+        .map-variant-test .map-gradient-right img {
+            width: 125%;
+            max-width: none;
+            height: 100%;
+            min-height: 130vh;
+            object-fit: cover;
+            object-position: left center;
+            display: block;
+            margin: 0;
         }
 
         /* ===== MOBILE: vertical layout (hidden on desktop) ===== */
@@ -1919,14 +2247,12 @@
         <button class="nav-menu-close" aria-label="Close menu" onclick="toggleMenu()">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
         </button>
-        <a href="#section-bestsellers" onclick="toggleMenu()">Bestsellers</a>
-        <a href="#section-brands" onclick="toggleMenu()">Our Brands</a>
-        <a href="#section-why" onclick="toggleMenu()">Why OMFY</a>
-        <a href="#section-how" onclick="toggleMenu()">How It Works</a>
-        <a href="#section-benefits" onclick="toggleMenu()">Benefits</a>
-        <a href="#map-brandbook" onclick="toggleMenu()">Our Network</a>
-        <a href="#section-testimonials" onclick="toggleMenu()">Testimonials</a>
+        <a href="#section-bestsellers" onclick="toggleMenu()">What We Sell</a>
+        <a href="#section-why" onclick="toggleMenu()">How We Work</a>
+        <a href="#section-network" onclick="toggleMenu()">Our Network</a>
+        <a href="#section-testimonials" onclick="toggleMenu()">What Our Partners Say</a>
         <a href="#section-faq" onclick="toggleMenu()">FAQ</a>
+        <a href="#form-section" onclick="toggleMenu()">Contacts</a>
         <a href="#form-section" class="nav-menu-cta" onclick="toggleMenu()">Request Catalog &rarr;</a>
     </div>
 
@@ -1947,8 +2273,8 @@
             <source src="hero-video.mp4" type="video/mp4">
         </video>
         <div class="container">
-            <h1 class="fade-in">Exclusive Scooter Brands That Sell Fast, Without Competing With Your Store</h1>
-            <p class="fade-in" style="animation-delay: 0.2s;">Premium pro scooter brands your competitors can't source. Own manufacturing, protected margins, and a partner-first approach, built by retailers, for retailers.</p>
+            <h1 class="fade-in">Become the Distributor of the World's Lightest Scooters in Your Country</h1>
+            <p class="fade-in" style="animation-delay: 0.2s;">Exclusive pro scooter brands with protected margins &mdash; we never sell direct to consumers.</p>
 
             <div class="social-proof-bar fade-in" style="animation-delay: 0.4s;">
                 <div class="proof-item">
@@ -1964,8 +2290,8 @@
                     <span>Min. Order</span>
                 </div>
                 <div class="proof-item">
-                    <strong>Free</strong>
-                    <span>1st Delivery</span>
+                    <strong>42%+</strong>
+                    <span>Avg. Margin</span>
                 </div>
             </div>
 
@@ -1987,7 +2313,6 @@
                     <div class="brand-logo"><img src="brands-logo/7.png" alt="BOOM"></div>
                     <div class="brand-logo"><img src="brands-logo/8.png" alt="ODI" class="logo-on-black"></div>
                     <div class="brand-logo"><img src="brands-logo/9.png" alt="LW" class="logo-on-black"></div>
-                    <div class="brand-logo"><img src="brands-logo/10.png" alt="Union Scooter Parts"></div>
                     <!-- Set 2 (duplicate for seamless loop) -->
                     <div class="brand-logo"><img src="brands-logo/1.png" alt="Ethic DTC"></div>
                     <div class="brand-logo"><img src="brands-logo/2.png" alt="Eretic"></div>
@@ -1998,7 +2323,6 @@
                     <div class="brand-logo"><img src="brands-logo/7.png" alt="BOOM"></div>
                     <div class="brand-logo"><img src="brands-logo/8.png" alt="ODI" class="logo-on-black"></div>
                     <div class="brand-logo"><img src="brands-logo/9.png" alt="LW" class="logo-on-black"></div>
-                    <div class="brand-logo"><img src="brands-logo/10.png" alt="Union Scooter Parts"></div>
                 </div>
             </div>
         </div>
@@ -2012,104 +2336,141 @@
             <div id="section-bestsellers"></div>
             <div class="section-tag fade-in">Top Products</div>
             <h2 class="fade-in">Bestsellers</h2>
-            <div class="products-carousel-wrap fade-in" id="productsCarousel">
-                <div class="products-carousel-track" id="productsTrack">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="product-aero-complete.png" alt="Union Aero Complete">
-                            <span class="product-badge">Lightest in the World</span>
+
+            <!-- Variant A · static 5-column grid (wider than container) -->
+            <div class="bestsellers-variant bestsellers-variant-a">
+                <div class="bestsellers-variant-label">Variant A · static 5-column grid</div>
+                <div class="products-carousel-wrap bestsellers-fullbleed fade-in" id="productsCarousel">
+                    <div class="products-carousel-track" id="productsTrack">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="product-aero-complete.png" alt="World's Lightest Complete">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Just 2,5kg</div>
+                                <h3>WORLD'S LIGHTEST COMPLETE</h3>
+                                <p>Built for maximum airtime and precision. Every gram optimized for top-level performance.</p>
+                                <button class="product-more-btn" onclick="openProductModal('p1')">View Details &rarr;</button>
+                            </div>
                         </div>
-                        <div class="product-info">
-                            <h3>Union Aero Complete</h3>
-                            <p>The world's lightest pro scooter. Ultra-premium build, incredibly responsive. The flagship of your store.</p>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="product-ethic-pandora.jpg" alt="Best Value Complete">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Best Value</div>
+                                <h3>BEST VALUE COMPLETE</h3>
+                                <p>Affordable entry into stunt riding. Reliable, lightweight and easy to sell.</p>
+                                <button class="product-more-btn" onclick="openProductModal('p2')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="product-union-bars.png" alt="Progression Focused Complete">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Rider Approved</div>
+                                <h3>PROGRESSION FOCUSED COMPLETE</h3>
+                                <p>Balanced setups designed for skill development. Stable, controlled, and consistent performance.</p>
+                                <button class="product-more-btn" onclick="openProductModal('p3')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="product-union-wheels.jpg" alt="Parts for Custom Builds">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Rider Choice</div>
+                                <h3>PARTS FOR CUSTOM BUILDS</h3>
+                                <p>Components for high-performance custom builds. Fast rotation and consistent demand.</p>
+                                <button class="product-more-btn" onclick="openProductModal('p4')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="product-union-deck.png" alt="Helmets + Protection">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Proven Seller</div>
+                                <h3>HELMETS + PROTECTION</h3>
+                                <p>Complete head-to-body safety. Lightweight helmets plus high-impact pads &mdash; two proven categories in one high-margin SKU group.</p>
+                                <button class="product-more-btn" onclick="openProductModal('p5')">View Details &rarr;</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="product-ethic-pandora.jpg" alt="Ethic DTC Pandora Complete">
-                            <span class="product-badge">Fan Favourite</span>
-                        </div>
-                        <div class="product-info">
-                            <h3>Ethic DTC Pandora</h3>
-                            <p>The complete scooter riders ask for by name. Bold colourways, proven durability, and a brand the community trusts.</p>
-                        </div>
+                    <div class="products-carousel-arrows">
+                        <button class="products-carousel-arrow" onclick="moveProducts(-1)">&#8249;</button>
+                        <div class="products-carousel-dots" id="productsDots"></div>
+                        <button class="products-carousel-arrow" onclick="moveProducts(1)">&#8250;</button>
                     </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="product-union-bars.png" alt="Union Titanium Bars">
-                            <span class="product-badge">Top Seller</span>
-                        </div>
-                        <div class="product-info">
-                            <h3>Union Titanium Bars</h3>
-                            <p>Industry-leading handlebars in titanium. Lightweight, ultra-strong, multiple sizes. The most-requested upgrade part.</p>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="product-union-wheels.jpg" alt="Union Turbomatic Wheels">
-                            <span class="product-badge">Fast Mover</span>
-                        </div>
-                        <div class="product-info">
-                            <h3>Union Turbomatic Wheels</h3>
-                            <p>High-rebound PU, precision ABEC bearings, 110mm and 120mm. The parts that keep riders coming back to your shop.</p>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="product-union-deck.png" alt="Union UNIQ Deck">
-                            <span class="product-badge">New 2026</span>
-                        </div>
-                        <div class="product-info">
-                            <h3>Union UNIQ Deck</h3>
-                            <p>Ultra-light forged aluminium deck with signature colourways. Eye-catching display piece that sells itself off the shelf.</p>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="product-boom-pads.png" alt="BOOM Protection Pads">
-                            <span class="product-badge">Essential Add-On</span>
-                        </div>
-                        <div class="product-info">
-                            <h3>BOOM Protection Pads</h3>
-                            <p>Premium knee and elbow pads designed for scooter riders. High-margin accessory your customers need with every scooter.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="products-carousel-arrows">
-                    <button class="products-carousel-arrow" onclick="moveProducts(-1)">&#8249;</button>
-                    <div class="products-carousel-dots" id="productsDots"></div>
-                    <button class="products-carousel-arrow" onclick="moveProducts(1)">&#8250;</button>
                 </div>
             </div>
 
-            <!-- Brand logos marquee -->
-            <div style="margin-top: 4rem;">
-                <div class="section-tag fade-in">Our Brands</div>
-                <h2 class="fade-in">Trusted By Riders Worldwide</h2>
-                <div class="marquee-wrapper marquee-no-fade fade-in">
-                    <div class="marquee-track">
-                        <!-- Set 1 -->
-                        <div class="brand-logo"><img src="brands-logo/1.png" alt="Ethic DTC"></div>
-                        <div class="brand-logo"><img src="brands-logo/2.png" alt="Eretic"></div>
-                        <div class="brand-logo"><img src="brands-logo/3.png" alt="Aest"></div>
-                        <div class="brand-logo"><img src="brands-logo/4.png" alt="Union" class="logo-on-black"></div>
-                        <div class="brand-logo"><img src="brands-logo/5.png" alt="Brand 5" class="logo-on-black"></div>
-                        <div class="brand-logo"><img src="brands-logo/6.png" alt="Versatyl" class="logo-on-black"></div>
-                        <div class="brand-logo"><img src="brands-logo/7.png" alt="BOOM"></div>
-                        <div class="brand-logo"><img src="brands-logo/8.png" alt="ODI" class="logo-on-black"></div>
-                        <div class="brand-logo"><img src="brands-logo/9.png" alt="LW" class="logo-on-black"></div>
-                        <div class="brand-logo"><img src="brands-logo/10.png" alt="Union Scooter Parts"></div>
-                        <!-- Set 2 (duplicate for seamless loop) -->
-                        <div class="brand-logo"><img src="brands-logo/1.png" alt="Ethic DTC"></div>
-                        <div class="brand-logo"><img src="brands-logo/2.png" alt="Eretic"></div>
-                        <div class="brand-logo"><img src="brands-logo/3.png" alt="Aest"></div>
-                        <div class="brand-logo"><img src="brands-logo/4.png" alt="Union" class="logo-on-black"></div>
-                        <div class="brand-logo"><img src="brands-logo/5.png" alt="Brand 5" class="logo-on-black"></div>
-                        <div class="brand-logo"><img src="brands-logo/6.png" alt="Versatyl" class="logo-on-black"></div>
-                        <div class="brand-logo"><img src="brands-logo/7.png" alt="BOOM"></div>
-                        <div class="brand-logo"><img src="brands-logo/8.png" alt="ODI" class="logo-on-black"></div>
-                        <div class="brand-logo"><img src="brands-logo/9.png" alt="LW" class="logo-on-black"></div>
-                        <div class="brand-logo"><img src="brands-logo/10.png" alt="Union Scooter Parts"></div>
+            <!-- Variant B · carousel with 5 cards (for A/B comparison) -->
+            <div class="bestsellers-variant bestsellers-variant-b" style="margin-top: 80px;">
+                <div class="bestsellers-variant-label">Variant B · carousel with 5 cards</div>
+                <div class="products-carousel-wrap fade-in" id="productsCarouselB">
+                    <div class="products-carousel-track" id="productsTrackB">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="product-aero-complete.png" alt="World's Lightest Complete">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Just 2,5kg</div>
+                                <h3>WORLD'S LIGHTEST COMPLETE</h3>
+                                <p>Built for maximum airtime and precision. Every gram optimized for top-level performance.</p>
+                                <button class="product-more-btn" onclick="openProductModal('p1')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="product-ethic-pandora.jpg" alt="Best Value Complete">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Best Value</div>
+                                <h3>BEST VALUE COMPLETE</h3>
+                                <p>Affordable entry into stunt riding. Reliable, lightweight and easy to sell.</p>
+                                <button class="product-more-btn" onclick="openProductModal('p2')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="product-union-bars.png" alt="Progression Focused Complete">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Rider Approved</div>
+                                <h3>PROGRESSION FOCUSED COMPLETE</h3>
+                                <p>Balanced setups designed for skill development. Stable, controlled, and consistent performance.</p>
+                                <button class="product-more-btn" onclick="openProductModal('p3')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="product-union-wheels.jpg" alt="Parts for Custom Builds">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Rider Choice</div>
+                                <h3>PARTS FOR CUSTOM BUILDS</h3>
+                                <p>Components for high-performance custom builds. Fast rotation and consistent demand.</p>
+                                <button class="product-more-btn" onclick="openProductModal('p4')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="product-union-deck.png" alt="Helmets + Protection">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Proven Seller</div>
+                                <h3>HELMETS + PROTECTION</h3>
+                                <p>Complete head-to-body safety. Lightweight helmets plus high-impact pads &mdash; two proven categories in one high-margin SKU group.</p>
+                                <button class="product-more-btn" onclick="openProductModal('p5')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-carousel-arrows">
+                        <button class="products-carousel-arrow" onclick="moveProductsB(-1)">&#8249;</button>
+                        <div class="products-carousel-dots" id="productsDotsB"></div>
+                        <button class="products-carousel-arrow" onclick="moveProductsB(1)">&#8250;</button>
                     </div>
                 </div>
             </div>
@@ -2121,34 +2482,52 @@
     <!-- ============================================ -->
     <section class="why-section section-dark" id="section-why">
         <div class="container">
-            <div class="section-tag fade-in">Why OMFY</div>
+            <div class="section-tag fade-in">Why OMFY?</div>
             <h2 class="fade-in">Built for Your Business, Not Against It</h2>
             <p class="section-subtitle fade-in">Products your competitors can't get. Margins they can't undercut.</p>
 
             <div class="why-img1-grid">
-                <div class="why-img1-card why-img1b-card fade-in" style="background-image: url('why-images/01-nob2c-A.png');">
+                <div class="why-img1-card why-img1b-card fade-in" style="background-image: url('why-images/01-nob2c-final.png');">
                     <h4>No B2C = No Competition With You</h4>
                     <p>We never sell directly to consumers. Your prices are protected, no dumping, no hidden competition. Period.</p>
                 </div>
-                <div class="why-img1-card why-img1b-card fade-in" style="background-image: url('why-images/02-retail-A.png');">
-                    <h4>Built From Real Retail Experience</h4>
-                    <p>We started as a scooter shop. We know what sells, what margin you need, and what your customers ask for. Our catalog is built for retailers, by retailers.</p>
+                <div class="why-img1-card why-img1b-card why-video-card fade-in" style="background-image: url('videos/why-retail-poster.jpg');">
+                    <video class="why-card-bg" muted loop playsinline preload="none" poster="videos/why-retail-poster.jpg" data-src="videos/why-retail.mp4"></video>
+                    <div class="why-card-content">
+                        <h4>Built From Real Retail Experience</h4>
+                        <p>We started as a scooter shop. We know what sells, what margin you need, and what your customers ask for. Our catalog is built for retailers, by retailers.</p>
+                    </div>
                 </div>
-                <div class="why-img1-card why-img1b-card fade-in" style="background-image: url('why-images/03-mfg-gemini-1.png');">
+                <div class="why-img1-card why-img1b-card fade-in" style="background-image: url('why-images/03-manufacturing-final.png');">
                     <h4>Own Manufacturing = Fast Reactions</h4>
                     <p>We design and produce Union in-house. That means faster restocks, custom runs, and the ability to react to trends before competitors even notice them.</p>
                 </div>
-                <div class="why-img1-card why-img1b-card fade-in" style="background-image: url('why-images/04-excl-gemini-1.png');">
-                    <h4>Exclusive Brands for Your Store</h4>
-                    <p>Carry brands your competitors can't source. Build customer loyalty with unique products they'll only find in your shop.</p>
+                <div class="why-img1-card why-img1b-card why-video-card fade-in" style="background-image: url('videos/photo-brands.jpg');">
+                    <video class="why-card-bg" muted loop playsinline preload="none" poster="videos/photo-brands.jpg" data-src="videos/video-brands-web.mp4"></video>
+                    <div class="why-card-content">
+                        <h4>Exclusive Brands for Your Store</h4>
+                        <p>Carry brands your competitors can't source. Build customer loyalty with unique products they'll only find in your shop.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- 4. HOW IT WORKS (Light) -->
+    <!-- MID-PAGE CTA (Light) — moved here on 2026-04-16 per client -->
     <!-- ============================================ -->
+    <section class="mid-cta section-light">
+        <div class="container">
+            <h2 class="fade-in">Ready to Stock the Brands Riders Actually Want?</h2>
+            <p class="section-subtitle fade-in" style="max-width: 600px; margin: 0 auto 2rem;">Get our full B2B catalog. No commitment, no credit card. Just a chat about growing your scooter sales.</p>
+            <button class="mid-cta-btn fade-in" onclick="scrollToForm()">Request Catalog &rarr;</button>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TEMP HIDDEN 2026-04-16: How It Works (on client request; restore if needed) -->
+    <!-- ============================================ -->
+    <!--
     <section class="how-section section-light" id="section-how">
         <div class="container">
             <div class="section-tag fade-in">4 Simple Steps</div>
@@ -2182,12 +2561,9 @@
                     <img src="Gemini_Generated_Image_innemeinnemeinne-3.png" alt="Scooter Manufacturing Workshop">
                 </div>
             </div>
-
-            <!-- flow-bar removed per request -->
         </div>
     </section>
-
-    <!-- How It Works Variant B removed -->
+    -->
 
     <!-- ============================================ -->
     <!-- 5. WHAT YOU GET (Dark) -->
@@ -2195,7 +2571,7 @@
     <section class="benefits-section section-dark" id="section-benefits">
         <div class="container">
             <div class="section-tag fade-in">Partnership Benefits</div>
-            <h2 class="fade-in">What You Get With OMFY</h2>
+            <h2 class="fade-in">What You Get With OMFY?</h2>
             <div class="benefits-grid">
                 <div class="benefit-item fade-in">
                     <div class="benefit-stat">42%+</div>
@@ -2240,121 +2616,52 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- 6. MID-PAGE CTA (Light) -->
+    <!-- 7. MAP — DESKTOP -->
     <!-- ============================================ -->
-    <section class="mid-cta section-light">
-        <div class="container">
-            <h2 class="fade-in">Ready to Stock the Brands Riders Actually Want?</h2>
-            <p class="section-subtitle fade-in" style="max-width: 600px; margin: 0 auto 2rem;">Get our full catalog with B2B pricing. No commitment, no credit card. Just a conversation about growing your scooter sales.</p>
-            <button class="mid-cta-btn fade-in" onclick="scrollToForm()">Request Catalog &rarr;</button>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- 7. MAP — DESKTOP (A/B test: two map layouts) -->
-    <!-- ============================================ -->
+    <div id="section-network"></div>
     <div class="map-desktop">
-    <!-- ===== Variant A ===== -->
-    <section class="map-gradient-section map-variant-a" id="map-brandbook">
-        <div class="map-variant-label">Variant A · map cover, right-top anchor</div>
-        <!-- Partner logos marquee at top of gradient -->
-        <div class="map-partners-top">
-            <div class="container">
-                <div class="marquee-wrapper">
-                    <div class="marquee-track" style="animation-duration: 20s;">
-                        <div class="brand-logo"><img src="partners-logo/1.png" alt="Scootive"></div>
-                        <div class="brand-logo"><img src="partners-logo/2.png" alt="Scootering.cz"></div>
-                        <div class="brand-logo"><img src="partners-logo/3.png" alt="Fantic26"></div>
-                        <div class="brand-logo"><img src="partners-logo/4.png" alt="Scooty24"></div>
-                        <div class="brand-logo"><img src="partners-logo/5-samokat-white.png" alt="Samokat"></div>
-                        <div class="brand-logo"><img src="partners-logo/6.png" alt="ScootWorld"></div>
-                        <div class="brand-logo"><img src="partners-logo/1.png" alt="Scootive"></div>
-                        <div class="brand-logo"><img src="partners-logo/2.png" alt="Scootering.cz"></div>
-                        <div class="brand-logo"><img src="partners-logo/3.png" alt="Fantic26"></div>
-                        <div class="brand-logo"><img src="partners-logo/4.png" alt="Scooty24"></div>
-                        <div class="brand-logo"><img src="partners-logo/5-samokat-white.png" alt="Samokat"></div>
-                        <div class="brand-logo"><img src="partners-logo/6.png" alt="ScootWorld"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Side-by-side: text+stats left, map right -->
+    <section class="map-gradient-section map-variant-b map-variant-test" id="section-map-desktop">
         <div class="map-gradient-inner">
-            <div class="map-gradient-left">
-                <div class="section-tag">Our Network</div>
-                <h2>100+ Partners Across Europe</h2>
-                <p>From Scandinavia to the Mediterranean, trusted retailers rely on OMFY for quality, reliability, and real partnership.</p>
-                <div class="map-gradient-stats">
-                    <div class="map-gradient-stat-card fade-in">
-                        <div class="stat-num">100+</div>
-                        <p>Active Partners</p>
-                    </div>
-                    <div class="map-gradient-stat-card fade-in">
-                        <div class="stat-num">19</div>
-                        <p>EU Countries</p>
-                    </div>
-                    <div class="map-gradient-stat-card fade-in">
-                        <div class="stat-num">Free</div>
-                        <p>1st Delivery</p>
-                    </div>
-                    <div class="map-gradient-stat-card fade-in">
-                        <div class="stat-num">1–5 days</div>
-                        <p>Max Delivery</p>
+            <div class="map-gradient-left map-gradient-left--sticky">
+                <div class="map-partners-top map-partners-top-wide">
+                    <div class="marquee-wrapper">
+                        <div class="marquee-track" style="animation-duration: 20s;">
+                            <div class="brand-logo"><img src="partners-logo/1.png" alt="Scootive"></div>
+                            <div class="brand-logo"><img src="partners-logo/2.png" alt="Scootering.cz"></div>
+                            <div class="brand-logo"><img src="partners-logo/3.png" alt="Fantic26"></div>
+                            <div class="brand-logo"><img src="partners-logo/4.png" alt="Scooty24"></div>
+                            <div class="brand-logo"><img src="partners-logo/5-samokat-white.png" alt="Samokat"></div>
+                            <div class="brand-logo"><img src="partners-logo/6.png" alt="ScootWorld"></div>
+                            <div class="brand-logo"><img src="partners-logo/1.png" alt="Scootive"></div>
+                            <div class="brand-logo"><img src="partners-logo/2.png" alt="Scootering.cz"></div>
+                            <div class="brand-logo"><img src="partners-logo/3.png" alt="Fantic26"></div>
+                            <div class="brand-logo"><img src="partners-logo/4.png" alt="Scooty24"></div>
+                            <div class="brand-logo"><img src="partners-logo/5-samokat-white.png" alt="Samokat"></div>
+                            <div class="brand-logo"><img src="partners-logo/6.png" alt="ScootWorld"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="map-gradient-right">
-                <img src="europe-map-transparent.png" alt="OMFY Distribution network across Europe">
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== Variant B ===== -->
-    <section class="map-gradient-section map-variant-b">
-        <div class="map-variant-label">Variant B · map bleeds to viewport right edge</div>
-        <div class="map-partners-top">
-            <div class="container">
-                <div class="marquee-wrapper">
-                    <div class="marquee-track" style="animation-duration: 20s;">
-                        <div class="brand-logo"><img src="partners-logo/1.png" alt="Scootive"></div>
-                        <div class="brand-logo"><img src="partners-logo/2.png" alt="Scootering.cz"></div>
-                        <div class="brand-logo"><img src="partners-logo/3.png" alt="Fantic26"></div>
-                        <div class="brand-logo"><img src="partners-logo/4.png" alt="Scooty24"></div>
-                        <div class="brand-logo"><img src="partners-logo/5-samokat-white.png" alt="Samokat"></div>
-                        <div class="brand-logo"><img src="partners-logo/6.png" alt="ScootWorld"></div>
-                        <div class="brand-logo"><img src="partners-logo/1.png" alt="Scootive"></div>
-                        <div class="brand-logo"><img src="partners-logo/2.png" alt="Scootering.cz"></div>
-                        <div class="brand-logo"><img src="partners-logo/3.png" alt="Fantic26"></div>
-                        <div class="brand-logo"><img src="partners-logo/4.png" alt="Scooty24"></div>
-                        <div class="brand-logo"><img src="partners-logo/5-samokat-white.png" alt="Samokat"></div>
-                        <div class="brand-logo"><img src="partners-logo/6.png" alt="ScootWorld"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="map-gradient-inner">
-            <div class="map-gradient-left">
-                <div class="section-tag">Our Network</div>
-                <h2>100+ Partners Across Europe</h2>
-                <p>From Scandinavia to the Mediterranean, trusted retailers rely on OMFY for quality, reliability, and real partnership.</p>
-                <div class="map-gradient-stats">
-                    <div class="map-gradient-stat-card fade-in">
-                        <div class="stat-num">100+</div>
-                        <p>Active Partners</p>
-                    </div>
-                    <div class="map-gradient-stat-card fade-in">
-                        <div class="stat-num">19</div>
-                        <p>EU Countries</p>
-                    </div>
-                    <div class="map-gradient-stat-card fade-in">
-                        <div class="stat-num">Free</div>
-                        <p>1st Delivery</p>
-                    </div>
-                    <div class="map-gradient-stat-card fade-in">
-                        <div class="stat-num">1–5 days</div>
-                        <p>Max Delivery</p>
+                <div class="map-gradient-left__inner">
+                    <div class="section-tag">Our Network</div>
+                    <h2>Our Partners Are Already Selling Across Europe</h2>
+                    <p>From Scandinavia to the Mediterranean, trusted retailers rely on OMFY for quality, reliability, and real partnership.</p>
+                    <div class="map-gradient-stats">
+                        <div class="map-gradient-stat-card fade-in">
+                            <div class="stat-num">100+</div>
+                            <p>Active Partners</p>
+                        </div>
+                        <div class="map-gradient-stat-card fade-in">
+                            <div class="stat-num">19</div>
+                            <p>EU Countries</p>
+                        </div>
+                        <div class="map-gradient-stat-card fade-in">
+                            <div class="stat-num">500+</div>
+                            <p>SKUs in Catalog</p>
+                        </div>
+                        <div class="map-gradient-stat-card fade-in">
+                            <div class="stat-num">+27%</div>
+                            <p>Network Growth YoY</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2372,7 +2679,7 @@
     <section class="map-gradient-section">
         <div class="map-gradient-header fade-in" style="padding-top:60px;">
             <div class="section-tag">Our Network</div>
-            <h2>100+ Partners Across Europe</h2>
+            <h2>Our Partners Are Already Selling Across Europe</h2>
             <p>From Scandinavia to the Mediterranean, trusted retailers rely on OMFY for quality, reliability, and real partnership.</p>
         </div>
 
@@ -2414,8 +2721,8 @@
                 <p>1st Delivery</p>
             </div>
             <div class="map-gradient-stat-card fade-in">
-                <div class="stat-num">1–5 days</div>
-                <p>Max Delivery</p>
+                <div class="stat-num">+27%</div>
+                <p>Network Growth YoY</p>
             </div>
         </div>
     </section>
@@ -2427,7 +2734,7 @@
     <section class="trust-section section-light" id="section-testimonials">
         <div class="container">
             <div class="section-tag fade-in">What Partners Say</div>
-            <h2 class="fade-in">Trusted Across Europe</h2>
+            <h2 class="fade-in">Real Words from Real Retailers</h2>
 
             <div class="testimonial-carousel" id="testimonialCarousel">
                 <div class="carousel-track" id="carouselTrack">
@@ -2485,7 +2792,7 @@
             <div class="form-header">
                 <div class="section-tag">Let's Talk</div>
                 <h2>Get Your Personalized B2B Offer</h2>
-                <p>Tell us about your store and we'll send you our catalog with custom pricing within 24 hours.</p>
+                <p>Tell us about your store and we'll send you our catalog.</p>
             </div>
 
             <div class="form-box">
@@ -2506,9 +2813,8 @@
                         <label for="phone">Phone (Optional)</label>
                         <input type="tel" id="phone" name="phone" placeholder="+371 20 180 440">
                     </div>
-                    <button type="submit" class="form-submit">Request Catalog & Pricing &rarr;</button>
+                    <button type="submit" class="form-submit">Request Catalog &rarr;</button>
                     <div class="form-disclaimer">
-                        <p><strong>No commitment. No credit card. Just a conversation about growing your scooter sales.</strong></p>
                         <p>Currently accepting new partners in select European territories.</p>
                     </div>
                 </form>
@@ -2656,6 +2962,26 @@
     </footer>
 
     <!-- ============================================ -->
+    <!-- PRODUCT DETAILS MODAL (placeholder content) -->
+    <!-- ============================================ -->
+    <dialog id="productModal" class="product-modal">
+        <button class="product-modal-close" type="button" onclick="closeProductModal()" aria-label="Close">&times;</button>
+        <div class="product-modal-body">
+            <div class="product-modal-carousel">
+                <div class="product-modal-track" id="modalTrack"></div>
+                <button class="product-modal-arrow prev" type="button" onclick="moveModal(-1)" aria-label="Previous">&#8249;</button>
+                <button class="product-modal-arrow next" type="button" onclick="moveModal(1)" aria-label="Next">&#8250;</button>
+                <div class="product-modal-dots" id="modalDots"></div>
+            </div>
+            <div class="product-modal-info">
+                <div class="product-kicker" id="modalKicker"></div>
+                <h3 id="modalTitle"></h3>
+                <p id="modalDesc"></p>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- ============================================ -->
     <!-- JAVASCRIPT -->
     <!-- ============================================ -->
     <script>
@@ -2773,7 +3099,81 @@
                 container.appendChild(dot);
             }
         }
-        window.addEventListener('resize', () => { buildProductDots(); productSlide = 0; updateProducts(); });
+        function isCarouselMode() { return window.innerWidth < 1024; }
+        window.addEventListener('resize', () => {
+            buildProductDotsB(); productSlideB = 0; updateProductsB();
+            if (!isCarouselMode()) return;
+            buildProductDots(); productSlide = 0; updateProducts();
+        });
+
+        // ===== PRODUCTS CAROUSEL — VARIANT B (always carousel, 3 visible on desktop) =====
+        let productSlideB = 0;
+        function getVisibleProductsB() {
+            if (window.innerWidth <= 600) return 1;
+            if (window.innerWidth <= 992) return 2;
+            return 3;
+        }
+        function getTotalProductSlidesB() {
+            const total = document.querySelectorAll('#productsTrackB .product-card').length;
+            return Math.max(1, total - getVisibleProductsB() + 1);
+        }
+        function moveProductsB(dir) {
+            const max = getTotalProductSlidesB() - 1;
+            productSlideB = Math.max(0, Math.min(max, productSlideB + dir));
+            updateProductsB();
+        }
+        function goToProductB(i) {
+            productSlideB = i;
+            updateProductsB();
+        }
+        function updateProductsB() {
+            const track = document.getElementById('productsTrackB');
+            if (!track) return;
+            const card = track.querySelector('.product-card');
+            if (!card) return;
+            if (window.innerWidth <= 600) {
+                const cardW = card.offsetWidth + 16;
+                track.scrollTo({ left: productSlideB * cardW, behavior: 'smooth' });
+            } else {
+                const cardW = card.offsetWidth + 24;
+                track.style.transform = `translateX(-${productSlideB * cardW}px)`;
+            }
+            const dots = document.querySelectorAll('#productsDotsB .products-carousel-dot');
+            dots.forEach((d, i) => d.classList.toggle('active', i === productSlideB));
+        }
+        function buildProductDotsB() {
+            const container = document.getElementById('productsDotsB');
+            if (!container) return;
+            const count = getTotalProductSlidesB();
+            container.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'products-carousel-dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToProductB(i);
+                container.appendChild(dot);
+            }
+        }
+        function enableProductsSwipeB() {
+            const track = document.getElementById('productsTrackB');
+            if (!track) return;
+            let startX = 0;
+            let currentX = 0;
+            let dragging = false;
+            track.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                dragging = true;
+            }, { passive: true });
+            track.addEventListener('touchmove', (e) => {
+                if (!dragging) return;
+                currentX = e.touches[0].clientX;
+            }, { passive: true });
+            track.addEventListener('touchend', () => {
+                if (!dragging) return;
+                dragging = false;
+                const diff = startX - currentX;
+                if (Math.abs(diff) > 40) moveProductsB(diff > 0 ? 1 : -1);
+            });
+        }
 
         // ===== SCROLL TO FORM =====
         function scrollToForm() {
@@ -2936,13 +3336,132 @@
             io.observe(track);
         }
 
+        // ===== PRODUCT DETAILS MODAL =====
+        const PRODUCT_DATA = {
+            p1: {
+                kicker: 'Just 2,5kg',
+                title: "WORLD'S LIGHTEST COMPLETE",
+                desc: 'Built for maximum airtime and precision. Every gram optimized for top-level performance.',
+                slides: ['product-aero-complete.png', 'product-aero-complete.png', 'product-aero-complete.png']
+            },
+            p2: {
+                kicker: 'Best Value',
+                title: 'BEST VALUE COMPLETE',
+                desc: 'Affordable entry into stunt riding. Reliable, lightweight and easy to sell.',
+                slides: ['product-ethic-pandora.jpg', 'product-ethic-pandora.jpg', 'product-ethic-pandora.jpg']
+            },
+            p3: {
+                kicker: 'Rider Approved',
+                title: 'PROGRESSION FOCUSED COMPLETE',
+                desc: 'Balanced setups designed for skill development. Stable, controlled, and consistent performance.',
+                slides: ['product-union-bars.png', 'product-union-bars.png', 'product-union-bars.png']
+            },
+            p4: {
+                kicker: 'Rider Choice',
+                title: 'PARTS FOR CUSTOM BUILDS',
+                desc: 'Components for high-performance custom builds. Fast rotation and consistent demand.',
+                slides: ['product-union-wheels.jpg', 'product-union-wheels.jpg', 'product-union-wheels.jpg']
+            },
+            p5: {
+                kicker: 'Proven Seller',
+                title: 'HELMETS + PROTECTION',
+                desc: 'Complete head-to-body safety. Lightweight helmets plus high-impact pads — two proven categories in one high-margin SKU group.',
+                slides: ['product-union-deck.png', 'product-boom-pads.png', 'product-union-deck.png']
+            }
+        };
+        let modalSlide = 0;
+        let modalSlideCount = 0;
+        function openProductModal(id) {
+            const data = PRODUCT_DATA[id];
+            const dlg = document.getElementById('productModal');
+            if (!data || !dlg) return;
+            document.getElementById('modalKicker').textContent = data.kicker;
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalDesc').textContent = data.desc;
+            const track = document.getElementById('modalTrack');
+            const dots = document.getElementById('modalDots');
+            track.innerHTML = '';
+            dots.innerHTML = '';
+            data.slides.forEach((src, i) => {
+                const slide = document.createElement('div');
+                slide.className = 'product-modal-slide';
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = data.title + ' photo ' + (i + 1);
+                slide.appendChild(img);
+                track.appendChild(slide);
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'product-modal-dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToModalSlide(i);
+                dots.appendChild(dot);
+            });
+            modalSlide = 0;
+            modalSlideCount = data.slides.length;
+            updateModalTrack();
+            dlg.showModal();
+        }
+        function closeProductModal() {
+            const dlg = document.getElementById('productModal');
+            if (dlg) dlg.close();
+        }
+        function moveModal(dir) {
+            if (!modalSlideCount) return;
+            modalSlide = (modalSlide + dir + modalSlideCount) % modalSlideCount;
+            updateModalTrack();
+        }
+        function goToModalSlide(i) { modalSlide = i; updateModalTrack(); }
+        function updateModalTrack() {
+            const track = document.getElementById('modalTrack');
+            if (!track) return;
+            track.style.transform = `translateX(-${modalSlide * 100}%)`;
+            document.querySelectorAll('.product-modal-dot').forEach((d, i) =>
+                d.classList.toggle('active', i === modalSlide));
+        }
+        (() => {
+            const dlg = document.getElementById('productModal');
+            if (!dlg) return;
+            dlg.addEventListener('click', (e) => {
+                if (e.target === dlg) closeProductModal();
+            });
+        })();
+
+        // Touch swipe в модальном окне
+        (() => {
+            const track = document.getElementById('modalTrack');
+            if (!track) return;
+            let startX = 0;
+            let startY = 0;
+            let dragging = false;
+            track.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                dragging = true;
+            }, { passive: true });
+            track.addEventListener('touchend', (e) => {
+                if (!dragging) return;
+                dragging = false;
+                const dx = e.changedTouches[0].clientX - startX;
+                const dy = e.changedTouches[0].clientY - startY;
+                // Только если горизонтальный свайп (не вертикальный скролл)
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+                    moveModal(dx < 0 ? 1 : -1);
+                }
+            }, { passive: true });
+        })();
+
         // ===== INIT =====
         document.addEventListener('DOMContentLoaded', () => {
             observeElements();
-            buildProductDots();
-            enableProductsSwipe();
-            attachMobileCarouselSync();
-            nudgeProductsCarousel();
+            if (isCarouselMode()) {
+                buildProductDots();
+                enableProductsSwipe();
+                attachMobileCarouselSync();
+                nudgeProductsCarousel();
+            }
+            // Variant B is always a carousel (including on desktop)
+            buildProductDotsB();
+            enableProductsSwipeB();
         });
 
         // Smooth anchor scroll
@@ -2955,6 +3474,36 @@
                 }
             });
         });
+
+        // Lazy-load background videos in Why OMFY cards
+        (() => {
+            const videos = document.querySelectorAll('video.why-card-bg');
+            if (!videos.length) return;
+            const load = (vid) => {
+                if (vid.dataset.loaded) return;
+                vid.dataset.loaded = '1';
+                vid.src = vid.dataset.src;
+                vid.load();
+                const playAttempt = vid.play();
+                if (playAttempt && typeof playAttempt.catch === 'function') {
+                    playAttempt.catch(() => {});
+                }
+                vid.addEventListener('loadeddata', () => vid.classList.add('loaded'), { once: true });
+            };
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) {
+                            load(e.target);
+                            io.unobserve(e.target);
+                        }
+                    });
+                }, { rootMargin: '200px' });
+                videos.forEach(v => io.observe(v));
+            } else {
+                videos.forEach(load);
+            }
+        })();
     </script>
 </body>
 </html>
