@@ -1080,9 +1080,13 @@
             /* Видео становятся по диагонали: top-right + bottom-left */
             .why-img1-card:nth-child(3) { order: 4; }
             .why-img1-card:nth-child(4) { order: 3; }
-            /* Exclusive Brands видео — масштабируем чуть крупнее, чтобы обрезать чёрные полосы */
+            /* Exclusive Brands: видео + постер (фон карточки) — масштабируем, чтобы обрезать чёрные полосы */
+            .why-img1-card:nth-child(4) {
+                background-size: 135% auto;
+                background-position: center center;
+            }
             .why-img1-card:nth-child(4) video.why-card-bg {
-                transform: scale(1.18);
+                transform: scale(1.35);
                 transform-origin: center center;
             }
         }
