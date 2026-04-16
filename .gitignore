@@ -1,3 +1,22 @@
 .DS_Store
 node_modules/
 .vercel
+
+# Оригиналы — только WebP в git
+*.jpg
+*.jpeg
+brandbook-photos/*.jpeg
+partners-logo/*.png
+brands-logo/*.png
+why-images/*.png
+Gemini_Generated_Image_*.png
+product-*.png
+europe-map-transparent.png
+_why-omfy-candidates/
+omfy-branding/
+brandbook-photos/*.jpeg
+landing-texts.md
+videos/UNION*
+videos/WhatsApp*
+videos/video-brands-clip.mp4
+index.html.bak
