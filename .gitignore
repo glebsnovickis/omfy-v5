@@ -21,3 +21,7 @@ videos/WhatsApp*
 videos/video-brands-clip.mp4
 index.html.bak
 bestsellers/raw/
+
+# Local archive (source videos, contracts, brandbook, legacy drafts) + review screenshots
+_archive/
+screenshots/
