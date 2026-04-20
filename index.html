@@ -673,7 +673,7 @@
         .product-image {
             width: 100%;
             height: 280px;
-            background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
+            background: #fff;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -681,6 +681,56 @@
             justify-content: center;
         }
         .product-image img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        .section-light .product-info {
+            background: linear-gradient(135deg, #f3f3f3 0%, #eaeaea 100%);
+        }
+        /* Cards Variant B — all-white bg, orange divider between photo and text */
+        .section-light .cards-style-white-divider .product-info {
+            background: #fff;
+            border-top: 3px solid var(--primary);
+        }
+
+        /* Cards Variant C — dark text bottom (white photo top + black text panel) */
+        .section-light .cards-style-dark .product-card {
+            background: #111;
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        .section-light .cards-style-dark .product-info {
+            background: #111;
+            color: #fff;
+        }
+        .section-light .cards-style-dark .product-info h3 {
+            color: #fff;
+        }
+        .section-light .cards-style-dark .product-more-btn {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        .section-light .cards-style-dark .product-more-btn:hover {
+            background: var(--primary);
+            color: #000;
+        }
+
+        /* Cards Variant D — orange text bottom (white photo + orange text panel) */
+        .section-light .cards-style-orange .product-info {
+            background: var(--primary);
+            color: #000;
+        }
+        .section-light .cards-style-orange .product-kicker {
+            color: #000;
+            opacity: 0.75;
+        }
+        .section-light .cards-style-orange .product-info h3 {
+            color: #000;
+        }
+        .section-light .cards-style-orange .product-more-btn {
+            color: #000;
+            border-color: #000;
+        }
+        .section-light .cards-style-orange .product-more-btn:hover {
+            background: #000;
+            color: var(--primary);
+        }
         .product-kicker {
             color: var(--primary);
             font-family: 'Geist', sans-serif;
@@ -2297,9 +2347,9 @@
     </div>
 
     <!-- ============================================ -->
-    <!-- 1. HERO (Dark — Video) -->
+    <!-- 1. HERO (hidden — client prefers Variant B below; markup kept for rollback) -->
     <!-- ============================================ -->
-    <section class="hero-video">
+    <section class="hero-video" style="display: none;">
         <!-- Hero nav: transparent, stays with the hero -->
         <nav class="nav-bar nav-hero" id="navHero">
             <div class="container">
@@ -2369,10 +2419,9 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- HERO VARIANT B — UNION CLEAN (client-supplied) -->
+    <!-- HERO (UNION CLEAN — client-supplied video, promoted to main hero) -->
     <!-- ============================================ -->
     <section class="hero-video hero-video-variant">
-        <div class="hero-variant-label">Hero Variant B · UNION CLEAN</div>
         <video autoplay muted loop playsinline preload="metadata">
             <source src="hero-video-union-clean.mp4" type="video/mp4">
         </video>
@@ -2539,7 +2588,7 @@
                 </div>
             </div>
 
-            <!-- Bestsellers carousel (client chose this over the 5-column grid). -->
+            <!-- Cards Variant A — client-approved: white image top, soft-grey text bottom -->
             <div class="bestsellers-variant bestsellers-variant-b">
                 <div class="products-carousel-wrap fade-in" id="productsCarouselB">
                     <div class="products-carousel-track" id="productsTrackB">
@@ -2598,6 +2647,178 @@
                         <button class="products-carousel-arrow" onclick="moveProductsB(-1)">&#8249;</button>
                         <div class="products-carousel-dots" id="productsDotsB"></div>
                         <button class="products-carousel-arrow" onclick="moveProductsB(1)">&#8250;</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Variant B — all white with orange divider line between photo and text (hidden: client did not like) -->
+            <div class="bestsellers-variant bestsellers-variant-b cards-style-white-divider" style="margin-top: 80px; display: none;">
+                <div class="bestsellers-variant-label">Cards Variant B · all-white with orange divider</div>
+                <div class="products-carousel-wrap fade-in" id="productsCarouselB2">
+                    <div class="products-carousel-track" id="productsTrackB2">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="bestsellers/p1/01-aero-black-1.webp" alt="World's Lightest Complete">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Just 2,5kg</div>
+                                <h3>WORLD'S LIGHTEST COMPLETE</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p1')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="bestsellers/p2/01-lite-lime.webp" alt="Best Value Complete">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Best Value</div>
+                                <h3>BEST VALUE COMPLETE</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p2')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="bestsellers/p3/01-progression-05803.webp" alt="Progression Focused Complete">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Rider Approved</div>
+                                <h3>PROGRESSION FOCUSED COMPLETE</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p3')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="bestsellers/p4/01-t-chrome-blue-2.webp" alt="Parts for Custom Builds">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Rider Choice</div>
+                                <h3>PARTS FOR CUSTOM BUILDS</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p4')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="bestsellers/p5/01-helmet-14dMf-1.webp" alt="Helmets + Protection">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-kicker">Proven Seller</div>
+                                <h3>HELMETS + PROTECTION</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p5')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-carousel-arrows">
+                        <button class="products-carousel-arrow" onclick="moveProductsB2(-1)">&#8249;</button>
+                        <div class="products-carousel-dots" id="productsDotsB2"></div>
+                        <button class="products-carousel-arrow" onclick="moveProductsB2(1)">&#8250;</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Variant C — dark text panel (hidden: client chose Variant A) -->
+            <div class="bestsellers-variant bestsellers-variant-b cards-style-dark" style="margin-top: 80px; display: none;">
+                <div class="bestsellers-variant-label">Cards Variant C · dark text panel</div>
+                <div class="products-carousel-wrap fade-in" id="productsCarouselB3">
+                    <div class="products-carousel-track" id="productsTrackB3">
+                        <div class="product-card">
+                            <div class="product-image"><img src="bestsellers/p1/01-aero-black-1.webp" alt="World's Lightest Complete"></div>
+                            <div class="product-info">
+                                <div class="product-kicker">Just 2,5kg</div>
+                                <h3>WORLD'S LIGHTEST COMPLETE</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p1')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image"><img src="bestsellers/p2/01-lite-lime.webp" alt="Best Value Complete"></div>
+                            <div class="product-info">
+                                <div class="product-kicker">Best Value</div>
+                                <h3>BEST VALUE COMPLETE</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p2')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image"><img src="bestsellers/p3/01-progression-05803.webp" alt="Progression Focused Complete"></div>
+                            <div class="product-info">
+                                <div class="product-kicker">Rider Approved</div>
+                                <h3>PROGRESSION FOCUSED COMPLETE</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p3')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image"><img src="bestsellers/p4/01-t-chrome-blue-2.webp" alt="Parts for Custom Builds"></div>
+                            <div class="product-info">
+                                <div class="product-kicker">Rider Choice</div>
+                                <h3>PARTS FOR CUSTOM BUILDS</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p4')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image"><img src="bestsellers/p5/01-helmet-14dMf-1.webp" alt="Helmets + Protection"></div>
+                            <div class="product-info">
+                                <div class="product-kicker">Proven Seller</div>
+                                <h3>HELMETS + PROTECTION</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p5')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-carousel-arrows">
+                        <button class="products-carousel-arrow" onclick="moveProductsB3(-1)">&#8249;</button>
+                        <div class="products-carousel-dots" id="productsDotsB3"></div>
+                        <button class="products-carousel-arrow" onclick="moveProductsB3(1)">&#8250;</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Variant D — orange text panel (hidden: client chose Variant A) -->
+            <div class="bestsellers-variant bestsellers-variant-b cards-style-orange" style="margin-top: 80px; display: none;">
+                <div class="bestsellers-variant-label">Cards Variant D · orange text panel</div>
+                <div class="products-carousel-wrap fade-in" id="productsCarouselB4">
+                    <div class="products-carousel-track" id="productsTrackB4">
+                        <div class="product-card">
+                            <div class="product-image"><img src="bestsellers/p1/01-aero-black-1.webp" alt="World's Lightest Complete"></div>
+                            <div class="product-info">
+                                <div class="product-kicker">Just 2,5kg</div>
+                                <h3>WORLD'S LIGHTEST COMPLETE</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p1')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image"><img src="bestsellers/p2/01-lite-lime.webp" alt="Best Value Complete"></div>
+                            <div class="product-info">
+                                <div class="product-kicker">Best Value</div>
+                                <h3>BEST VALUE COMPLETE</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p2')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image"><img src="bestsellers/p3/01-progression-05803.webp" alt="Progression Focused Complete"></div>
+                            <div class="product-info">
+                                <div class="product-kicker">Rider Approved</div>
+                                <h3>PROGRESSION FOCUSED COMPLETE</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p3')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image"><img src="bestsellers/p4/01-t-chrome-blue-2.webp" alt="Parts for Custom Builds"></div>
+                            <div class="product-info">
+                                <div class="product-kicker">Rider Choice</div>
+                                <h3>PARTS FOR CUSTOM BUILDS</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p4')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image"><img src="bestsellers/p5/01-helmet-14dMf-1.webp" alt="Helmets + Protection"></div>
+                            <div class="product-info">
+                                <div class="product-kicker">Proven Seller</div>
+                                <h3>HELMETS + PROTECTION</h3>
+                                <button class="product-more-btn" onclick="openProductModal('p5')">View Details &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-carousel-arrows">
+                        <button class="products-carousel-arrow" onclick="moveProductsB4(-1)">&#8249;</button>
+                        <div class="products-carousel-dots" id="productsDotsB4"></div>
+                        <button class="products-carousel-arrow" onclick="moveProductsB4(1)">&#8250;</button>
                     </div>
                 </div>
             </div>
@@ -3135,6 +3356,14 @@
             const navHero = document.getElementById('navHero');
             const SCROLL_THRESHOLD = 500;
 
+            // If the original hero (with transparent nav-hero) is hidden, show the
+            // sticky white nav from page load so users always have a visible nav.
+            const heroHasVisibleNav = navHero && navHero.offsetParent !== null;
+            if (!heroHasVisibleNav) {
+                navScrolled.classList.add('visible');
+                return;
+            }
+
             window.addEventListener('scroll', function() {
                 const y = window.pageYOffset || document.documentElement.scrollTop;
                 if (y > SCROLL_THRESHOLD) {
@@ -3227,6 +3456,9 @@
         function isCarouselMode() { return window.innerWidth < 1024; }
         window.addEventListener('resize', () => {
             buildProductDotsB(); productSlideB = 0; updateProductsB();
+            buildProductDotsB2(); productSlideB2 = 0; updateProductsB2();
+            if (typeof cardsB3 !== 'undefined') { cardsB3.build(); cardsB3.setSlide(0); }
+            if (typeof cardsB4 !== 'undefined') { cardsB4.build(); cardsB4.setSlide(0); }
             if (!isCarouselMode()) return;
             buildProductDots(); productSlide = 0; updateProducts();
         });
@@ -3347,6 +3579,198 @@
                 if (Math.abs(diff) > 40) moveProductsB(diff > 0 ? 1 : -1);
             });
         }
+
+        // ===== PRODUCTS CAROUSEL — VARIANT B2 (second card style for A/B test) =====
+        let productSlideB2 = 0;
+        let productsAutoplayTimerB2 = null;
+        function getTotalProductSlidesB2() {
+            const total = document.querySelectorAll('#productsTrackB2 .product-card').length;
+            return Math.max(1, total - getVisibleProductsB() + 1);
+        }
+        function moveProductsB2(dir) {
+            const max = getTotalProductSlidesB2() - 1;
+            productSlideB2 = Math.max(0, Math.min(max, productSlideB2 + dir));
+            updateProductsB2();
+            restartProductsAutoplayB2();
+        }
+        function goToProductB2(i) {
+            productSlideB2 = i;
+            updateProductsB2();
+            restartProductsAutoplayB2();
+        }
+        function updateProductsB2() {
+            const track = document.getElementById('productsTrackB2');
+            if (!track) return;
+            const card = track.querySelector('.product-card');
+            if (!card) return;
+            if (window.innerWidth <= 600) {
+                const cardW = card.offsetWidth + 16;
+                track.scrollTo({ left: productSlideB2 * cardW, behavior: 'smooth' });
+            } else {
+                const cardW = card.offsetWidth + 24;
+                track.style.transform = `translateX(-${productSlideB2 * cardW}px)`;
+            }
+            const dots = document.querySelectorAll('#productsDotsB2 .products-carousel-dot');
+            dots.forEach((d, i) => d.classList.toggle('active', i === productSlideB2));
+        }
+        function buildProductDotsB2() {
+            const container = document.getElementById('productsDotsB2');
+            if (!container) return;
+            const count = getTotalProductSlidesB2();
+            container.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'products-carousel-dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToProductB2(i);
+                container.appendChild(dot);
+            }
+        }
+        function enableProductsSwipeB2() {
+            const track = document.getElementById('productsTrackB2');
+            if (!track) return;
+            let startX = 0, currentX = 0, dragging = false;
+            track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; dragging = true; }, { passive: true });
+            track.addEventListener('touchmove', (e) => { if (dragging) currentX = e.touches[0].clientX; }, { passive: true });
+            track.addEventListener('touchend', () => {
+                if (!dragging) return;
+                dragging = false;
+                const diff = startX - currentX;
+                if (Math.abs(diff) > 40) moveProductsB2(diff > 0 ? 1 : -1);
+            });
+        }
+        function startProductsAutoplayB2() {
+            stopProductsAutoplayB2();
+            productsAutoplayTimerB2 = setInterval(() => {
+                const max = getTotalProductSlidesB2() - 1;
+                if (max <= 0) return;
+                productSlideB2 = productSlideB2 >= max ? 0 : productSlideB2 + 1;
+                updateProductsB2();
+            }, PRODUCTS_AUTOPLAY_MS);
+        }
+        function stopProductsAutoplayB2() {
+            if (productsAutoplayTimerB2) {
+                clearInterval(productsAutoplayTimerB2);
+                productsAutoplayTimerB2 = null;
+            }
+        }
+        function restartProductsAutoplayB2() {
+            if (productsAutoplayTimerB2) {
+                stopProductsAutoplayB2();
+                startProductsAutoplayB2();
+            }
+        }
+        function wireProductsAutoplayB2() {
+            const wrap = document.getElementById('productsCarouselB2');
+            if (!wrap) return;
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) startProductsAutoplayB2();
+                    else stopProductsAutoplayB2();
+                });
+            }, { threshold: 0.3 });
+            io.observe(wrap);
+            wrap.addEventListener('mouseenter', stopProductsAutoplayB2);
+            wrap.addEventListener('mouseleave', () => {
+                if (document.documentElement.contains(wrap) && wrap.getBoundingClientRect().top < window.innerHeight) {
+                    startProductsAutoplayB2();
+                }
+            });
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) stopProductsAutoplayB2();
+            });
+        }
+
+        // ===== PRODUCTS CAROUSEL — factory for additional card-style variants =====
+        function createCardsCarousel(suffix) {
+            const wrapId = 'productsCarousel' + suffix;
+            const trackId = 'productsTrack' + suffix;
+            const dotsId = 'productsDots' + suffix;
+            let slide = 0;
+            let timer = null;
+            function total() {
+                const count = document.querySelectorAll('#' + trackId + ' .product-card').length;
+                return Math.max(1, count - getVisibleProductsB() + 1);
+            }
+            function update() {
+                const track = document.getElementById(trackId);
+                if (!track) return;
+                const card = track.querySelector('.product-card');
+                if (!card) return;
+                if (window.innerWidth <= 600) {
+                    track.scrollTo({ left: slide * (card.offsetWidth + 16), behavior: 'smooth' });
+                } else {
+                    track.style.transform = `translateX(-${slide * (card.offsetWidth + 24)}px)`;
+                }
+                document.querySelectorAll('#' + dotsId + ' .products-carousel-dot').forEach((d, i) => d.classList.toggle('active', i === slide));
+            }
+            function move(dir) {
+                const max = total() - 1;
+                slide = Math.max(0, Math.min(max, slide + dir));
+                update();
+                restart();
+            }
+            function goTo(i) { slide = i; update(); restart(); }
+            function build() {
+                const c = document.getElementById(dotsId);
+                if (!c) return;
+                c.innerHTML = '';
+                const count = total();
+                for (let i = 0; i < count; i++) {
+                    const dot = document.createElement('button');
+                    dot.className = 'products-carousel-dot' + (i === 0 ? ' active' : '');
+                    dot.onclick = () => goTo(i);
+                    c.appendChild(dot);
+                }
+            }
+            function enableSwipe() {
+                const track = document.getElementById(trackId);
+                if (!track) return;
+                let startX = 0, currentX = 0, dragging = false;
+                track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; dragging = true; }, { passive: true });
+                track.addEventListener('touchmove', (e) => { if (dragging) currentX = e.touches[0].clientX; }, { passive: true });
+                track.addEventListener('touchend', () => {
+                    if (!dragging) return;
+                    dragging = false;
+                    const diff = startX - currentX;
+                    if (Math.abs(diff) > 40) move(diff > 0 ? 1 : -1);
+                });
+            }
+            function start() {
+                stop();
+                timer = setInterval(() => {
+                    const max = total() - 1;
+                    if (max <= 0) return;
+                    slide = slide >= max ? 0 : slide + 1;
+                    update();
+                }, PRODUCTS_AUTOPLAY_MS);
+            }
+            function stop() { if (timer) { clearInterval(timer); timer = null; } }
+            function restart() { if (timer) { stop(); start(); } }
+            function wire() {
+                const wrap = document.getElementById(wrapId);
+                if (!wrap) return;
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) start();
+                        else stop();
+                    });
+                }, { threshold: 0.3 });
+                io.observe(wrap);
+                wrap.addEventListener('mouseenter', stop);
+                wrap.addEventListener('mouseleave', () => {
+                    if (document.documentElement.contains(wrap) && wrap.getBoundingClientRect().top < window.innerHeight) start();
+                });
+                document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+            }
+            function setSlide(v) { slide = v; update(); }
+            return { move, goTo, build, enableSwipe, start, stop, restart, wire, setSlide };
+        }
+        const cardsB3 = createCardsCarousel('B3');
+        const cardsB4 = createCardsCarousel('B4');
+        function moveProductsB3(dir) { cardsB3.move(dir); }
+        function goToProductB3(i) { cardsB3.goTo(i); }
+        function moveProductsB4(dir) { cardsB4.move(dir); }
+        function goToProductB4(i) { cardsB4.goTo(i); }
 
         // ===== SCROLL TO FORM =====
         function scrollToForm() {
@@ -3666,6 +4090,13 @@
             buildProductDotsB();
             enableProductsSwipeB();
             wireProductsAutoplayB();
+            // Variant B2 (alternate card style shown for comparison)
+            buildProductDotsB2();
+            enableProductsSwipeB2();
+            wireProductsAutoplayB2();
+            // Variant B3 (dark) and B4 (orange) — extra card-style options
+            cardsB3.build(); cardsB3.enableSwipe(); cardsB3.wire();
+            cardsB4.build(); cardsB4.enableSwipe(); cardsB4.wire();
         });
 
         // Smooth anchor scroll
