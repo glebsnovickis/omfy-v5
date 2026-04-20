@@ -357,6 +357,25 @@
             letter-spacing: 0.5px;
             border: none;
         }
+        .nav-menu a.nav-menu-cta-secondary {
+            display: block;
+            text-align: center;
+            margin-top: 12px;
+            background: transparent;
+            color: var(--primary);
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-family: 'Geist', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 2px solid var(--primary);
+        }
+        .nav-menu a.nav-menu-cta-secondary:hover {
+            background: var(--primary);
+            color: #000;
+        }
 
         /* ===== HERO SECTION (Video) ===== */
         .hero-video {
@@ -367,6 +386,23 @@
             position: relative;
             overflow: hidden;
             background: #000;
+        }
+        /* Dev A/B/C labels on hero variants */
+        .hero-variant-label {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            z-index: 50;
+            padding: 6px 12px;
+            background: rgba(255, 78, 0, 0.92);
+            color: #000;
+            font-family: 'Geist', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .hero-video video {
             position: absolute;
@@ -812,10 +848,8 @@
             /* Стрелки скрыты на мобильном — свайп пальцем */
             .product-modal-arrow { display: none; }
         }
-        /* Скрыть Variant B бестселлеров на мобильном */
-        @media (max-width: 767px) {
-            .bestsellers-variant-b { display: none; }
-        }
+        /* Variant A скрыт: клиент выбрал карусель (Variant B) на всех размерах. */
+        .bestsellers-variant-a { display: none; }
 
         .products-carousel-arrows {
             display: flex;
@@ -2257,9 +2291,9 @@
         <a href="#section-network" onclick="toggleMenu()">Our Network</a>
         <a href="#section-testimonials" onclick="toggleMenu()">What Our Partners Say</a>
         <a href="#section-faq" onclick="toggleMenu()">FAQ</a>
-        <a href="https://omfydistribution.com/" target="_blank" rel="noopener" onclick="toggleMenu()">Become a Partner</a>
         <a href="#form-section" onclick="toggleMenu()">Contacts</a>
         <a href="#form-section" class="nav-menu-cta" onclick="toggleMenu()">Request Catalog &rarr;</a>
+        <a href="https://omfydistribution.com/" target="_blank" rel="noopener" class="nav-menu-cta-secondary" onclick="toggleMenu()">Become a Partner &rarr;</a>
     </div>
 
     <!-- ============================================ -->
@@ -2279,8 +2313,8 @@
             <source src="hero-video.mp4" type="video/mp4">
         </video>
         <div class="container">
-            <h1 class="fade-in">Become the Distributor of the World's Lightest Scooters in Your Country</h1>
-            <p class="fade-in" style="animation-delay: 0.2s;">Exclusive pro scooter brands with protected margins &mdash; we never sell direct to consumers.</p>
+            <h1 class="fade-in">Bring the World's Lightest Scooters to Your Market</h1>
+            <p class="fade-in" style="animation-delay: 0.2s;">Exclusive pro scooter brands with protected margins: no direct-to-consumer sales.</p>
 
             <div class="social-proof-bar fade-in" style="animation-delay: 0.4s;">
                 <div class="proof-item">
@@ -2320,6 +2354,104 @@
                     <div class="brand-logo"><img src="brands-logo/8.webp" alt="ODI" class="logo-on-black"></div>
                     <div class="brand-logo"><img src="brands-logo/9.webp" alt="LW" class="logo-on-black"></div>
                     <!-- Set 2 (duplicate for seamless loop) -->
+                    <div class="brand-logo"><img src="brands-logo/1.webp" alt="Ethic DTC"></div>
+                    <div class="brand-logo"><img src="brands-logo/2.webp" alt="Eretic"></div>
+                    <div class="brand-logo"><img src="brands-logo/3.webp" alt="Aest"></div>
+                    <div class="brand-logo"><img src="brands-logo/4.webp" alt="Union" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/5.webp" alt="Brand 5" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/6.webp" alt="Versatyl" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/7.webp" alt="BOOM"></div>
+                    <div class="brand-logo"><img src="brands-logo/8.webp" alt="ODI" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/9.webp" alt="LW" class="logo-on-black"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- HERO VARIANT B — UNION CLEAN (client-supplied) -->
+    <!-- ============================================ -->
+    <section class="hero-video hero-video-variant">
+        <div class="hero-variant-label">Hero Variant B · UNION CLEAN</div>
+        <video autoplay muted loop playsinline preload="metadata">
+            <source src="hero-video-union-clean.mp4" type="video/mp4">
+        </video>
+        <div class="container">
+            <h1 class="fade-in">Bring the World's Lightest Scooters to Your Market</h1>
+            <p class="fade-in" style="animation-delay: 0.2s;">Exclusive pro scooter brands with protected margins: no direct-to-consumer sales.</p>
+
+            <div class="social-proof-bar fade-in" style="animation-delay: 0.4s;">
+                <div class="proof-item"><strong>100+</strong><span>Retailers</span></div>
+                <div class="proof-item"><strong>19</strong><span>Countries</span></div>
+                <div class="proof-item"><strong>&euro;500</strong><span>Min. Order</span></div>
+                <div class="proof-item"><strong>42%+</strong><span>Avg. Margin</span></div>
+            </div>
+
+            <button class="hero-cta fade-in" style="animation-delay: 0.6s;" onclick="scrollToForm()">Request Catalog &amp; Pricing</button>
+        </div>
+
+        <div class="hero-brands-strip fade-in" style="animation-delay: 0.8s;">
+            <div class="hero-brands-strip__label">Our Brands</div>
+            <div class="marquee-wrapper">
+                <div class="marquee-track">
+                    <div class="brand-logo"><img src="brands-logo/1.webp" alt="Ethic DTC"></div>
+                    <div class="brand-logo"><img src="brands-logo/2.webp" alt="Eretic"></div>
+                    <div class="brand-logo"><img src="brands-logo/3.webp" alt="Aest"></div>
+                    <div class="brand-logo"><img src="brands-logo/4.webp" alt="Union" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/5.webp" alt="Brand 5" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/6.webp" alt="Versatyl" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/7.webp" alt="BOOM"></div>
+                    <div class="brand-logo"><img src="brands-logo/8.webp" alt="ODI" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/9.webp" alt="LW" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/1.webp" alt="Ethic DTC"></div>
+                    <div class="brand-logo"><img src="brands-logo/2.webp" alt="Eretic"></div>
+                    <div class="brand-logo"><img src="brands-logo/3.webp" alt="Aest"></div>
+                    <div class="brand-logo"><img src="brands-logo/4.webp" alt="Union" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/5.webp" alt="Brand 5" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/6.webp" alt="Versatyl" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/7.webp" alt="BOOM"></div>
+                    <div class="brand-logo"><img src="brands-logo/8.webp" alt="ODI" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/9.webp" alt="LW" class="logo-on-black"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- HERO VARIANT C — UNION BRAND 2025 (hidden; keep markup for later review) -->
+    <!-- ============================================ -->
+    <section class="hero-video hero-video-variant" style="display: none;">
+        <div class="hero-variant-label">Hero Variant C · UNION BRAND 2025</div>
+        <video autoplay muted loop playsinline preload="metadata">
+            <source src="hero-video-union-brand.mp4" type="video/mp4">
+        </video>
+        <div class="container">
+            <h1 class="fade-in">Bring the World's Lightest Scooters to Your Market</h1>
+            <p class="fade-in" style="animation-delay: 0.2s;">Exclusive pro scooter brands with protected margins: no direct-to-consumer sales.</p>
+
+            <div class="social-proof-bar fade-in" style="animation-delay: 0.4s;">
+                <div class="proof-item"><strong>100+</strong><span>Retailers</span></div>
+                <div class="proof-item"><strong>19</strong><span>Countries</span></div>
+                <div class="proof-item"><strong>&euro;500</strong><span>Min. Order</span></div>
+                <div class="proof-item"><strong>42%+</strong><span>Avg. Margin</span></div>
+            </div>
+
+            <button class="hero-cta fade-in" style="animation-delay: 0.6s;" onclick="scrollToForm()">Request Catalog &amp; Pricing</button>
+        </div>
+
+        <div class="hero-brands-strip fade-in" style="animation-delay: 0.8s;">
+            <div class="hero-brands-strip__label">Our Brands</div>
+            <div class="marquee-wrapper">
+                <div class="marquee-track">
+                    <div class="brand-logo"><img src="brands-logo/1.webp" alt="Ethic DTC"></div>
+                    <div class="brand-logo"><img src="brands-logo/2.webp" alt="Eretic"></div>
+                    <div class="brand-logo"><img src="brands-logo/3.webp" alt="Aest"></div>
+                    <div class="brand-logo"><img src="brands-logo/4.webp" alt="Union" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/5.webp" alt="Brand 5" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/6.webp" alt="Versatyl" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/7.webp" alt="BOOM"></div>
+                    <div class="brand-logo"><img src="brands-logo/8.webp" alt="ODI" class="logo-on-black"></div>
+                    <div class="brand-logo"><img src="brands-logo/9.webp" alt="LW" class="logo-on-black"></div>
                     <div class="brand-logo"><img src="brands-logo/1.webp" alt="Ethic DTC"></div>
                     <div class="brand-logo"><img src="brands-logo/2.webp" alt="Eretic"></div>
                     <div class="brand-logo"><img src="brands-logo/3.webp" alt="Aest"></div>
@@ -2407,9 +2539,8 @@
                 </div>
             </div>
 
-            <!-- Variant B · carousel with 5 cards (for A/B comparison) -->
-            <div class="bestsellers-variant bestsellers-variant-b" style="margin-top: 80px;">
-                <div class="bestsellers-variant-label">Variant B · carousel with 5 cards</div>
+            <!-- Bestsellers carousel (client chose this over the 5-column grid). -->
+            <div class="bestsellers-variant bestsellers-variant-b">
                 <div class="products-carousel-wrap fade-in" id="productsCarouselB">
                     <div class="products-carousel-track" id="productsTrackB">
                         <div class="product-card">
@@ -3115,10 +3246,58 @@
             const max = getTotalProductSlidesB() - 1;
             productSlideB = Math.max(0, Math.min(max, productSlideB + dir));
             updateProductsB();
+            restartProductsAutoplayB();
         }
         function goToProductB(i) {
             productSlideB = i;
             updateProductsB();
+            restartProductsAutoplayB();
+        }
+        let productsAutoplayTimerB = null;
+        const PRODUCTS_AUTOPLAY_MS = 4000;
+        function startProductsAutoplayB() {
+            stopProductsAutoplayB();
+            productsAutoplayTimerB = setInterval(() => {
+                const max = getTotalProductSlidesB() - 1;
+                if (max <= 0) return;
+                productSlideB = productSlideB >= max ? 0 : productSlideB + 1;
+                updateProductsB();
+            }, PRODUCTS_AUTOPLAY_MS);
+        }
+        function stopProductsAutoplayB() {
+            if (productsAutoplayTimerB) {
+                clearInterval(productsAutoplayTimerB);
+                productsAutoplayTimerB = null;
+            }
+        }
+        function restartProductsAutoplayB() {
+            if (productsAutoplayTimerB) {
+                stopProductsAutoplayB();
+                startProductsAutoplayB();
+            }
+        }
+        function wireProductsAutoplayB() {
+            const wrap = document.getElementById('productsCarouselB');
+            if (!wrap) return;
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        startProductsAutoplayB();
+                    } else {
+                        stopProductsAutoplayB();
+                    }
+                });
+            }, { threshold: 0.3 });
+            io.observe(wrap);
+            wrap.addEventListener('mouseenter', stopProductsAutoplayB);
+            wrap.addEventListener('mouseleave', () => {
+                if (document.documentElement.contains(wrap) && wrap.getBoundingClientRect().top < window.innerHeight) {
+                    startProductsAutoplayB();
+                }
+            });
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) stopProductsAutoplayB();
+            });
         }
         function updateProductsB() {
             const track = document.getElementById('productsTrackB');
@@ -3486,6 +3665,7 @@
             // Variant B is always a carousel (including on desktop)
             buildProductDotsB();
             enableProductsSwipeB();
+            wireProductsAutoplayB();
         });
 
         // Smooth anchor scroll
